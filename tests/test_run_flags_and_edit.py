@@ -181,3 +181,32 @@ def test_edit_without_operation_is_usage_error(demo: Path) -> None:
 
 def test_edit_text_without_page_is_usage_error(demo: Path) -> None:
     assert runner.invoke(app, ["edit", "demo", "--text-en", "x"]).exit_code == 2
+
+
+def test_llm_text_rewrite_updates_all_languages_and_revokes_approval(demo: Path) -> None:
+    """kb edit --text 'instruction' rewrites via LLM in every language (§6.2)."""
+    page = _page(demo, 1)
+    page["status"] = "approved"
+    before_text = dict(page["text"])  # type: ignore[arg-type]
+    _write_page(demo, 1, page)
+
+    result = runner.invoke(app, ["edit", "demo", "--page", "1", "--text", "make it shorter"])
+    assert result.exit_code == 0
+
+    updated = _page(demo, 1)
+    assert set(updated["text"]) == {"en", "th"}  # type: ignore[arg-type]
+    assert updated["text"] != before_text
+    assert updated["status"] == "image_done"  # approval revoked (§6.2)
+
+
+def test_book_show_page_displays_text_and_prompt(demo: Path) -> None:
+    result = runner.invoke(app, ["book", "show", "demo", "--page", "1"])
+    assert result.exit_code == 0
+    page = _page(demo, 1)
+    text = page["text"]["en"][:30]  # type: ignore[index]
+    assert text in result.output.replace("\n", " ") or text.split()[0] in result.output
+    assert "image prompt" in result.output
+
+
+def test_book_show_unknown_page_is_usage_error(demo: Path) -> None:
+    assert runner.invoke(app, ["book", "show", "demo", "--page", "99"]).exit_code == 2

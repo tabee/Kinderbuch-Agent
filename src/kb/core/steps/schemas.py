@@ -31,3 +31,9 @@ class PageSpec(BaseModel):
     characters_present: list[str] = Field(
         default_factory=list
     )  # character names, narrative-salience order (consumed by HC-2.2)
+
+
+class PageTextSpec(BaseModel):
+    """LLM-assisted text rewrite (``kb edit --text``): text only, image untouched."""
+
+    text: dict[str, str]  # keyed by ISO 639-1 code (HC-1.2)

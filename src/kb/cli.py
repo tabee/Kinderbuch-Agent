@@ -248,9 +248,31 @@ def book_status(slug: Annotated[str, typer.Argument()]) -> None:
 
 
 @book_app.command("show")
-def book_show(slug: Annotated[str, typer.Argument()]) -> None:
-    """Show a book's metadata."""
+def book_show(
+    slug: Annotated[str, typer.Argument()],
+    page: Annotated[
+        int | None,
+        typer.Option("--page", min=1, help="Show one page in full: text, prompt, status."),
+    ] = None,
+) -> None:
+    """Show a book's metadata, or a single page in full with --page."""
     book = _load_book(slug)
+    if page is not None:
+        target = next((p for p in book.pages if p.number == page), None)
+        if target is None:
+            raise typer.BadParameter(f"book {slug!r} has no page {page}", param_hint="--page")
+        console.print(f"[bold]{book.title}[/bold] — page {target.number} ({target.status})")
+        for lang in book.languages:
+            console.print(f"\n[bold]{lang}[/bold]")
+            console.print(target.text.get(lang, "[dim]— no text —[/dim]"))
+        if target.image_prompt:
+            console.print("\n[bold]image prompt[/bold]")
+            console.print(target.image_prompt)
+        if target.characters_present:
+            console.print(f"\ncharacters: {', '.join(target.characters_present)}")
+        if target.image_path:
+            console.print(f"image: {target.image_path}")
+        return
     console.print(f"[bold]{book.title}[/bold] ({book.slug})")
     console.print(f"universe: {book.universe_slug}")
     console.print(f"languages: {', '.join(book.languages)}")
@@ -333,6 +355,10 @@ def run(
 def edit(
     slug: Annotated[str, typer.Argument()],
     page: Annotated[int | None, typer.Option("--page", min=1)] = None,
+    text: Annotated[
+        str | None,
+        typer.Option("--text", help="Rewrite the page text (all languages) with an instruction."),
+    ] = None,
     text_en: Annotated[str | None, typer.Option("--text-en", help="Replace English text.")] = None,
     text_th: Annotated[str | None, typer.Option("--text-th", help="Replace Thai text.")] = None,
     image: Annotated[
@@ -348,16 +374,20 @@ def edit(
     """Edit book content (semantics per §6.2)."""
     book = _load_book(slug)
     texts = {lang: value for lang, value in (("en", text_en), ("th", text_th)) if value is not None}
-    if not (texts or image or bible or approve_page):
+    if not (texts or text or image or bible or approve_page):
         raise typer.BadParameter(
-            "nothing to do — provide --text-*, --image, --bible, or --approve-page"
+            "nothing to do — provide --text, --text-*, --image, --bible, or --approve-page"
         )
-    if (texts or image) and page is None:
+    if (texts or text or image) and page is None:
         raise typer.BadParameter("--page is required for text and image edits")
 
     settings = Settings.from_env()
     books = _books()
     try:
+        if text and page is not None:
+            llm = create_llm_provider(settings, languages=book.languages)
+            updated = editing.rewrite_text(books, book, llm, page, text)
+            console.print(f"Page {page}: text rewritten (status: {updated.status}).")
         if texts and page is not None:
             updated = editing.edit_text(books, book, page, texts)
             console.print(f"Page {page}: text updated (status: {updated.status}).")

@@ -86,6 +86,10 @@ class MockLLMProvider(LLMProvider):
         seed = int.from_bytes(hashlib.sha256(prompt.encode("utf-8")).digest()[:4], "big")
         page_match = re.search(r"\bpage (\d+)\b", prompt, re.IGNORECASE)
         page = int(page_match.group(1)) if page_match else None
+        if page is not None and "Instruction:" in prompt:
+            # A rewrite must yield text different from the original page text:
+            # shift the sample index by a non-zero, instruction-dependent offset.
+            page += 1 + seed % (len(_TEXTS) - 1)
         return schema.model_validate(self._build_model_values(schema, seed, page))
 
     def _build_model_values(

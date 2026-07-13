@@ -273,10 +273,12 @@ kb book new <slug> --universe <name> [--langs en,th] [--age 4-6] [--idea "..."] 
 kb book list | status | show <slug>
 
 kb run <slug> [--force] [--recreate-images] [--from-page N] [--pages 3,5,7-9] [--interactive]
-kb edit <slug> --page N --text-en "..." --text-th "..."
+kb edit <slug> --page N --text "make it shorter..."      # LLM rewrite, all languages
+kb edit <slug> --page N --text-en "..." --text-th "..."  # manual replacement
 kb edit <slug> --page N --image "make the child happier..."
 kb edit <slug> --bible "..."
 kb edit <slug> --approve-page N
+kb book show <slug> [--page N]                           # full page text + image prompt
 
 kb pdf <slug>
 kb serve

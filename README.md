@@ -2,7 +2,7 @@
 
 `kb` turns an idea into a bilingual (EN/TH) illustrated children's book as a print-ready PDF: outline → story → character bible → pages → PDF, via an idempotent, resumable pipeline.
 
-The authoritative specification is [implementation-spec.md](implementation-spec.md).
+The authoritative specification is [implementation-spec.md](implementation-spec.md). The complete command and flag reference is in [docs/MANUAL.md](docs/MANUAL.md).
 
 ## Status
 
@@ -59,14 +59,17 @@ kb open nino               # open the book in the preview
 kb book status nino
 ```
 
-Editing:
+Small changes via CLI — view, optimize, regenerate:
 
 ```bash
-kb edit demo --page 2 --text-en "..." --text-th "..."   # revokes approval (§6.2)
-kb edit demo --page 2 --image "make the child happier"  # regenerates that image
+kb book show demo --page 2                              # read a page: all languages + image prompt
+kb edit demo --page 2 --text "make it shorter, punchier" # LLM rewrite of ALL languages at once
+kb edit demo --page 2 --text-en "..." --text-th "..."    # manual replacement (§6.2)
+kb edit demo --page 2 --image "make the child happier"   # regenerate just that image
 kb edit demo --bible "give the naga a red scarf"
 kb edit demo --approve-page 2
-kb run demo --recreate-images --pages 3,5-7             # selective regeneration
+kb run demo --recreate-images --pages 3,5-7              # selective regeneration
+kb pdf demo                                              # re-render after any edit
 ```
 
 Older readers, longer books, own style — create a universe with its own illustration

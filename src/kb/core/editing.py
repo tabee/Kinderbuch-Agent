@@ -10,7 +10,8 @@ from kb.consistency.reference_manager import select_references
 from kb.core.book_manager import BookManager
 from kb.core.models import Book, Character, Page, Universe
 from kb.core.slug import slugify
-from kb.core.steps.schemas import CharacterBibleSpec
+from kb.core.steps.prose import prose_guidance
+from kb.core.steps.schemas import CharacterBibleSpec, PageTextSpec
 from kb.core.views import write_bible_view, write_story_view
 from kb.errors import KBError
 from kb.image.base import ImageProvider
@@ -32,6 +33,35 @@ def edit_text(books: BookManager, book: Book, number: int, texts: dict[str, str]
     books.save_page(book.slug, page)
     write_story_view(book, books.book_dir(book.slug))
     return page
+
+
+def rewrite_text(
+    books: BookManager, book: Book, llm: LLMProvider, number: int, instruction: str
+) -> Page:
+    """LLM-assisted rewrite of a page's text in every configured language (§6.2)."""
+    page = get_page(book, number)
+    if not page.text:
+        raise KBError(f"page {number} has no text yet — run the pipeline first")
+    current = "\n".join(f"[{lang}] {text}" for lang, text in sorted(page.text.items()))
+    languages = ", ".join(book.languages)
+    prompt = (
+        f"Revise the text of page {page.number} of the illustrated book '{book.title}' "
+        f"(age group {book.age_group}).\n"
+        f"Current text:\n{current}\n"
+        f"Instruction: {instruction}\n"
+        f"Return the complete revised text in these languages (ISO 639-1 keys): {languages}. "
+        f"All languages must express the same content. {prose_guidance(book.age_group)}"
+    )
+    spec = llm.generate_structured(
+        system="You are an award-winning author revising bilingual page text. "
+        "Always respond via the structured output tool.",
+        prompt=prompt,
+        schema=PageTextSpec,
+    )
+    missing = set(book.languages) - set(spec.text)
+    if missing:
+        raise KBError(f"page {number}: LLM omitted language(s) {sorted(missing)} (HC-1.2)")
+    return edit_text(books, book, number, {lang: spec.text[lang] for lang in book.languages})
 
 
 def edit_image(
