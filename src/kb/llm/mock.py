@@ -1,13 +1,17 @@
 """Deterministic offline LLM provider for development, tests, and phase gates (§15).
 
 Synthesizes schema-valid Pydantic instances by introspecting the target model:
-no network, no credentials, zero cost. ``dict[str, str]`` fields are filled
-with placeholder text for every configured language — including real Thai
-text, so the PDF gate exercises libthai line breaking (HC-3.4).
+no network, no credentials, zero cost. Output is themed (Swiss-Thai myths) and
+varies deterministically with the request prompt, so different pages get
+different text and different image prompts — while identical requests always
+produce identical results (idempotency, HC-4.1). ``dict[str, str]`` fields are
+filled for every configured language, including real Thai text so the PDF gate
+exercises libthai line breaking (HC-3.4).
 """
 
 from __future__ import annotations
 
+import hashlib
 import types
 import typing
 from collections.abc import Sequence
@@ -18,42 +22,83 @@ from pydantic import BaseModel
 from kb.errors import KBError
 from kb.llm.base import LLMProvider, T
 
-_SAMPLE_TEXT = {
-    "en": "Once upon a time, a kind little bear lived high in the mountains.",
-    "th": "กาลครั้งหนึ่ง หมีน้อยใจดีอาศัยอยู่บนภูเขาสูง",
-}
+# Themed bilingual sample bank (Swiss alpine folklore meets Thai mythology).
+_TEXTS: list[dict[str, str]] = [
+    {
+        "en": "High in the snowy Alps, Heidi the marmot heard a song from far-away Siam.",
+        "th": "บนเทือกเขาแอลป์ที่ปกคลุมด้วยหิมะ ไฮดี้มาร์มอตได้ยินเสียงเพลงจากแดนสยามอันไกลโพ้น",
+    },
+    {
+        "en": "Nari the little naga glided up the mountain stream, curious about the snow.",
+        "th": "นารีนาคน้อยเลื้อยทวนลำธารภูเขาขึ้นมา ด้วยความสงสัยในหิมะ",
+    },
+    {
+        "en": "Together they shared warm bread and mango sticky rice under the old pine.",
+        "th": "ทั้งสองแบ่งปันขนมปังอุ่นและข้าวเหนียวมะม่วงใต้ต้นสนเก่าแก่",
+    },
+    {
+        "en": "The mountain spirit smiled and rang the great cowbell across the valley.",
+        "th": "ภูตแห่งขุนเขายิ้มและสั่นกระดิ่งวัวใบใหญ่ก้องไปทั่วหุบเขา",
+    },
+    {
+        "en": "That night, fireflies and alpenglow lit the way home for the two friends.",
+        "th": "คืนนั้น หิ่งห้อยและแสงสนธยาแห่งเทือกเขาส่องทางกลับบ้านให้เพื่อนรักทั้งสอง",
+    },
+    {
+        "en": "And so the Alps and the river kingdom were friends forever after.",
+        "th": "และแล้วเทือกเขาแอลป์กับอาณาจักรแม่น้ำก็เป็นมิตรกันตลอดกาล",
+    },
+]
 
+_PHRASES: list[str] = [
+    "Heidi the marmot waves from a flower meadow",
+    "Nari the naga curls around a snowy pine",
+    "the mountain spirit rings a giant cowbell",
+    "a floating market appears in the alpine lake",
+    "fireflies dance over the glacier at dusk",
+    "the two friends picnic on a chalet balcony",
+]
 
-def _sample_text(lang: str) -> str:
-    return _SAMPLE_TEXT.get(lang, f"[{lang}] Once upon a time, in a faraway land.")
+_NAMES: list[str] = [
+    "Heidi the Marmot",
+    "Nari the Naga",
+    "Barry the Mountain Spirit",
+    "Mali the Firefly",
+    "Ueli the Ibex",
+    "Song the River Otter",
+]
 
 
 class MockLLMProvider(LLMProvider):
-    """Offline stand-in for a real LLM; output depends only on the schema and languages."""
+    """Offline stand-in for a real LLM; deterministic per (prompt, schema, languages)."""
 
     def __init__(self, languages: Sequence[str] = ("en", "th")) -> None:
         self._languages = list(languages)
 
     def generate_structured(self, *, system: str, prompt: str, schema: type[T]) -> T:
-        """Build a valid instance of ``schema``; ``system``/``prompt`` are ignored."""
-        return schema.model_validate(self._build_model_values(schema))
+        """Build a valid instance of ``schema``; content varies with ``prompt``."""
+        seed = int.from_bytes(hashlib.sha256(prompt.encode("utf-8")).digest()[:4], "big")
+        return schema.model_validate(self._build_model_values(schema, seed))
 
-    def _build_model_values(self, schema: type[BaseModel]) -> dict[str, object]:
+    def _build_model_values(self, schema: type[BaseModel], seed: int) -> dict[str, object]:
         return {
-            name: self._value_for(field.annotation, name)
+            name: self._value_for(field.annotation, name, seed)
             for name, field in schema.model_fields.items()
             if field.is_required()
         }
 
-    def _value_for(self, annotation: object, name: str) -> object:
+    def _value_for(self, annotation: object, name: str, seed: int) -> object:
         annotation = _unwrap_annotated(annotation)
         origin = typing.get_origin(annotation)
         args = typing.get_args(annotation)
+        salt = seed + sum(name.encode("utf-8"))
 
         if origin in (typing.Union, types.UnionType):
-            return None if type(None) in args else self._value_for(args[0], name)
+            return None if type(None) in args else self._value_for(args[0], name, seed)
         if annotation is str:
-            return f"Mock {name.replace('_', ' ')}."
+            if name.startswith("name"):
+                return _NAMES[salt % len(_NAMES)]
+            return f"{_PHRASES[salt % len(_PHRASES)].capitalize()} ({name.replace('_', ' ')})."
         if annotation is int:
             return 1
         if annotation is float:
@@ -65,13 +110,17 @@ class MockLLMProvider(LLMProvider):
         if origin is typing.Literal:
             return args[0]
         if origin is dict and args == (str, str):
-            return {lang: _sample_text(lang) for lang in self._languages}
+            sample = _TEXTS[salt % len(_TEXTS)]
+            return {
+                lang: sample.get(lang, f"[{lang}] Once upon a time, in a faraway land.")
+                for lang in self._languages
+            }
         if origin is list:
             if name == "languages":
                 return list(self._languages)
-            return [self._value_for(args[0], name)]
+            return [self._value_for(args[0], name, seed + i) for i in range(1, 4)]
         if isinstance(annotation, type) and issubclass(annotation, BaseModel):
-            return self._build_model_values(annotation)
+            return self._build_model_values(annotation, seed)
         raise KBError(f"mock LLM cannot synthesize a value for field {name!r} ({annotation!r})")
 
 

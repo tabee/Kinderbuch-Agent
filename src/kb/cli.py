@@ -18,11 +18,16 @@ from rich.table import Table
 
 from kb import __version__
 from kb.config import Settings
+from kb.core import editing
 from kb.core.book_manager import BookManager
 from kb.core.models import Book, Universe
 from kb.core.pagespec import parse_page_spec
+from kb.core.pipeline import Pipeline
+from kb.core.steps.context import RunOptions
 from kb.core.universe_manager import UniverseManager
 from kb.errors import KBError, NotFoundError
+from kb.image import create_image_provider
+from kb.llm import create_llm_provider
 from kb.logging_setup import setup_logging
 
 app = typer.Typer(
@@ -39,8 +44,6 @@ console = Console()
 
 _SLUG_RE = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
 _LANG_RE = re.compile(r"[a-z]{2}")
-
-_NOT_IMPLEMENTED = "[yellow]not implemented:[/yellow] {what} arrives in {phase} (spec §15)."
 
 
 # --------------------------------------------------------------------------- helpers
@@ -272,15 +275,46 @@ def run(
         bool, typer.Option("--interactive", help="Confirm between pipeline steps.")
     ] = False,
 ) -> None:
-    """Run the pipeline (Steps 01-05). Idempotent by default (HC-4.1); flags per §8.2."""
-    _load_book(slug)
+    """Run the pipeline (Steps 01-04). Idempotent by default (HC-4.1); flags per §8.2."""
+    book = _load_book(slug)
+    selected: set[int] | None = None
     if pages is not None:
         try:
-            parse_page_spec(pages)
+            selected = parse_page_spec(pages)
         except ValueError as exc:
             raise typer.BadParameter(str(exc), param_hint="--pages") from exc
-    console.print(_NOT_IMPLEMENTED.format(what="pipeline steps 01-04", phase="Phase 2"))
-    raise typer.Exit(1)
+
+    universe = _load_universe(book.universe_slug)
+    settings = Settings.from_env()
+    options = RunOptions(
+        force=force,
+        recreate_images=recreate_images,
+        from_page=from_page,
+        pages=selected,
+        interactive=interactive,
+    )
+    try:
+        pipeline = Pipeline(
+            books=_books(),
+            universe=universe,
+            llm=create_llm_provider(settings, languages=book.languages),
+            images=create_image_provider(settings),
+            settings=settings,
+            confirm=typer.confirm if interactive else None,
+        )
+        result = pipeline.run(book, options)
+    except KBError as exc:
+        console.print(f"[red]error:[/red] {exc}")
+        raise typer.Exit(1) from exc
+
+    if result.steps_run:
+        console.print(f"Steps run: {', '.join(result.steps_run)}.")
+    else:
+        console.print("Everything up to date — nothing to do (HC-4.1).")
+    if result.pages_texted or result.pages_imaged:
+        console.print(
+            f"Pages: {result.pages_texted} text(s), {result.pages_imaged} image(s) generated."
+        )
 
 
 @app.command()
@@ -300,33 +334,72 @@ def edit(
     ] = None,
 ) -> None:
     """Edit book content (semantics per §6.2)."""
-    _load_book(slug)
-    console.print(_NOT_IMPLEMENTED.format(what="editing", phase="Phase 2"))
-    raise typer.Exit(1)
+    book = _load_book(slug)
+    texts = {lang: value for lang, value in (("en", text_en), ("th", text_th)) if value is not None}
+    if not (texts or image or bible or approve_page):
+        raise typer.BadParameter(
+            "nothing to do — provide --text-*, --image, --bible, or --approve-page"
+        )
+    if (texts or image) and page is None:
+        raise typer.BadParameter("--page is required for text and image edits")
+
+    settings = Settings.from_env()
+    books = _books()
+    try:
+        if texts and page is not None:
+            updated = editing.edit_text(books, book, page, texts)
+            console.print(f"Page {page}: text updated (status: {updated.status}).")
+        if image and page is not None:
+            universe = _load_universe(book.universe_slug)
+            editing.edit_image(books, book, universe, create_image_provider(settings), page, image)
+            console.print(f"Page {page}: image regenerated (approval revoked, §6.2).")
+        if bible:
+            llm = create_llm_provider(settings, languages=book.languages)
+            revised = editing.edit_bible(books, book, llm, bible)
+            console.print(f"Character bible revised ({len(revised)} characters).")
+        if approve_page is not None:
+            editing.approve_page(books, book, approve_page)
+            console.print(f"Page {approve_page}: approved.")
+    except KBError as exc:
+        console.print(f"[red]error:[/red] {exc}")
+        raise typer.Exit(1) from exc
 
 
 @app.command()
 def pdf(slug: Annotated[str, typer.Argument()]) -> None:
     """Render the print-ready PDF (spec §11)."""
-    _load_book(slug)
-    console.print(_NOT_IMPLEMENTED.format(what="PDF rendering", phase="Phase 3"))
-    raise typer.Exit(1)
+    book = _load_book(slug)
+    universe = _load_universe(book.universe_slug)
+    from kb.pdf.renderer import render_pdf  # deferred: needs Pango/cairo system libs
+
+    try:
+        path = render_pdf(book, universe, _books().book_dir(book.slug), Path.cwd() / "Global")
+    except KBError as exc:
+        console.print(f"[red]error:[/red] {exc}")
+        raise typer.Exit(1) from exc
+    console.print(f"PDF written to [bold]{path}[/bold]")
 
 
 @app.command()
 def serve() -> None:
-    """Start the local web preview (editor aid only)."""
-    console.print(_NOT_IMPLEMENTED.format(what="the web preview", phase="Phase 3"))
-    raise typer.Exit(1)
+    """Start the local web preview on http://127.0.0.1:8000 (editor aid only)."""
+    import uvicorn
+
+    from kb.web.app import create_app
+
+    console.print("Serving preview on [bold]http://127.0.0.1:8000[/bold] (Ctrl+C to stop).")
+    uvicorn.run(create_app(Path.cwd() / "Books"), host="127.0.0.1", port=8000, log_level="warning")
 
 
 @app.command("open")
 def open_book(slug: Annotated[str, typer.Argument()]) -> None:
-    """Open a book in the web preview."""
+    """Open a book in the web preview (start `kb serve` first)."""
+    import webbrowser
+
     book = _load_book(slug)
-    console.print(f"book files: {_books().book_dir(book.slug)}")
-    console.print(_NOT_IMPLEMENTED.format(what="the web preview", phase="Phase 3"))
-    raise typer.Exit(1)
+    url = f"http://127.0.0.1:8000/books/{book.slug}"
+    console.print(f"Opening {url} — if nothing loads, start [bold]kb serve[/bold] first.")
+    webbrowser.open(url)
 
 
 # --------------------------------------------------------------------------- entry point

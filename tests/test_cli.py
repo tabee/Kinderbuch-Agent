@@ -62,11 +62,12 @@ def test_run_invalid_pages_spec_is_usage_error(workspace: Path) -> None:
     assert result.exit_code == 2
 
 
-def test_run_stub_exits_one(workspace: Path) -> None:
-    """Pipeline is Phase 2; the stub must exit 1 (runtime failure), not 0."""
+def test_run_without_credentials_fails_cleanly(workspace: Path) -> None:
+    """Default provider is anthropic; without a key the run must fail fast (HC-5.3)."""
     runner.invoke(app, ["book", "new", "demo", "--universe", "swiss-thai-myths"])
     result = runner.invoke(app, ["run", "demo"])
     assert result.exit_code == 1
+    assert "ANTHROPIC_API_KEY" in result.output
 
 
 def test_universe_list_shows_universe(workspace: Path) -> None:

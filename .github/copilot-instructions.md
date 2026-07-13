@@ -41,4 +41,5 @@ uv run pytest           # tests — offline only, no network
 
 - Modern idiomatic Python 3.12, Pydantic v2, full type hints, composition over inheritance.
 - Languages are ISO 639-1 codes internally; display names only in templates/UI.
+- **Always update README.md** after every phase, deployment, or significant change (status section, commands, deviations).
 - No over-engineering: no premature abstractions, no features beyond the spec. Deviations from the recommended stack are allowed only if every HC still holds — document rationale in the README.

@@ -15,9 +15,9 @@ def create_image_provider(settings: Settings) -> ImageProvider:
     if settings.image_provider == "mock":
         return MockImageProvider()
     if settings.image_provider == "imagen":
-        raise KBError(
-            "the 'imagen' provider arrives in Phase 4 (spec §15) — set KB_IMAGE_PROVIDER=mock"
-        )
+        from kb.image.google_image import GoogleImageProvider
+
+        return GoogleImageProvider(model=settings.image_model)
     raise KBError(
         f"unknown image provider {settings.image_provider!r} (expected 'mock' or 'imagen')"
     )

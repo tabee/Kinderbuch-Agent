@@ -59,6 +59,26 @@ class Universe(BaseModel):
     style_guide: str = ""
 
 
+class Outline(BaseModel):
+    """Step 01 output: story skeleton, one synopsis per planned page (§7.1)."""
+
+    title: str
+    premise: str
+    page_synopses: list[str]
+
+
+class StoryBeat(BaseModel):
+    """One spread's narrative; list order defines the page number (§7.1)."""
+
+    narrative: str
+
+
+class Story(BaseModel):
+    """Step 02 output: the full story as ordered beats (§7.1)."""
+
+    beats: list[StoryBeat]
+
+
 class Book(BaseModel):
     """One book project; persisted under ``Books/<slug>/`` (§6.3)."""
 
@@ -69,5 +89,11 @@ class Book(BaseModel):
     languages: LanguageCodes  # copied from the Universe at creation, independent afterwards
     age_group: str = "4-6"
     idea: str = ""
+    outline: Outline | None = None  # Step 01 artifact
+    story: Story | None = None  # Step 02 artifact
     characters: list[Character] = Field(default_factory=list)
     pages: list[Page] = Field(default_factory=list)
+
+    def character(self, slug: str) -> Character | None:
+        """Look up a character by its stable slug."""
+        return next((c for c in self.characters if c.slug == slug), None)

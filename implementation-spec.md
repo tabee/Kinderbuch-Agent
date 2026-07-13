@@ -86,7 +86,7 @@ Every constraint carries a stable ID (`HC-x.y`) so that code review, tests, and 
 - **HC-3.1** Text and image are separate physical pages (§11.2). A single wide landscape page combining both is forbidden.
 - **HC-3.2** 3 mm bleed on all sides and correct inner gutters, per the geometry in §11.1.
 - **HC-3.3** The Dockerfile MUST be based on `python:3.12-slim` (Debian bookworm). Alpine is forbidden.
-- **HC-3.4** Thai text MUST break correctly: `libthai` available to Pango, `word-break: keep-all` in CSS, `lang="th"` on Thai content, rendered in Noto Sans Thai.
+- **HC-3.4** Thai text MUST break correctly: `libthai` available to Pango (which performs Thai line segmentation natively), `lang="th"` on Thai content, rendered in Noto Sans Thai.
 - **HC-3.5** All fonts are embedded from `Global/fonts/`. No system-font fallback for book content (full determinism).
 
 ### 3.4 CLI & State Management
@@ -316,7 +316,9 @@ All configuration is via environment variables, read once at startup (`.env` sup
 | `KB_LLM_PROVIDER` | no | `anthropic` | LLM provider selection: `anthropic` or `mock` (offline, deterministic, zero cost). |
 | `KB_LLM_MODEL` | no | provider default | Anthropic model ID; set a cheaper model (e.g. a Haiku-class model) for low-cost development. |
 | `KB_IMAGE_PROVIDER` | no | `mock` | Image provider selection: `mock` or `imagen`. |
-| `GOOGLE_APPLICATION_CREDENTIALS` | for `imagen` | — | Path to the service-account JSON. |
+| `KB_IMAGE_MODEL` | no | provider default | Gemini image model ID (default `gemini-3.1-flash-image`; `gemini-3-pro-image` for higher quality). |
+| `GOOGLE_API_KEY` | for `imagen` | — | Google AI Studio key (Gemini API). The `imagen` provider targets current Gemini image models; classic Imagen `:predict` models are closed to new users (verified 2026-07). |
+| `GOOGLE_APPLICATION_CREDENTIALS` | no | — | Service-account JSON for the optional Vertex AI route. |
 | `KB_MAX_CONCURRENCY` | no | `4` | Maximum parallel image-generation requests. |
 | `KB_LOG_LEVEL` | no | `INFO` | Logging verbosity. |
 
@@ -351,7 +353,7 @@ Both provider families ship an offline mock implementation. The mocks are determ
 ### 11.3 Typography
 
 - Fonts exclusively from `Global/fonts/` via `@font-face`, fully embedded in the PDF (HC-3.5).
-- Thai content is wrapped in elements with `lang="th"`, uses Noto Sans Thai, and relies on `libthai`-backed Pango line breaking with `word-break: keep-all` (HC-3.4).
+- Thai content is wrapped in elements with `lang="th"`, uses Noto Sans Thai, and relies on `libthai`-backed Pango line breaking (HC-3.4). WeasyPrint ignores `word-break`; libthai performs the segmentation.
 
 ### 11.4 Color & Resolution
 

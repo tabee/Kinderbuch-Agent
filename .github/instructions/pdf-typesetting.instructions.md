@@ -21,7 +21,7 @@ Full requirements: spec §11 and HC-3.x. This is a critical path — correctness
 ## Thai Text (HC-3.4)
 
 - Wrap Thai content in elements with `lang="th"`.
-- CSS: `word-break: keep-all` on Thai text; font-family Noto Sans Thai.
+- Font-family Noto Sans Thai. Do NOT use `word-break` — WeasyPrint ignores it; Pango + libthai perform Thai line segmentation natively (verified).
 - Line breaking relies on Pango + libthai — these come from the Docker image. If Thai breaks mid-word, check libthai is installed and `lang` attributes are set; do not hack around it with manual breaks.
 
 ## Fonts (HC-3.5)

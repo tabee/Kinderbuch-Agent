@@ -21,6 +21,7 @@ class Settings(BaseModel):
     llm_provider: str = "anthropic"
     llm_model: str | None = None  # None → provider default
     image_provider: str = "mock"
+    image_model: str | None = None  # None → provider default
     max_concurrency: int = 4
     log_level: str = "INFO"
 
@@ -47,6 +48,7 @@ class Settings(BaseModel):
             llm_provider=os.environ.get("KB_LLM_PROVIDER", "anthropic"),
             llm_model=os.environ.get("KB_LLM_MODEL") or None,
             image_provider=os.environ.get("KB_IMAGE_PROVIDER", "mock"),
+            image_model=os.environ.get("KB_IMAGE_MODEL") or None,
             max_concurrency=max_concurrency,
             log_level=log_level,
         )

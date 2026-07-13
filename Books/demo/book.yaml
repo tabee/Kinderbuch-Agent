@@ -1,0 +1,49 @@
+schema_version: 1
+slug: demo
+title: Demo
+universe_slug: swiss-thai-myths
+languages:
+- en
+- th
+age_group: 4-6
+idea: ''
+outline:
+  title: Fireflies dance over the glacier at dusk (title).
+  premise: The two friends picnic on a chalet balcony (premise).
+  page_synopses:
+  - A floating market appears in the alpine lake (page synopses).
+  - Fireflies dance over the glacier at dusk (page synopses).
+  - The two friends picnic on a chalet balcony (page synopses).
+story:
+  beats:
+  - narrative: The mountain spirit rings a giant cowbell (narrative).
+  - narrative: A floating market appears in the alpine lake (narrative).
+  - narrative: Fireflies dance over the glacier at dusk (narrative).
+characters:
+- slug: nari-the-naga
+  name: Nari the Naga
+  role: Heidi the marmot waves from a flower meadow (role).
+  description: Fireflies dance over the glacier at dusk (description).
+  primary_reference: references/nari-the-naga.png
+  visual_keywords:
+  - Fireflies dance over the glacier at dusk (visual keywords).
+  - The two friends picnic on a chalet balcony (visual keywords).
+  - Heidi the marmot waves from a flower meadow (visual keywords).
+- slug: barry-the-mountain-spirit
+  name: Barry the Mountain Spirit
+  role: Nari the naga curls around a snowy pine (role).
+  description: The two friends picnic on a chalet balcony (description).
+  primary_reference: references/barry-the-mountain-spirit.png
+  visual_keywords:
+  - The two friends picnic on a chalet balcony (visual keywords).
+  - Heidi the marmot waves from a flower meadow (visual keywords).
+  - Nari the naga curls around a snowy pine (visual keywords).
+- slug: mali-the-firefly
+  name: Mali the Firefly
+  role: The mountain spirit rings a giant cowbell (role).
+  description: Heidi the marmot waves from a flower meadow (description).
+  primary_reference: references/mali-the-firefly.png
+  visual_keywords:
+  - Heidi the marmot waves from a flower meadow (visual keywords).
+  - Nari the naga curls around a snowy pine (visual keywords).
+  - The mountain spirit rings a giant cowbell (visual keywords).

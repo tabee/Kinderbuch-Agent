@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Literal
 
@@ -11,6 +12,8 @@ from pydantic import BaseModel, Field
 from kb.config import Settings
 from kb.errors import KBError
 from kb.llm import MockLLMProvider, create_llm_provider
+
+_THAI_SCRIPT = re.compile(r"[\u0e00-\u0e7f]")
 
 
 class _Scene(BaseModel):
@@ -42,15 +45,27 @@ def test_hc12_text_contains_every_configured_language() -> None:
     page = provider.generate_structured(system="s", prompt="p", schema=_StoryPage)
 
     assert set(page.text) == {"en", "th"}
-    assert "กาลครั้งหนึ่ง" in page.text["th"]  # real Thai text for the PDF gate (HC-3.4)
+    assert _THAI_SCRIPT.search(page.text["th"])  # real Thai text for the PDF gate (HC-3.4)
 
 
-def test_mock_llm_is_deterministic() -> None:
+def test_mock_llm_is_deterministic_per_prompt() -> None:
     provider = MockLLMProvider(["en", "th"])
-    first = provider.generate_structured(system="s", prompt="p", schema=_StoryPage)
-    second = provider.generate_structured(system="other", prompt="other", schema=_StoryPage)
+    first = provider.generate_structured(system="s", prompt="page 1", schema=_StoryPage)
+    same = provider.generate_structured(system="s", prompt="page 1", schema=_StoryPage)
 
-    assert first == second
+    assert first == same  # identical request → identical output (idempotency, HC-4.1)
+
+
+def test_mock_llm_varies_with_prompt() -> None:
+    """Different pages (prompts) must get different text and image prompts."""
+    provider = MockLLMProvider(["en", "th"])
+    outputs = [
+        provider.generate_structured(system="s", prompt=f"page {n}", schema=_StoryPage)
+        for n in range(1, 4)
+    ]
+
+    texts = [o.text["en"] for o in outputs]
+    assert len(set(texts)) > 1
 
 
 def test_factory_selects_mock() -> None:

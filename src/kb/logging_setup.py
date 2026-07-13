@@ -16,3 +16,9 @@ def setup_logging(level: str) -> None:
         handlers=[RichHandler(show_path=False, rich_tracebacks=False)],
         force=True,
     )
+    # Third-party libraries log verbosely at INFO; keep kb output readable.
+    logging.getLogger("weasyprint").setLevel(logging.WARNING)
+    logging.getLogger("weasyprint.progress").setLevel(logging.WARNING)
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    logging.getLogger("httpcore").setLevel(logging.WARNING)
+    logging.getLogger("fontTools").setLevel(logging.WARNING)

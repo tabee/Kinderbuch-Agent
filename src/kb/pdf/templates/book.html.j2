@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="{{ book.languages[0] }}">
+<head>
+<meta charset="utf-8">
+<title>{{ book.title }}</title>
+<style>
+  @font-face {
+    font-family: "Noto Sans";
+    src: url("{{ fonts_dir }}/NotoSans-Regular.ttf");
+    font-weight: normal;
+  }
+  @font-face {
+    font-family: "Noto Sans";
+    src: url("{{ fonts_dir }}/NotoSans-Bold.ttf");
+    font-weight: bold;
+  }
+  @font-face {
+    font-family: "Noto Sans Thai";
+    src: url("{{ fonts_dir }}/NotoSansThai-Regular.ttf");
+    font-weight: normal;
+  }
+  @font-face {
+    font-family: "Noto Sans Thai";
+    src: url("{{ fonts_dir }}/NotoSansThai-Bold.ttf");
+    font-weight: bold;
+  }
+
+  /* Page media box = trim + bleed on all sides (HC-3.2): {{ page_w }}mm x {{ page_h }}mm */
+  @page { size: {{ page_w }}mm {{ page_h }}mm; margin: 0; }
+
+  /* Text pages (verso). Inner margin = gutter; margins include the 3mm bleed. */
+  @page text:left {
+    margin: {{ m.top }}mm {{ m.gutter }}mm {{ m.bottom }}mm {{ m.outer }}mm;
+  }
+  @page text:right {
+    margin: {{ m.top }}mm {{ m.outer }}mm {{ m.bottom }}mm {{ m.gutter }}mm;
+  }
+  @page image { margin: 0; }
+  @page title { margin: {{ m.top }}mm {{ m.outer }}mm; }
+
+  html { font-family: "Noto Sans", sans-serif; }
+
+  section.title-page {
+    page: title;
+    break-after: page;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+  }
+  section.title-page h1 { font-size: 28pt; margin-bottom: 8mm; }
+  section.title-page p { font-size: 12pt; color: #555; }
+
+  section.text-page {
+    page: text;
+    break-before: left; /* verso: text on the left page of each spread (HC-3.1) */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+  section.text-page p { font-size: 14pt; line-height: 1.6; margin: 0 0 6mm 0; }
+
+  /* Thai typesetting: Pango + libthai segment Thai lines natively via lang="th" (HC-3.4).
+     (WeasyPrint has no word-break support; libthai handles the breaking.) */
+  p[lang="th"] {
+    font-family: "Noto Sans Thai", sans-serif;
+  }
+
+  section.image-page {
+    page: image;
+    break-before: right; /* recto: full-bleed image on the right page (HC-3.1) */
+  }
+  section.image-page img {
+    display: block;
+    width: {{ page_w }}mm;
+    height: {{ page_h }}mm;
+    object-fit: cover; /* extends to the full bleed box (§11.1) */
+  }
+</style>
+</head>
+<body>
+
+<section class="title-page">
+  <h1>{{ book.title }}</h1>
+  <p>{{ universe.name }}</p>
+</section>
+
+{% for page in book.pages %}
+<section class="text-page">
+  {% for lang in book.languages %}
+  <p lang="{{ lang }}">{{ page.text.get(lang, "") }}</p>
+  {% endfor %}
+</section>
+<section class="image-page">
+  <img src="{{ page.image_path }}" alt="Illustration for page {{ page.number }}">
+</section>
+{% endfor %}
+
+</body>
+</html>

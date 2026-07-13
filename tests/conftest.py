@@ -1,10 +1,35 @@
-"""Shared fixtures: a temporary kb workspace with one universe."""
+"""Shared fixtures: a temporary kb workspace with one universe.
+
+An autouse fixture strips all provider credentials and kb settings from the
+environment so tests can NEVER accidentally reach a real API (offline-only
+policy, spec §13) — even if the developer's shell has a sourced .env.
+"""
 
 from __future__ import annotations
 
 from pathlib import Path
 
 import pytest
+
+_SCRUBBED_ENV_VARS = (
+    "ANTHROPIC_API_KEY",
+    "GOOGLE_API_KEY",
+    "GOOGLE_APPLICATION_CREDENTIALS",
+    "KB_LLM_PROVIDER",
+    "KB_LLM_MODEL",
+    "KB_IMAGE_PROVIDER",
+    "KB_IMAGE_MODEL",
+    "KB_MAX_CONCURRENCY",
+    "KB_LOG_LEVEL",
+)
+
+
+@pytest.fixture(autouse=True)
+def offline_environment(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Guarantee zero network access and zero API cost for every test (§13)."""
+    for name in _SCRUBBED_ENV_VARS:
+        monkeypatch.delenv(name, raising=False)
+
 
 UNIVERSE_YAML = """\
 slug: swiss-thai-myths
