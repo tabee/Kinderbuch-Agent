@@ -2,10 +2,10 @@
 
 | | |
 |---|---|
-| **Version** | 5.0 |
+| **Version** | 5.1 |
 | **Status** | Approved for implementation |
 | **Date** | 2026-07-13 |
-| **Supersedes** | v4.0 |
+| **Supersedes** | v5.0 (adds per-phase verification gates and the mock LLM provider) |
 | **Audience** | Implementing engineer or autonomous coding agent |
 
 ---
@@ -313,12 +313,16 @@ All configuration is via environment variables, read once at startup (`.env` sup
 | Variable | Required | Default | Purpose |
 |----------|----------|---------|---------|
 | `ANTHROPIC_API_KEY` | for real LLM use | — | Anthropic authentication. |
+| `KB_LLM_PROVIDER` | no | `anthropic` | LLM provider selection: `anthropic` or `mock` (offline, deterministic, zero cost). |
+| `KB_LLM_MODEL` | no | provider default | Anthropic model ID; set a cheaper model (e.g. a Haiku-class model) for low-cost development. |
 | `KB_IMAGE_PROVIDER` | no | `mock` | Image provider selection: `mock` or `imagen`. |
 | `GOOGLE_APPLICATION_CREDENTIALS` | for `imagen` | — | Path to the service-account JSON. |
 | `KB_MAX_CONCURRENCY` | no | `4` | Maximum parallel image-generation requests. |
 | `KB_LOG_LEVEL` | no | `INFO` | Logging verbosity. |
 
 Providers validate their own configuration at instantiation and fail fast with an actionable message (HC-5.3).
+
+Both provider families ship an offline mock implementation. The mocks are deterministic, require no credentials, and make no network calls — they power the test suite and the phase verification gates (§15).
 
 ---
 
@@ -375,6 +379,7 @@ Providers validate their own configuration at instantiation and fail fast with a
   - Idempotency and status transitions (`run`, `--force`, `--recreate-images`, edit semantics from §6.2).
   - `--pages` spec parsing, including invalid inputs.
   - Atomic persistence round-trip (Book/Page → YAML → Book/Page).
+- **Offline end-to-end gate.** With `KB_LLM_PROVIDER=mock` and `KB_IMAGE_PROVIDER=mock`, `kb run` followed by `kb pdf` MUST produce a bilingual multi-page PDF with placeholder images — no network access, zero API cost. Assertions are programmatic (page count, both languages present, fonts embedded; e.g. via `pypdf` as a dev dependency). This test is introduced incrementally by the phase gates (§15) and must remain green permanently once added.
 
 ---
 
@@ -395,9 +400,13 @@ The project is complete only when all of the following hold:
 
 ## 15. Implementation Phases
 
+Every phase ends with a **verification gate**: an automated, offline, zero-API-cost check that proves the phase works. A phase is not complete until its gate passes, and all earlier gates must remain green. Gates are implemented as pytest tests (using the mock providers) plus the §13 quality gates (ruff, mypy, pytest).
+
 ### Phase 1 — Foundation (must be rock solid)
 
-Project scaffold, domain models (§6), Book/Universe managers with atomic persistence, complete CLI surface (commands may still be stubs), mock ImageProvider, Anthropic structured-output client, Dockerfile (`python:3.12-slim` + Thai/Pango dependencies), tenacity wiring, working `kb --help`, basic README.
+Project scaffold, domain models (§6), Book/Universe managers with atomic persistence, complete CLI surface (commands may still be stubs), mock LLM and image providers, Anthropic structured-output client, Dockerfile (`python:3.12-slim` + Thai/Pango dependencies), tenacity wiring, working `kb --help`, basic README.
+
+**Gate 1:** quality gates pass; `kb --help` exits 0; `kb book new demo --universe swiss-thai-myths --langs en,th` produces a valid `book.yaml` with inherited languages; exit-code semantics (§8.3) covered by tests; both mock providers produce deterministic output offline.
 
 **Exit criterion — STOP after Phase 1.** Present `tree -L 3`, the output of `kb --help`, and a short status report. Wait for human review before continuing.
 
@@ -405,13 +414,19 @@ Project scaffold, domain models (§6), Book/Universe managers with atomic persis
 
 Steps 01–04 with structured outputs, reference manager (multi-character logic, HC-2.2), prompt builder (consistency + spatial anchoring, HC-2.3/2.4), parallel image generation (§7.3), full idempotency and flag semantics (§8.2), interactive mode.
 
+**Gate 2 (offline pipeline run):** with both mock providers, `kb run demo` completes Steps 01–04 — every page has text in every configured language plus a placeholder image, every character has exactly one reference image (HC-2.1); an immediately repeated `kb run demo` is a no-op (HC-4.1); an interrupted run resumes cleanly.
+
 ### Phase 3 — Output
 
 Left/right page HTML/CSS, WeasyPrint with bleed/gutter/Thai (§11), `kb pdf`, simple web preview, one end-to-end example book.
 
+**Gate 3 (offline book production — the final product test):** with both mock providers, `kb run demo && kb pdf demo` produces a complete bilingual (EN/TH) children's book PDF with placeholder images at **zero LLM cost**: correct page count (text/image page per spread), Thai and English text present, fonts embedded from `Global/fonts/`, 216 × 216 mm page geometry. Asserted programmatically in the test suite.
+
 ### Phase 4 — Hardening
 
 Real Google Imagen provider, full test coverage per §13, logging polish, final README.
+
+**Gate 4:** the complete §13 suite passes, including all earlier gates; the `imagen` provider is selectable via configuration but never exercised by tests; §14 acceptance criteria hold end to end.
 
 ---
 

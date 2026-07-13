@@ -4,7 +4,7 @@
 
 ## Authoritative Specification
 
-[implementation-spec.md](../implementation-spec.md) (v5.0) is the single source of truth. Read it before implementing anything. Requirements carry stable IDs (`HC-x.y` = Hard Constraint, `§n` = section) — reference them in code comments, commit messages, and test names where relevant.
+[implementation-spec.md](../implementation-spec.md) (v5.1) is the single source of truth. Read it before implementing anything. Requirements carry stable IDs (`HC-x.y` = Hard Constraint, `§n` = section) — reference them in code comments, commit messages, and test names where relevant.
 
 ## Hard Constraints (summary — full text in spec §3)
 
@@ -18,7 +18,7 @@ Never violate these; when in doubt, re-read the spec section:
 
 ## Phase Discipline
 
-Work proceeds in phases (spec §15). **Stop after Phase 1** and present `tree -L 3`, `kb --help` output, and a status report. Do not start a later phase without explicit human approval.
+Work proceeds in phases (spec §15). **Stop after Phase 1** and present `tree -L 3`, `kb --help` output, and a status report. Do not start a later phase without explicit human approval. Every phase ends with its verification gate (spec §15): offline pytest tests using both mock providers, zero API cost; earlier gates must stay green.
 
 ## Architecture
 

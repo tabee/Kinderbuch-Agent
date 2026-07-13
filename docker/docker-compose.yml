@@ -1,0 +1,12 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    env_file:
+      - path: ../.env
+        required: false # secrets via env only (HC-5.3); optional for mock-only use
+    volumes:
+      - ../Books:/app/Books # book state appears immediately on the host (spec §12)
+      - ../Global:/app/Global
+    init: true

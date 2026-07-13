@@ -15,3 +15,11 @@ applyTo: "tests/**"
 3. Idempotency and status transitions: default skip behavior, `--force`, `--recreate-images`, edit/approval-revocation semantics (spec §6.2, §8.2).
 4. `--pages` spec parsing (`3,5,7-9`), including invalid inputs → usage error (exit code 2).
 5. Atomic persistence round-trip: Book/Page → YAML → Book/Page, plus `schema_version` rejection of newer versions.
+
+## Phase verification gates (spec §15)
+
+Every phase ends with an offline gate test using BOTH mock providers (`MockLLMProvider` + `MockImageProvider`) — zero network, zero API cost. Once a gate test exists it must stay green forever:
+
+- Gate 2: `kb run demo` completes Steps 01-04 offline; repeated run is a no-op; interrupted runs resume.
+- Gate 3 (final product test): `kb run demo && kb pdf demo` yields a bilingual EN/TH PDF with placeholder images — assert page count, both languages present (incl. Thai text), embedded fonts, 216 × 216 mm geometry.
+- Gate 4: full §13 suite; the `imagen` provider is never exercised by tests.

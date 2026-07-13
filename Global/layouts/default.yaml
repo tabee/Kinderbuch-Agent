@@ -1,0 +1,11 @@
+# Default print layout (spec §11.1) — consumed by the PDF renderer in Phase 3.
+name: default
+trim_width_mm: 210
+trim_height_mm: 210
+bleed_mm: 3          # HC-3.2
+text_page:
+  gutter_margin_mm: 20   # inner margin, >= 20 mm
+  outer_margin_mm: 12
+  top_margin_mm: 12
+  bottom_margin_mm: 12
+  trim_safety_mm: 5      # no text within 5 mm of the trim line
