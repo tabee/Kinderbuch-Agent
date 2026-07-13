@@ -1,0 +1,26 @@
+number: 3
+text:
+  en: At Yai's home near the temple, Grandmother opens her arms wide. "Welcome, little
+    one," she says softly, holding Nino close. Her eyes sparkle just like Mama's.
+    Yai shows Nino the temple bells that ring out in gentle waves of music. She tells
+    him stories of kind mountain spirits and protective naga guardians who watch over
+    the land and keep it safe. Nino listens, mesmerized. The magic of Yai's words
+    warms his heart.
+  th: ที่บ้านยายใกล้กับวัด ยายเปิดแขนกว้างขึ้น "ยินดีต้อนรับจ้ะ ลูกน้อย" เธอพูดอย่างนุ่มนวล
+    กอดนีโนเข้าไว้อบอุ่น ดวงตาของเธอเงาวาวเหมือนแม่ ยายแสดงให้นีโนเห็นกระดิ่งวัดที่ส่งเสียงดนตรีที่นุ่มนวล
+    เธอบอกเรื่องราวของวิญญาณภูเขาใจดีและผู้พิทักษ์นาค ที่คอยดูแลแผ่นดินและปกป้องให้ปลอดภัย
+    นีโนฟังด้วยใจเต็มเปี่ยม ความมหัศจรรย์จากคำพูดของยายอบอุ่นใจของเขา
+image_prompt: A warm, intimate scene inside a traditional Thai home near a temple.
+  Yai, an elderly Thai grandmother with a gentle, radiant smile and sparkling eyes,
+  stands with her arms wide open embracing her young grandson Nino, who looks up at
+  her with wonder and trust. Behind them, golden temple bells hang softly in the warm
+  light, their gentle glow filling the room. In the background, subtle illustrations
+  of protective mountain spirits with kind faces and an elegant naga guardian coil
+  gracefully, their presence magical yet comforting. Warm, golden-hour sunlight streams
+  through windows, creating an atmosphere of safety, love, and ancient wisdom. The
+  style should be soft, watercolor-like, and suitable for children ages 4-6.
+image_path: images/page-003.png
+characters_present:
+- yai
+- nino
+status: image_done

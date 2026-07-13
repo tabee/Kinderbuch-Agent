@@ -56,3 +56,28 @@ def test_gives_up_after_two_corrective_attempts(provider: AnthropicLLMProvider) 
         provider.generate_structured(system="s", prompt="question", schema=_Answer)
 
     assert len(prompts) == 3  # the fourth (valid) response is never requested
+
+
+class _Bilingual(BaseModel):
+    text: dict[str, str]
+
+
+def test_json_string_fields_are_repaired_locally(provider: AnthropicLLMProvider) -> None:
+    """A nested object emitted as a JSON string is fixed without a costly re-prompt."""
+    fake, prompts = _fake_request([{"text": '{"en": "Hello", "th": "สวัสดี"}'}])
+    provider._request = fake  # type: ignore[method-assign]
+
+    result = provider.generate_structured(system="s", prompt="p", schema=_Bilingual)
+
+    assert result.text == {"en": "Hello", "th": "สวัสดี"}
+    assert len(prompts) == 1  # no corrective round-trip needed
+
+
+def test_unrepairable_string_still_reprompts(provider: AnthropicLLMProvider) -> None:
+    fake, prompts = _fake_request([{"text": "not json at all"}, {"text": {"en": "ok"}}])
+    provider._request = fake  # type: ignore[method-assign]
+
+    result = provider.generate_structured(system="s", prompt="p", schema=_Bilingual)
+
+    assert result.text == {"en": "ok"}
+    assert len(prompts) == 2

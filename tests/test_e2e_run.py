@@ -47,6 +47,7 @@ def test_gate2_full_offline_run(workspace: Path, mock_env: None) -> None:
     # Steps 01-02: structured artifacts exist (HC-1.1)
     assert book["outline"] is not None
     assert book["story"] is not None
+    assert book["title"] == book["outline"]["title"]  # authored title adopted (Step 01)
 
     # Step 03: every character has exactly one primary reference image (HC-2.1)
     assert book["characters"]

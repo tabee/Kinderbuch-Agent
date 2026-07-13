@@ -1,0 +1,55 @@
+number: 1
+text:
+  en: 'The glacier was retreating the way an old man retreats into himself — slowly,
+    and with a kind of dignity that made it worse. Nik stood on the moraine above
+    Grindelbach, his boots swallowed to the laces in grey mud that smelled of iron
+    and cold stone, and watched the Steinbach Glacier pull back from the world it
+    had once commanded. He had come up here alone, the way he always did when the
+    village felt too small, which lately was most days. The photograph in his jacket
+    pocket was starting to soften at the edges from being handled so many times: Grossvater
+    Ernst on thick white ice in July, skis over one shoulder, laughing at whoever
+    held the camera. Nik looked from the photograph to the exposed rock face below
+    the glacier''s new tongue — dark grey, almost black, glistening like a wound that
+    hadn''t been open long enough yet to scar. He was standing, he had calculated
+    with his science teacher Frau Becker''s help, roughly four hundred metres below
+    where the ice had been when that photograph was taken — four hundred metres, in
+    forty years. He pressed his thumb over Grossvater Ernst''s face, not to cover
+    it, but just to feel that it was still there. Behind him and far below, Grindelbach
+    arranged itself in the valley like a model of itself — the church spire, the painted
+    shutters, the cable car pylons standing idle in summer like a sentence that had
+    forgotten its ending. It was the most photographed village in the canton, his
+    father often said, as though that were a form of permanence. Nik put the photograph
+    away and did not go back down for another hour.'
+  th: ธารน้ำแข็งถอยร่นเหมือนชายชราที่ค่อยๆ หดตัวเข้าหาตัวเอง — อย่างช้าๆ และด้วยศักดิ์ศรีบางอย่างที่ทำให้ทุกอย่างเลวร้ายยิ่งขึ้น
+    นิคยืนอยู่บนแนวเศษหินเหนือหมู่บ้านกรินเดลบาค รองเท้าบู้ตของเขาจมลึกถึงเชือกผูกในโคลนสีเทาที่โชยกลิ่นเหล็กและหินเย็น
+    ขณะจ้องมองธารน้ำแข็งชไตน์บาคที่ถอนตัวออกจากโลกซึ่งครั้งหนึ่งเคยอยู่ใต้อำนาจของมัน
+    เขาขึ้นมาที่นี่คนเดียว เหมือนที่เขาทำเสมอเมื่อรู้สึกว่าหมู่บ้านคับแคบเกินไป ซึ่งช่วงหลังมานี้แทบจะทุกวัน
+    รูปถ่ายในกระเป๋าเสื้อแจ็กเก็ตเริ่มนิ่มและยับที่ขอบจากการหยิบออกมาดูบ่อยครั้งนัก
+    — เป็นภาพของโกรสฟาเทอร์ เอิร์นสท์ยืนอยู่บนน้ำแข็งสีขาวหนาในเดือนกรกฎาคม สกีพาดบนบ่าข้างหนึ่ง
+    ยิ้มหัวเราะกับใครก็ตามที่ถือกล้อง นิคเงยตามองจากรูปถ่ายไปยังหน้าผาหินที่ถูกเปิดเผยอยู่ใต้ปลายธารน้ำแข็งแห่งใหม่
+    — สีเทาเข้ม เกือบจะดำ แวววาวราวกับแผลที่เพิ่งเปิดใหม่จนยังไม่ทันเกิดเป็นแผลเป็น
+    เขายืนอยู่ในจุดที่เขาคำนวณร่วมกับฟราว เบคเคอร์ครูวิทยาศาสตร์ว่าต่ำกว่าตำแหน่งที่น้ำแข็งเคยอยู่ตอนถ่ายรูปนั้นประมาณสี่ร้อยเมตร
+    — สี่ร้อยเมตร ในสี่สิบปี เขากดนิ้วโป้งทับลงบนใบหน้าของโกรสฟาเทอร์ เอิร์นสท์ ไม่ใช่เพื่อปิดบัง
+    แต่เพื่อสัมผัสให้รู้ว่ายังอยู่ที่นั่น เบื้องหลังเขาและต่ำลงไปไกลมาก กรินเดลบาคจัดวางตัวเองในหุบเขาดุจหุ่นจำลองของตัวมันเอง
+    — ยอดแหลมของโบสถ์ บานเกล็ดหน้าต่างสีสันสวยงาม และเสาค้ำกระเช้าไฟฟ้าที่ตั้งอยู่เฉยๆ
+    ในยามฤดูร้อนเหมือนประโยคที่ลืมบทสรุปของตัวเอง พ่อของเขามักพูดว่านี่คือหมู่บ้านที่ถูกถ่ายภาพมากที่สุดในแคว้น
+    ราวกับว่านั่นเป็นรูปแบบหนึ่งของความยั่งยืน นิคเก็บรูปถ่ายกลับเข้ากระเป๋า และไม่ลงไปข้างล่างอีกเกือบชั่วโมง
+image_prompt: 'A lone teenage boy, around 13-14, stands on a rocky glacial moraine
+  in the Swiss Alps on an overcast summer day. He wears a worn hiking jacket and muddy
+  boots sunk ankle-deep in iron-grey mud. He holds a small, softened old photograph
+  at arm''s length, comparing it to the vast exposed rock face before him — dark,
+  wet, almost black stone revealed where a glacier has retreated. The Steinbach Glacier''s
+  ragged new terminus is visible higher up, its ice a dull blue-white against the
+  grey mountain. Far below in the valley, the compact village of Grindelbach is visible:
+  a church spire, painted timber shutters, and idle cable-car pylons threading down
+  the hillside. The atmosphere is cold, still, and melancholic. The boy''s posture
+  is contemplative — shoulders slightly hunched, weight on one leg — not defeated,
+  but thinking hard. Muted palette: slate grey, ash white, faded brown; a single pale
+  wash of light breaks through cloud to illuminate the exposed rock, creating a stark,
+  wound-like gleam. Painterly realism with fine detail, suitable for a young adult
+  illustrated novel.'
+image_path: images/page-001.png
+characters_present:
+- nik-gerber
+- grossvater-ernst
+status: image_done

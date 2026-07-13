@@ -15,6 +15,7 @@ from kb.consistency.prompt_builder import build_page_image_prompt
 from kb.consistency.reference_manager import select_references
 from kb.core.models import Book, Page
 from kb.core.steps.context import StepContext
+from kb.core.steps.prose import prose_guidance
 from kb.core.steps.schemas import PageSpec
 from kb.core.views import write_story_view
 from kb.errors import KBError
@@ -77,11 +78,12 @@ def _generate_text(ctx: StepContext, page: Page) -> None:
     characters = ", ".join(f"{c.name}" for c in book.characters) or "none defined"
     languages = ", ".join(book.languages)
     prompt = (
-        f"Write page {page.number} of the picture book '{book.title}' "
+        f"Write page {page.number} of the illustrated book '{book.title}' "
         f"(age group {book.age_group}).\n"
         f"Narrative for this page: {beat}\n"
         f"Known characters: {characters}\n"
-        f"Provide the page text in these languages (ISO 639-1 keys): {languages}.\n"
+        f"Provide the page text in these languages (ISO 639-1 keys): {languages}. "
+        f"{prose_guidance(book.age_group)}\n"
         "Also provide an illustration prompt for the facing image page and the "
         "characters present in the scene, most important first."
     )

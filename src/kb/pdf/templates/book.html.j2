@@ -60,7 +60,7 @@
     justify-content: center;
     height: 100%;
   }
-  section.text-page p { font-size: 14pt; line-height: 1.6; margin: 0 0 6mm 0; }
+  section.text-page p { font-size: {{ text_font_size }}pt; line-height: 1.45; margin: 0 0 4mm 0; }
 
   /* Thai typesetting: Pango + libthai segment Thai lines natively via lang="th" (HC-3.4).
      (WeasyPrint has no word-break support; libthai handles the breaking.) */

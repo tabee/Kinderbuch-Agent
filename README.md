@@ -13,15 +13,27 @@ The authoritative specification is [implementation-spec.md](implementation-spec.
 | 3 — Output (PDF + preview) | ✅ complete | Gate 3: offline `kb run && kb pdf` → bilingual EN/TH PDF, zero LLM cost ([tests/test_e2e_pdf.py](tests/test_e2e_pdf.py)) |
 | 4 — Hardening (Google images, polish) | ✅ complete | Gate 4: full §13 suite; real provider config-selectable, never exercised by tests |
 
-All pipeline steps (outline → story → character bible → pages) run with structured LLM outputs, visual-consistency reference management, and parallel image generation. `kb pdf` produces a print-ready PDF: 216 × 216 mm pages (3 mm bleed), verso text / recto full-bleed image spreads, embedded Noto fonts, libthai-backed Thai line breaking. `Books/demo` is a complete offline example book.
+All pipeline steps (outline → story → character bible → pages) run with structured LLM outputs, visual-consistency reference management, and parallel image generation. `kb pdf` produces a print-ready PDF: 216 × 216 mm pages (3 mm bleed), verso text / recto full-bleed image spreads, embedded Noto fonts, libthai-backed Thai line breaking, and age-aware typography (larger type for pre-readers, book-sized type for young adults). Example books in `Books/`:
+
+- `demo` — offline (mock) example, zero cost
+- `ninos-two-mountains` — real-generated picture book (age 4-6, 5 spreads)
+- `the-weight-of-water` — real-generated young-adult book (age 12-14, 10 spreads, own universe/style) about climate change between a Swiss glacier village and the Chao Phraya delta
 
 ## Quickstart
 
 ### Local (uv)
 
 ```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh   # if uv is missing
 uv sync
 uv run kb --help
+alias kb='uv run kb'          # the rest of this README assumes this alias (or use Docker)
+```
+
+For real generation, create your .env first:
+
+```bash
+cp .env.example .env          # then fill in ANTHROPIC_API_KEY (+ GOOGLE_API_KEY for images)
 ```
 
 ### Docker
@@ -37,13 +49,14 @@ docker compose -f docker/docker-compose.yml exec app kb --help
 ## First book in under 5 minutes
 
 ```bash
-kb universe list                                            # ships with swiss-thai-myths
-kb book new demo --universe swiss-thai-myths --langs en,th
-kb run demo                # full pipeline; use KB_LLM_PROVIDER=mock for a free dry run
-kb pdf demo                # → Books/demo/build/demo.pdf (print-ready)
+kb universe list                                  # ships with swiss-thai-myths
+kb book new nino --universe swiss-thai-myths --langs en,th --age 4-6 \
+  --idea "Nino, a curious four-year-old, visits his Thai grandmother for the first time"
+kb run nino                # full pipeline; use KB_LLM_PROVIDER=mock KB_IMAGE_PROVIDER=mock for a free dry run
+kb pdf nino                # → Books/nino/build/nino.pdf (print-ready)
 kb serve                   # web preview at http://127.0.0.1:8000
-kb open demo               # open the book in the preview
-kb book status demo
+kb open nino               # open the book in the preview
+kb book status nino
 ```
 
 Editing:
@@ -54,6 +67,14 @@ kb edit demo --page 2 --image "make the child happier"  # regenerates that image
 kb edit demo --bible "give the naga a red scarf"
 kb edit demo --approve-page 2
 kb run demo --recreate-images --pages 3,5-7             # selective regeneration
+```
+
+Older readers, longer books, own style — create a universe with its own illustration
+style and use `--age`/`--spreads`; prose level and typography adapt automatically:
+
+```bash
+kb universe new alpine-monsoon --langs en,th --style "cinematic graphic-novel, ink and watercolor"
+kb book new the-weight-of-water --universe alpine-monsoon --age 12-14 --spreads 10 --idea "..."
 ```
 
 ## Configuration

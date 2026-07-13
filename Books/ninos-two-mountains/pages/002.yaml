@@ -1,0 +1,33 @@
+number: 2
+text:
+  en: When Nino stepped off the airplane, the warm air wrapped around him like a soft
+    blanket. So different from the crisp alpine breezes back home! His eyes grew wide.
+    Golden temple spires reached toward the sky like giant fingers. Bright colors
+    danced everywhere—on buildings, on clothes, on flags. And the sounds! Like a thousand
+    bells singing at once. Nino saw floating markets with fruits he'd never seen before,
+    piled high in wooden boats. He saw green rice terraces that stretched like nature's
+    own beautiful quilt across the valleys. Thailand was magical, and Nino's heart
+    was already full of wonder.
+  th: เมื่อนีโนเดินลงจากเครื่องบิน อากาศอุ่นๆ ห่อหุ้มเขาเหมือนผ้าคลุมอ่อนนุ่ม แตกต่างมากจากสายลมอัลไพน์ที่เย็นสดชื่นที่บ้าน
+    ตาของนีโนกว้างไป ยอดพระวิหารทองคำยื่นขึ้นไปยังท้องฟ้าเหมือนนิ้วมือยักษ์ สีสันสดใสเต้นรำไปทั่ว—บนอาคาร
+    บนเสื้อผ้า บนธง และเสียง! เหมือนระฆังพันเรือนร้องเพลงพร้อมกันไป นีโนเห็นตลาดน้ำลอยตัวพร้อมผลไม้ที่เขาไม่เคยเห็นมาก่อน
+    วางซ้อนกันในเรือไม้ เขาเห็นไร่ข้าวสีเขียวที่ยืดออกเหมือนผ้าห่มสวยงามของธรรมชาติทั่วลุ่มหุบเขา
+    ประเทศไทยมีความมหัศจรรย์ และหัวใจของนีโนเต็มไปด้วยความชื่นชมใจ
+image_prompt: A wide, vibrant scene showing young Nino stepping off an airplane onto
+  Thai soil, with wide eyes full of wonder and awe. The foreground shows Nino in the
+  warm tropical air, his expression radiant with amazement. In the background, golden
+  temple spires with pointed roofs gleam in the sunlight, reaching toward a bright
+  blue sky. Colorful Thai flags and decorations flutter in the breeze. In the middle
+  distance, a floating market is visible with wooden boats laden with exotic fruits—mangoes,
+  dragon fruits, tropical flowers—reflected in calm water. To one side, terraced rice
+  paddies in shades of green stretch across rolling hills like a patchwork quilt.
+  The whole scene is filled with warm, golden light and vibrant tropical colors—deep
+  greens, golds, reds, oranges, and blues. Yai (Nino's grandmother) stands nearby
+  watching him with a warm, welcoming smile. The air seems to shimmer with warmth
+  and magic. Include details like temple bells, colorful robes of monks in the distance,
+  and the lush tropical vegetation that makes Thailand feel alive and enchanting.
+image_path: images/page-002.png
+characters_present:
+- nino
+- yai
+status: image_done

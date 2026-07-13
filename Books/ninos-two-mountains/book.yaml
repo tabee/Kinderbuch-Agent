@@ -1,0 +1,133 @@
+schema_version: 1
+slug: ninos-two-mountains
+title: Nino's Two Homes
+universe_slug: swiss-thai-myths
+languages:
+- en
+- th
+age_group: 4-6
+idea: Nino is a four-year-old boy with a Swiss papa and a Thai mama. He knows the
+  cows and snowy peaks of his Swiss village, but this summer he travels to Thailand
+  for the first time to meet his grandmother Yai. Between temple bells and cowbells,
+  mango sticky rice and alpine bread, Nino discovers that having two homes means twice
+  the love.
+outline:
+  title: Nino's Two Homes
+  premise: Four-year-old Nino has always known the snowy Swiss mountains and friendly
+    cows of his alpine village, but this summer he embarks on his first adventure
+    to Thailand to meet his grandmother Yai. As he journeys between two worlds—where
+    temple bells echo alongside cowbells and mango sticky rice complements alpine
+    bread—Nino learns that having a Swiss papa and a Thai mama means his heart is
+    wonderfully big enough for twice the love.
+  page_synopses:
+  - Nino waves goodbye to the snowy peaks and cowbells of his Swiss village as he
+    prepares for a big adventure. Papa and Mama help him pack his favorite things,
+    and Nino wonders what Thailand will be like—imagining mountains, animals, and
+    new friends waiting for him.
+  - Nino arrives in Thailand and is amazed by the heat, colors, and sounds—so different
+    from his quiet alpine home. He sees the floating markets, temple spires, and lush
+    rice terraces, and his eyes grow wide with wonder at this magical new place.
+  - Nino meets his grandmother Yai at her home near the temple. Yai wraps him in a
+    warm embrace and shows him the temple bells that ring like music. Nino discovers
+    that Yai knows stories about kind mountain spirits and protective naga guardians
+    who watch over the land.
+  - Nino and Yai share meals together—she teaches him to eat mango sticky rice with
+    his fingers, while Nino shares stories about Swiss alpine bread and the friendly
+    cows back home. Through food and laughter, Nino realizes how Yai's love tastes
+    like home, just like Mama's cooking.
+  - As Nino prepares to return to Switzerland, he understands that his two homes have
+    made his heart twice as full. He hugs Yai goodbye, knowing he carries both the
+    snowy mountains and Thailand's warmth inside him, and that love connects all the
+    people and places he calls home.
+story:
+  beats:
+  - narrative: 'Nino stands at his window, watching the snowy peaks sparkle in the
+      morning light. "Goodbye, mountains! Goodbye, cows!" he calls as Papa and Mama
+      help him pack his suitcase with his favorite things. His heart goes pitter-patter
+      with excitement—soon he will meet Yai, his grandmother far away in a place called
+      Thailand. Nino wonders: will there be mountains there too? Will there be animals
+      and new friends waiting for him?'
+  - narrative: When Nino steps off the airplane, the warm air wraps around him like
+      a soft blanket—so different from crisp alpine breezes! His eyes grow wide as
+      he sees golden temple spires reaching toward the sky, bright colors dancing
+      everywhere, and sounds like a thousand bells singing at once. There are floating
+      markets with fruits he's never seen, and green rice terraces that stretch like
+      nature's own quilt. Thailand is magical, and Nino's heart is already full of
+      wonder.
+  - narrative: At Yai's home near the temple, his grandmother opens her arms wide
+      and holds him close, smiling with eyes that sparkle just like Mama's. "Welcome,
+      little one," Yai says softly. She shows him the temple bells that ring out in
+      gentle waves of music, and tells him stories of kind mountain spirits and protective
+      naga guardians who watch over the land and keep it safe. Nino listens, mesmerized,
+      and feels the magic of Yai's words warm his heart.
+  - narrative: 'Yai teaches Nino to pick up warm mango sticky rice with his fingers
+      and pop it in his mouth—it''s sweet and soft and absolutely delicious! Nino
+      laughs and tells her all about Swiss alpine bread and the friendly cows who
+      say "moo" each morning back home. As they share their meals and laughter together,
+      Nino realizes something wonderful: Yai''s love tastes like home, just like Mama''s
+      cooking always does. The food, the stories, the hugs—they all say "I love you"
+      in different languages.'
+  - narrative: On his last morning in Thailand, Nino hugs Yai tight and feels his
+      heart stretch to fit two whole homes inside it. The snowy Swiss mountains and
+      Yai's warm arms, temple bells and cowbells, mango sticky rice and alpine bread—they
+      all belong together in his heart, just like his Swiss Papa and Thai Mama. As
+      Nino waves goodbye, he knows that love is the strongest bridge between places,
+      and that his two homes have made his heart twice as full, twice as happy, and
+      wonderfully, beautifully his.
+characters:
+- slug: nino
+  name: Nino
+  role: Protagonist - curious young traveler discovering two worlds
+  description: A thoughtful 4-6 year old boy with a wonder-filled heart, traveling
+    from Switzerland to Thailand to meet his grandmother. He bridges two cultures
+    and learns that love transcends geography. His character arc moves from excitement
+    and curiosity to deep emotional understanding about family and belonging.
+  primary_reference: references/nino.png
+  visual_keywords:
+  - round rosy cheeks
+  - wide curious eyes
+  - blonde or light brown hair
+  - small child proportions
+  - suitcase clutched in hand
+- slug: yai
+  name: Yai
+  role: Grandmother - warm, magical storyteller and cultural bridge
+  description: Nino's Thai grandmother, elderly and graceful, living near a temple.
+    She embodies wisdom, warmth, and the magic of Thai culture. Her love is expressed
+    through food, stories, and physical affection. She represents home, tradition,
+    and the unchanging bonds of family across distance.
+  primary_reference: references/yai.png
+  visual_keywords:
+  - silver or white hair
+  - weathered gentle hands
+  - traditional Thai clothing or sarong
+  - warm smile radiating from eyes
+  - smaller stature with graceful posture
+- slug: papa
+  name: Papa
+  role: Father - supportive parent helping Nino bridge cultures
+  description: Nino's Swiss father, caring and encouraging. He helps pack Nino's suitcase
+    and supports his son's journey to meet his other grandmother. His presence represents
+    the Alpine heritage and the stable, loving foundation Nino leaves behind, yet
+    carries with him.
+  primary_reference: references/papa.png
+  visual_keywords:
+  - Alpine Swiss features
+  - sturdy build
+  - light-colored facial hair or clean-shaven
+  - warm reassuring expression
+  - practical alpine clothing
+- slug: mama
+  name: Mama
+  role: Mother - loving parent connecting East and West
+  description: Nino's mother, who is Thai (implied through the connection to Yai and
+    Thailand). She represents the bridge between Nino's two worlds—Swiss and Thai.
+    Her eyes sparkle like Yai's, showing the familial connection. She guides Nino
+    with love and helps him understand both cultures are his birthright.
+  primary_reference: references/mama.png
+  visual_keywords:
+  - Thai heritage features
+  - sparkling expressive eyes
+  - warm nurturing presence
+  - connection to both cultures
+  - cooking and food preparation

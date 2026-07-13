@@ -1,0 +1,26 @@
+number: 1
+text:
+  en: 'Nino stands at his window, watching the snowy peaks sparkle in the morning
+    light. "Goodbye, mountains! Goodbye, cows!" he calls out happily as Papa and Mama
+    help him pack his suitcase with his favorite things. His heart goes pitter-patter
+    with excitement. Soon he will meet Yai, his grandmother who lives far, far away
+    in a place called Thailand. Nino wonders: Will there be mountains there too? Will
+    there be animals and new friends waiting for him?'
+  th: 'นิโน ยืนอยู่ที่หน้าต่างของเขา มองดูยอดเขาที่มีหิมะ เกร็กระยิบระยับในแสงสายตรู่
+    "ลาก่อนเขา! ลาก่อนวัว!" เขาเรียกออกมาด้วยความสุข ในขณะที่พ่อและแม่ช่วยเขาเก็บสิ่งของที่ชอบของเขาลงในกระเป๋าเดินทาง
+    หัวใจของเขาเต้นอย่างตื่นเต้น เร็ว ๆ นี้เขาจะได้พบยาย ย่า ของเขา ซึ่งอาศัยอยู่ไกล
+    ๆ ในสถานที่ที่เรียกว่าประเทศไทย นิโนสงสัย: จะมีเขาที่นั่นด้วยหรือ? จะมีสัตว์และเพื่อนใหม่คอยรอเขาหรือ?'
+image_prompt: A cozy bedroom scene with a young boy named Nino standing at a large
+  window in the morning light. Through the window, snow-capped mountains sparkle beautifully
+  in the distance. Behind him, his Papa and Mama are helping him pack a colorful suitcase,
+  smiling warmly. The room is filled with his favorite toys and belongings scattered
+  about, ready to be packed. Sunlight streams through the window, creating a magical,
+  excited atmosphere. The boy's face shows wonder and joy as he gazes at the mountains,
+  with a thought bubble above him containing images of mountains, animals, and new
+  friends. A cow can be seen grazing in the snowy landscape outside the window.
+image_path: images/page-001.png
+characters_present:
+- nino
+- papa
+- mama
+status: image_done

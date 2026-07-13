@@ -1,0 +1,61 @@
+number: 7
+text:
+  en: 'Dao had commandeered the upper floor the way scientists commandeer spaces —
+    completely, and without apology. The salvaged table from the kitchen sat beneath
+    a landscape of organised accumulation: water-level charts dated back twenty-six
+    months, temperature graphs printed on paper that had rippled slightly from the
+    humidity, and two sets of satellite images pinned side by side on the wall above
+    with the calm conviction of someone presenting evidence to a jury. Nik stopped
+    in the doorway. One set showed the Chao Phraya delta across six years — the brown
+    edges of the floodplain spreading incrementally, the coastline softening and retreating.
+    The other showed a glacier retreating from a rock face he recognised without needing
+    to read the label, and something shifted in his chest — not heartbreak, which
+    he''d expected, but a strange, almost vertiginous clarity, like the feeling at
+    the top of a mountain when the clouds open and the view is suddenly so large it
+    reorganises everything you thought you knew about distance. ''You''ve been tracking
+    both,'' he said, and it wasn''t a question. ''For two years,'' Dao said, with
+    the matter-of-fact precision of someone who finds it slightly puzzling that this
+    would be remarkable, and then she explained the correlation she''d identified
+    — the rate of glacial melt feeding sea-level anomalies, the intensification of
+    monsoon seasons, the data from the valley meteorological station that Frau Becker,
+    without knowing it, had been compiling at the same time. Nik sat down across from
+    her and put his notebook on the table, and they looked at each other — two fifteen-year-olds
+    on opposite sides of a table covered in evidence about the world they''d been
+    born into. ''My father thinks these are two different problems,'' Nik said. Dao
+    considered this seriously, which he appreciated. ''They''re the same sentence,''
+    she said. ''Just written in different languages.'''
+  th: 'ดาวยึดครองชั้นบนในแบบที่นักวิทยาศาสตร์ยึดครองพื้นที่ — อย่างสมบูรณ์ และไม่ขอโทษใคร
+    โต๊ะที่กอบกู้มาจากครัวตั้งอยู่ท่ามกลางการสะสมที่มีระเบียบ: แผนภูมิระดับน้ำที่บันทึกย้อนหลังยี่สิบหกเดือน
+    กราฟอุณหภูมิที่พิมพ์บนกระดาษซึ่งย่นเล็กน้อยจากความชื้น และภาพถ่ายดาวเทียมสองชุดที่ปักหมุดเคียงกันบนผนัง
+    ด้วยความมั่นใจอันสงบนิ่งของผู้นำเสนอหลักฐานต่อคณะลูกขุน นิคหยุดอยู่ที่ปากประตู
+    ชุดหนึ่งแสดงให้เห็นดินดอนสามเหลี่ยมปากแม่น้ำเจ้าพระยาในช่วงหกปี — ขอบสีน้ำตาลของที่ราบน้ำท่วมถึงที่ขยายออกทีละน้อย
+    แนวชายฝั่งที่นุ่มนวลลงและร่นถอย อีกชุดแสดงธารน้ำแข็งที่ถอยร่นออกจากหน้าผา ซึ่งเขารู้จักโดยไม่ต้องอ่านป้ายชื่อ
+    และบางอย่างก็เคลื่อนไหวในอกเขา — ไม่ใช่ความเจ็บปวดที่เขาคาดไว้ แต่เป็นความกระจ่างอันแปลกประหลาด
+    เกือบหวิว เหมือนความรู้สึกบนยอดเขาเมื่อเมฆเปิดออก และทิวทัศน์กว้างใหญ่จนจัดระเบียบทุกสิ่งที่คุณเคยคิดว่ารู้เรื่องระยะทางเสียใหม่
+    ''เธอติดตามทั้งสองอย่าง'' เขาพูด และมันไม่ใช่คำถาม ''สองปีแล้ว'' ดาวตอบด้วยความแม่นยำแบบตรงไปตรงมาของคนที่รู้สึกสับสนเล็กน้อยว่าเรื่องนี้จะน่าทึ่งตรงไหน
+    แล้วเธอก็อธิบายความสัมพันธ์ที่เธอค้นพบ — อัตราการละลายของธารน้ำแข็งที่ส่งผลต่อความผิดปกติของระดับน้ำทะเล
+    การทวีความรุนแรงของฤดูมรสุม ข้อมูลจากสถานีอุตุนิยมวิทยาในหุบเขาที่เฟราเบกเกอร์รวบรวมมาโดยไม่รู้ตัวในช่วงเวลาเดียวกัน
+    นิคนั่งลงตรงข้ามเธอและวางสมุดโน้ตบนโต๊ะ พวกเขามองหน้ากัน — เด็กสิบห้าปีสองคนนั่งคนละด้านของโต๊ะที่ปกคลุมด้วยหลักฐานเกี่ยวกับโลกที่พวกเขาเกิดมา
+    ''พ่อของฉันคิดว่านี่คือสองปัญหาที่แตกต่างกัน'' นิคกล่าว ดาวพิจารณาเรื่องนี้อย่างจริงจัง
+    ซึ่งเขาชื่นชม ''มันเป็นประโยคเดียวกัน'' เธอกล่าว ''แค่เขียนต่างภาษากันเท่านั้น'''
+image_prompt: 'Interior illustration, dusk light filtering through a rain-streaked
+  window into a cluttered upper-floor room in a Thai house. A large salvaged wooden
+  table dominates the foreground, its surface dense with hand-drawn water-level charts,
+  slightly rippled temperature graphs, and open notebooks. On the wall behind the
+  table, two grids of satellite images are pinned in careful rows — one showing a
+  river delta spreading and retreating across six years, the other showing a mountain
+  glacier shrinking against bare grey rock. A Thai girl of about fifteen (Dao) sits
+  on one side of the table, composed and intent, her posture carrying quiet authority.
+  A Swiss-Thai boy of about fifteen (Nik) sits across from her, leaning slightly forward
+  with his worn notebook open on the table before him, his gaze moving between the
+  glacier images and her face — expression caught between recognition and vertigo.
+  The room feels lived-in and purposeful: pushpins, coloured markers, a handheld weather
+  instrument on a shelf. Warm amber desk-lamp light pools over the table; the world
+  outside the window is grey-blue with monsoon cloud. Detailed realistic illustration,
+  slightly muted palette, cinematic intimacy, rendered in a style suited to literary
+  young-adult fiction.'
+image_path: images/page-007.png
+characters_present:
+- dao
+- nik-gerber
+status: image_done

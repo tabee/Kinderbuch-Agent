@@ -78,3 +78,11 @@ def test_languages_override_at_creation(tmp_path: Path) -> None:
 def test_hc12_invalid_language_code_rejected() -> None:
     with pytest.raises(ValidationError, match="ISO 639-1"):
         Book(slug="x", title="X", universe_slug="u", languages=["english"])
+
+
+def test_slugify_transliterates_unicode() -> None:
+    from kb.core.slug import slugify
+
+    assert slugify("Leo Zürcher") == "leo-zurcher"
+    assert slugify("Grossvater Ernst") == "grossvater-ernst"
+    assert slugify("ยาย") == "character"  # non-transliterable → safe fallback

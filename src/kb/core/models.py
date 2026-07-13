@@ -88,6 +88,7 @@ class Book(BaseModel):
     universe_slug: str
     languages: LanguageCodes  # copied from the Universe at creation, independent afterwards
     age_group: str = "4-6"
+    spreads: int = 5  # number of double-page spreads (drives Step 01)
     idea: str = ""
     outline: Outline | None = None  # Step 01 artifact
     story: Story | None = None  # Step 02 artifact

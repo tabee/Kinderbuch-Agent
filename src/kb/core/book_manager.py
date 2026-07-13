@@ -33,6 +33,8 @@ class BookManager:
         *,
         languages: list[str] | None = None,
         age_group: str = "4-6",
+        idea: str = "",
+        spreads: int = 5,
     ) -> Book:
         """Create a book; languages are copied from the universe unless overridden (§6.1)."""
         book = Book(
@@ -41,6 +43,8 @@ class BookManager:
             universe_slug=universe.slug,
             languages=list(languages if languages is not None else universe.languages),
             age_group=age_group,
+            idea=idea,
+            spreads=spreads,
         )
         self.save(book)
         return book

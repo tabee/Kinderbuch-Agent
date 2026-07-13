@@ -1,0 +1,54 @@
+number: 6
+text:
+  en: 'Nothing prepares you for the smell of a flooded place. It is mud and salt and
+    something sweet-rotten that lodges in the back of your throat and stays. Nik stood
+    knee-deep in brown water between Somchai''s shrimp ponds and understood, for the
+    first time, that he had been thinking about this crisis in completely the wrong
+    unit of measurement — he had been thinking in glaciers, in the slow geological
+    language of the Alps. Here it was intimate. Here it smelled of last month''s harvest
+    fermenting in the wrong kind of water. Somchai moved through the wreckage with
+    a steadiness Nik first mistook for acceptance, then recognised as something harder:
+    the steadiness of a man who had decided that to keep moving was the only resistance
+    left. He pointed out where the seawall had buckled, where the mangrove buffer
+    had been cleared fifteen years ago for development since abandoned anyway — he
+    said this last part without bitterness, just as fact, the way Nik''s father spoke
+    of the snowline. Nik opened the notebook. He wrote: *water the colour of milky
+    tea, the whole horizon flat and wet, Somchai''s boots moving and not stopping.*
+    Then he drew — badly, but Frau Becker had said it didn''t need to be art, it needed
+    to be observation — the waterline against the shed wall, the half-submerged seedling
+    trays, the vast white sky pressing down like a hand. He drew a line from the water''s
+    surface to the top of the wall and labelled it with Dao''s pencil mark, which
+    he had memorised, and felt the two landscapes touch for the first time inside
+    the white space of the page.'
+  th: ไม่มีอะไรเตรียมใจคุณได้สำหรับกลิ่นของสถานที่ที่ถูกน้ำท่วม มันคือโคลน เกลือ และบางอย่างที่หวานและเน่าเกาะอยู่ในลำคอและไม่จากไป
+    นิคยืนจมน้ำสีน้ำตาลถึงเข่าอยู่ระหว่างบ่อกุ้งของลุงสมชาย และเข้าใจเป็นครั้งแรกว่าเขาคิดถึงวิกฤตครั้งนี้ด้วยหน่วยวัดที่ผิดโดยสิ้นเชิง
+    เขาคิดด้วยภาษาของธารน้ำแข็ง ด้วยเวลาอันยาวนานของเทือกเขาแอลป์ แต่ที่นี่มันใกล้ชิดและเจ็บปวด
+    มันมีกลิ่นของการเก็บเกี่ยวเดือนก่อนที่กำลังหมักในน้ำผิดประเภท ลุงสมชายเดินผ่านซากความเสียหายด้วยความมั่นคงที่นิคเข้าใจผิดว่าคือการยอมรับ
+    แต่แล้วตระหนักว่ามันซับซ้อนกว่านั้น นั่นคือความมั่นคงของคนที่ตัดสินใจแล้วว่าการเดินต่อไปคือการต่อต้านเพียงหนึ่งเดียวที่เหลืออยู่
+    ลุงชี้ให้ดูว่าแนวกำแพงกันทะเลพังตรงไหน แนวป่าโกงกางที่เคยปกป้องผืนดินถูกโค่นไปเมื่อสิบห้าปีก่อนเพื่อการพัฒนาที่ถูกทิ้งร้างไปแล้ว
+    เขาพูดเรื่องนี้โดยไม่มีความขมขื่น เพียงแต่บอกเป็นข้อเท็จจริง เหมือนที่พ่อของนิคพูดถึงแนวหิมะ
+    นิคเปิดสมุด เขาเขียนว่า *น้ำสีชาใส่นม ขอบฟ้าราบเรียบและเปียกชื้นทั้งสิ้น รองเท้าบู้ทของลุงสมชายที่เดินไม่หยุด*
+    แล้วเขาก็วาดรูป แม้จะไม่เก่ง แต่ฟราวเบคเคอร์บอกว่ามันไม่จำเป็นต้องเป็นงานศิลปะ
+    ขอให้เป็นการสังเกต เขาลากเส้นจากผิวน้ำถึงด้านบนของผนังโกดัง แล้วติดป้ายด้วยรอยดินสอของดาว
+    ซึ่งเขาจำไว้แม่นยำ และรู้สึกว่าภูมิทัศน์สองแห่งได้สัมผัสกันเป็นครั้งแรกในพื้นที่สีขาวของหน้ากระดาษ
+image_prompt: 'Painterly, watercolour-and-ink illustration in a muted, heat-bleached
+  palette — ochres, tarnished whites, and the dull brown of floodwater. A teenage
+  boy (Nik) stands knee-deep in brown water between ruined shrimp pond embankments,
+  a worn notebook held open just above the water''s surface, a pencil moving across
+  the page. He is slightly hunched, concentrating, sweaty, his school-trip clothes
+  incongruous against the devastation. Beside and slightly ahead of him, a Thai man
+  in his fifties (Somchai) walks with quiet, deliberate steadiness through the same
+  water, rubber boots sending small ripples outward, one arm raised to gesture toward
+  a buckled concrete seawall in the middle distance. The landscape is flat and enormous:
+  a vast, white-hot sky presses down on a horizon of still brown water, a half-submerged
+  corrugated shed wall to the right shows a clear waterline stain, and seedling trays
+  float or tilt against it. The mangrove tree-line is absent — only stumps and open
+  sky where it should be. Nik''s notebook is shown in a small inset vignette at the
+  page corner: rough pencil sketches of the shed wall with a carefully labelled waterline,
+  the handwritten words "water the colour of milky tea" visible. Mood: heavy, honest,
+  quietly devastating. No dialogue bubbles. Soft natural light, no dramatic shadows.'
+image_path: images/page-006.png
+characters_present:
+- nik-gerber
+- somchai
+status: image_done

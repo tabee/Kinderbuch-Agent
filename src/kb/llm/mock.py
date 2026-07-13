@@ -12,6 +12,7 @@ exercises libthai line breaking (HC-3.4).
 from __future__ import annotations
 
 import hashlib
+import re
 import types
 import typing
 from collections.abc import Sequence
@@ -76,28 +77,42 @@ class MockLLMProvider(LLMProvider):
         self._languages = list(languages)
 
     def generate_structured(self, *, system: str, prompt: str, schema: type[T]) -> T:
-        """Build a valid instance of ``schema``; content varies with ``prompt``."""
-        seed = int.from_bytes(hashlib.sha256(prompt.encode("utf-8")).digest()[:4], "big")
-        return schema.model_validate(self._build_model_values(schema, seed))
+        """Build a valid instance of ``schema``; content varies with ``prompt``.
 
-    def _build_model_values(self, schema: type[BaseModel], seed: int) -> dict[str, object]:
+        When the prompt names a page ("page N"), N drives sample selection so
+        that different pages are guaranteed different content — not merely
+        hash-probably different.
+        """
+        seed = int.from_bytes(hashlib.sha256(prompt.encode("utf-8")).digest()[:4], "big")
+        page_match = re.search(r"\bpage (\d+)\b", prompt, re.IGNORECASE)
+        page = int(page_match.group(1)) if page_match else None
+        return schema.model_validate(self._build_model_values(schema, seed, page))
+
+    def _build_model_values(
+        self, schema: type[BaseModel], seed: int, page: int | None = None
+    ) -> dict[str, object]:
         return {
-            name: self._value_for(field.annotation, name, seed)
+            name: self._value_for(field.annotation, name, seed, page)
             for name, field in schema.model_fields.items()
             if field.is_required()
         }
 
-    def _value_for(self, annotation: object, name: str, seed: int) -> object:
+    def _value_for(
+        self, annotation: object, name: str, seed: int, page: int | None = None
+    ) -> object:
         annotation = _unwrap_annotated(annotation)
         origin = typing.get_origin(annotation)
         args = typing.get_args(annotation)
         salt = seed + sum(name.encode("utf-8"))
 
         if origin in (typing.Union, types.UnionType):
-            return None if type(None) in args else self._value_for(args[0], name, seed)
+            return None if type(None) in args else self._value_for(args[0], name, seed, page)
         if annotation is str:
             if name.startswith("name"):
                 return _NAMES[salt % len(_NAMES)]
+            if page is not None:
+                phrase = _PHRASES[(page - 1 + sum(name.encode("utf-8"))) % len(_PHRASES)]
+                return f"{phrase.capitalize()} ({name.replace('_', ' ')}, page {page})."
             return f"{_PHRASES[salt % len(_PHRASES)].capitalize()} ({name.replace('_', ' ')})."
         if annotation is int:
             return 1
@@ -110,17 +125,19 @@ class MockLLMProvider(LLMProvider):
         if origin is typing.Literal:
             return args[0]
         if origin is dict and args == (str, str):
-            sample = _TEXTS[salt % len(_TEXTS)]
+            index = (page - 1) % len(_TEXTS) if page is not None else salt % len(_TEXTS)
+            sample = _TEXTS[index]
+            suffix = f" ({page})" if page is not None and page > len(_TEXTS) else ""
             return {
-                lang: sample.get(lang, f"[{lang}] Once upon a time, in a faraway land.")
+                lang: sample.get(lang, f"[{lang}] Once upon a time, in a faraway land.") + suffix
                 for lang in self._languages
             }
         if origin is list:
             if name == "languages":
                 return list(self._languages)
-            return [self._value_for(args[0], name, seed + i) for i in range(1, 4)]
+            return [self._value_for(args[0], name, seed + i, page) for i in range(1, 4)]
         if isinstance(annotation, type) and issubclass(annotation, BaseModel):
-            return self._build_model_values(annotation, seed)
+            return self._build_model_values(annotation, seed, page)
         raise KBError(f"mock LLM cannot synthesize a value for field {name!r} ({annotation!r})")
 
 

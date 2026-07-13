@@ -1,0 +1,493 @@
+schema_version: 1
+slug: the-weight-of-water
+title: The Weight of Water
+universe_slug: alpine-monsoon
+languages:
+- en
+- th
+age_group: 12-14
+spreads: 10
+idea: Nik, 14, grows up in a Swiss-German mountain village as the son of a Swiss mountain
+  guide and a Thai mother. The glacier above the village - the one his grandfather
+  still skied on in summer - is dying, and with it the village's future; his father
+  wants to build snow cannons, his best friend's family profits from them, and Nik
+  thinks it is all a lie. When his mother takes him to Thailand after his uncle's
+  shrimp farm near the Chao Phraya is flooded for the third year, Nik sees the other
+  end of the same catastrophe. Caught between his father's stubbornness, his uncle's
+  resignation, a Thai cousin who fights back with science, and his own anger at the
+  adults who broke the world, Nik has to work out what courage means when you are
+  fourteen, belong to two places, and both are drowning - one in water, one in the
+  loss of ice.
+outline:
+  title: Alpine Monsoon
+  premise: Fourteen-year-old Nik, the Swiss-Thai son of a mountain guide and a Thai
+    mother, watches the glacier above his alpine village shrink season by season while
+    his father pins the village's hopes on artificial snow and his best friend's family
+    profits from the machines. When a third catastrophic flood drowns his uncle's
+    shrimp farm near the Chao Phraya delta, Nik travels to Thailand with his mother
+    and discovers the other face of the same crisis. Caught between his father's stubborn
+    pragmatism, his uncle's quiet resignation, and a Thai cousin who channels her
+    grief into citizen science, Nik must find out what courage looks like when you
+    are fourteen, belong to two landscapes at once, and both of them are being erased.
+  page_synopses:
+  - 'Spread 1 — THE MOUNTAIN IN SUMMER: Nik stands alone on the moraine above the
+    village of Grindelbach, boots caked in grey glacial mud, staring at the retreating
+    tongue of the Steinbach Glacier. A faded photograph tucked in his jacket pocket
+    shows his grandfather skiing this same slope in July, on thick white ice. Behind
+    Nik, far below, the village looks postcard-pretty — but the ski lifts are still,
+    and the ice he is standing where the ice used to be.'
+  - 'Spread 2 — SNOW CANNONS: Back in the village, Nik''s father Erik and his best
+    friend Leo''s father unveil a glossy planning brochure for a ring of snow cannons
+    to be installed above the runs before winter. The adults celebrate over coffee
+    and schnapps; Leo grins, proud of his family''s investment. Nik watches the room
+    and says nothing, but his expression — reflected in the dark window behind the
+    group — asks a question nobody in the room wants to hear.'
+  - 'Spread 3 — TWO KITCHENS: A quiet domestic spread contrasting two evening meals
+    happening at the same hour across the world: Nik''s mother Malee cooks tom kha
+    in the alpine farmhouse while a phone call from her brother Somchai in Thailand
+    crackles with static and urgency — the river has risen again. Across the split
+    page, Somchai''s flooded kitchen: a single lamp, water around the table legs,
+    his daughter Dao measuring the waterline on the wall beside three previous marks.'
+  - 'Spread 4 — THE ARGUMENT: Erik and Nik collide in the barn after dinner. Erik
+    insists the snow cannons are the only way to keep the village alive and pay the
+    mortgage; Nik calls them a lie told to tourists. Neither shouts — this family
+    argues in tight, careful sentences — but the distance between them fills the page.
+    Malee stands in the doorway, between them in every sense, already deciding she
+    must take Nik to Thailand.'
+  - 'Spread 5 — DEPARTURE: Geneva Airport predawn. Nik carries a notebook his science
+    teacher gave him — ''write down what you see, both places'' — and wears his father''s
+    old fleece over his mother''s Thai amulet. Erik sees them off with a handshake
+    for Nik, too stiff to be a hug. The departures board glows above them. Nik looks
+    back once; his father is already walking away, hands in pockets, shoulders set
+    against something he cannot name.'
+  - 'Spread 6 — THE DROWNED FARM: Arriving at Somchai''s farm in the Chao Phraya delta,
+    Nik wades through knee-deep brown water between rows of flooded shrimp ponds.
+    Somchai moves through the wreckage with the calm of a man who has grieved this
+    before. Nik opens his notebook for the first time and begins to sketch the waterline,
+    the submerged seedlings, the sky — huge, humid, indifferent — connecting dots
+    his father cannot see from the Alps.'
+  - 'Spread 7 — DAO''S DATA: Nik''s cousin Dao, fifteen and fiercely methodical, spreads
+    her climate data across a salvaged table on the upper floor: water-level charts,
+    temperature graphs, satellite images of both the delta and — to Nik''s shock —
+    the Steinbach Glacier. She has been tracking them in parallel for two years. For
+    the first time Nik sees the two landscapes as one wound, and his private anger
+    becomes something sharper and more useful: the beginning of a question worth asking
+    aloud.'
+  - 'Spread 8 — LETTERS TO THE MOUNTAIN: Nik and Dao spend a night writing — Nik to
+    his father, Dao drafting a report for a regional youth climate coalition she wants
+    Nik to co-sign. Nik''s letter to Erik is honest in a way their face-to-face talk
+    never managed: he describes the flooded farm, Somchai''s silence, the glacier
+    photo, Dao''s charts. He does not ask his father to abandon the snow cannons;
+    he asks him to also tell the truth about why they are needed. Courage, Nik begins
+    to understand, is not the same as having the answer.'
+  - 'Spread 9 — RETURN AND RECKONING: Back in Grindelbach as autumn closes in, Nik
+    presents Dao''s combined data — glacier retreat and delta flooding mapped as a
+    single connected system — to the village council, Leo beside him, unexpectedly,
+    having chosen his friend over his family''s investment. Erik sits in the back
+    row, arms folded, then slowly uncrosses them. No vote is taken, no cannons are
+    cancelled, but something cracks open in the room: the village hears itself named
+    as part of a larger story for the first time.'
+  - 'Spread 10 — BOTH HORIZONS: A final wordless double spread. Left page: the Steinbach
+    Glacier at dusk, smaller than it was, but Nik and Leo are there with measuring
+    stakes and a notebook — the first markers of an ongoing record. Right page: Dao
+    in the delta at the same hour of day, planting mangrove seedlings in the recovering
+    mud, her own notebook open beside her. Between the two pages, stitching the Alps
+    to the delta in the white gutter of the book, a single sentence: ''You don''t
+    have to fix the whole world. You have to know which part of it is yours to carry.'''
+story:
+  beats:
+  - narrative: 'The glacier was retreating the way an old man retreats into himself
+      — slowly, and with a kind of dignity that made it worse. Nik stood on the moraine
+      above Grindelbach, his boots swallowed to the laces in grey mud that smelled
+      of iron and cold stone, and watched the Steinbach Glacier pull back from the
+      world it had once commanded. He had come up here alone, the way he always did
+      when the village felt too small, which lately was most days. The photograph
+      in his jacket pocket was starting to soften at the edges from being handled
+      so many times: Grossvater Ernst on thick white ice in July, skis over one shoulder,
+      laughing at whoever held the camera. Nik looked from the photograph to the exposed
+      rock face below the glacier''s new tongue — dark grey, almost black, glistening
+      like a wound that hadn''t been open long enough yet to scar. He was standing,
+      he had calculated with his science teacher Frau Becker''s help, roughly four
+      hundred metres below where the ice had been when that photograph was taken.
+      Four hundred metres. In forty years. He pressed his thumb over Grossvater Ernst''s
+      face, not to cover it, but just to feel that it was still there. Behind him
+      and far below, Grindelbach arranged itself in the valley like a model of itself
+      — the church spire, the painted shutters, the cable car pylons standing idle
+      in summer like a sentence that had forgotten its ending. It was the most photographed
+      village in the canton, his father often said, as though that were a form of
+      permanence. Nik put the photograph away and did not go back down for another
+      hour.'
+  - narrative: 'The planning brochure was glossy enough to reflect the faces looking
+      at it, which Nik thought was probably not an accident. He sat at the edge of
+      the Zürcher family''s kitchen table — Leo''s family''s table, technically, though
+      half the village seemed to pass through it on any given week — and watched his
+      father and Herr Zürcher lean over the open pages with the focused pleasure of
+      men who had found a solution they could hold in their hands. The snow cannon
+      ring would cover the upper runs from November through March, regardless of temperature,
+      regardless of what the sky decided to do. The brochure used words like ''sustainable
+      winter tourism'' and ''climate-adaptive infrastructure'', and Nik turned those
+      phrases over in his mind the way you''d turn a coin to check both sides. Leo
+      was grinning beside his father, proud in a way that was completely genuine,
+      and Nik understood that — understood that Leo loved this valley the same way
+      he did, that Leo''s pride was not cynicism. That made it harder. The adults
+      lifted their glasses and someone said something about ''securing the season''
+      and somebody else laughed, and the room was warm with relief the way a room
+      gets warm when a decision has already been made and the only thing left is to
+      celebrate it. Nik looked toward the dark window above the sink and saw himself
+      in it: a pale reflection, mouth closed, watching. The reflection looked like
+      a boy with a question he didn''t yet know how to ask without it sounding like
+      an accusation. He picked up the brochure and read it again, more carefully,
+      because he believed in reading things carefully before he decided what he felt
+      about them. The snow would be made from water pumped from the reservoir that
+      Grindelbach had been arguing about for three years. That part was on page eleven,
+      in small print.'
+  - narrative: 'At seven in the evening, the farmhouse kitchen smelled of lemongrass
+      and galangal and the particular sweetness of coconut milk beginning to simmer,
+      and Nik sat at the table doing homework he was not actually doing. His mother
+      Malee moved between the stove and the chopping board the way she always cooked
+      — unhurried, certain, as if she had brought a different understanding of time
+      with her from Bangkok and simply never exchanged it for the Swiss version. The
+      tom kha was her brother''s recipe, or close enough: Somchai had always been
+      the better cook, she said, the one with patience. The phone rang on the counter,
+      and the moment she picked it up her whole body changed — a slight stiffening
+      at the shoulders, a careful stillness that Nik had learned to read like weather.
+      He put down his pencil. On the other side of the world, at three in the morning,
+      his uncle Somchai was standing in water that had reached his kitchen table for
+      the third time in four years, and his voice on the crackly line was the voice
+      of a man reporting a fact rather than asking for help, because some men grieve
+      by staying precise. Malee asked short questions in Thai, and Nik caught the
+      words for ''high'' and ''again'' and ''the seedlings'', and the room got very
+      quiet except for the simmering pot. Across the split of that same hour, in a
+      farmhouse in the Chao Phraya delta, Somchai''s daughter Dao was doing what Dao
+      always did when the water came: she was measuring. A pencil mark on the doorframe
+      wall, dated in her small neat handwriting, below three earlier marks from three
+      earlier floods. The lamp on the salvaged table threw her shadow long across
+      the water''s surface. She was fifteen, and she measured the world because measuring
+      it was the only way she''d found to keep it from feeling entirely unmeasurable.
+      Nik''s mother hung up the phone and stood at the stove for a moment without
+      turning around, and then she turned around, and she looked at her son with the
+      expression of a woman who has just made a decision she''s been circling for
+      months.'
+  - narrative: 'The barn still smelled of the two horses they no longer kept, a ghost-smell
+      that lived in the old wood, and Nik had always found it easier to say difficult
+      things in spaces that smelled of something real. He''d followed his father out
+      after dinner without quite deciding to, the way you walk into an argument the
+      way you walk into weather — you knew it was coming; you just didn''t know you''d
+      stopped trying to avoid it. ''They''re machines that make fake snow so people
+      can pretend winter is the same as it was,'' Nik said, and he was careful to
+      say it evenly, the way his father had taught him — no shouting, because shouting
+      in this family was an admission that your words weren''t good enough on their
+      own. Erik set down the feeding bucket he wasn''t using and looked at his son
+      with the tired patience of a man who had had this argument with himself many
+      more times than anyone knew. ''They''re machines that keep twelve families in
+      this valley from selling their homes,'' his father said. ''Including ours.''
+      Nik wanted to say that truth and necessity weren''t the same thing, but what
+      came out was: ''You know it doesn''t fix anything.'' Erik said, very quietly,
+      ''I know that, Nik,'' and the quietness of it was almost worse than anger would
+      have been, because it left no room to push against. The distance between them
+      across the barn floor was perhaps three metres, but it had the quality of a
+      much larger distance — the kind measured not in space but in the different ways
+      two people understand what survival means. Malee stood in the open doorway with
+      the light from the house behind her, and she said nothing, because she was the
+      only person in the room who could see both of them completely, and sometimes
+      seeing completely means you understand that no words will close the distance
+      yet — only time, and motion, and choosing to move toward something instead of
+      standing still.'
+  - narrative: 'Geneva Airport at five in the morning had a particular kind of loneliness
+      to it — not a sad loneliness, Nik thought, but an honest one, the loneliness
+      of a place built entirely for leaving. He had Frau Becker''s notebook in his
+      backpack, a proper field notebook with thick cream pages, and her instructions
+      written on the inside cover in red pen: *Write down what you see. Both places.
+      Don''t decide what it means yet.* He wore his father''s old fleece — the green
+      one with the fraying cuffs that Erik had stopped wearing the winter after Grossvater
+      Ernst died — and under his collar, against his skin, his mother''s Thai amulet,
+      the small golden monk his grandmother had blessed at a temple in Chiang Mai
+      before Malee ever knew Switzerland existed. He was made of both of these things
+      in equal measure, and on most days that felt like abundance. This morning it
+      felt like weight. His father had driven them to the terminal in silence, carried
+      the bags to the check-in queue, and then turned to Nik and offered a handshake
+      — a real handshake, firm and brief, the way Erik shook hands with people he
+      respected — and Nik had shaken it, because he understood that was the full extent
+      of what his father could do right now without breaking something he wasn''t
+      ready to break in public. ''Look after your mother,'' his father said. Nik thought:
+      *she will look after me and I will look after her and that is not the same as
+      what you mean, but fine.* He said, ''I will.'' The departures board flickered
+      and resettled its orange letters above them. When Nik turned at the security
+      gate to look back, his father was already walking toward the exit, hands in
+      his coat pockets, shoulders set in the particular way they set when Erik Gerber
+      was holding something inside himself very carefully, the way you carry something
+      full to the brim.'
+  - narrative: 'Nothing quite prepares you for the smell of a flooded place — not
+      the descriptions of it, not the photographs. It is mud and salt and something
+      sweet-rotten that gets into the back of your throat and stays there, and Nik
+      stood knee-deep in brown water between the rows of Somchai''s shrimp ponds and
+      understood for the first time that he had been thinking about this crisis in
+      a completely wrong unit of measurement. He had been thinking in glaciers — in
+      the large, geological, slow-motion language of the Alps — and here the crisis
+      was intimate and immediate and smelled of last month''s harvest still fermenting
+      in the wrong kind of water. His uncle moved through the wreckage with a steadiness
+      that Nik initially mistook for acceptance, and then realised was something more
+      complicated: the steadiness of a man who had decided that to keep moving was
+      the only form of resistance available to him now. Somchai said very little.
+      He pointed out where the seawall had buckled, where the water table had risen
+      too high for the ponds to drain, where the mangrove buffer that had once protected
+      this stretch of delta had been cleared fifteen years ago for development that
+      had since been abandoned anyway. He said this last part without particular bitterness,
+      just as information, the way Nik''s father talked about the snowline — as a
+      fact that had weight but couldn''t be argued with. Nik opened the notebook.
+      He wrote down: *water the colour of milky tea, the whole horizon flat and wet,
+      Somchai''s boots moving and not stopping.* Then he began to sketch — not well,
+      he was not much of an artist, but Frau Becker had told him it didn''t need to
+      be art, it needed to be observation — the waterline against the shed wall, the
+      half-submerged seedling trays, the sky above the delta which was vast and white
+      and possessed of a heat that pressed down on everything beneath it like a hand.
+      He drew a line connecting the water''s surface to the top of the shed wall,
+      and labelled it with Dao''s pencil mark from the doorframe, which he had memorised,
+      and felt the two landscapes touch for the first time inside the white space
+      of a notebook page.'
+  - narrative: 'Dao had commandeered the upper floor the way scientists commandeer
+      spaces — completely, and without apology. The salvaged table from the kitchen
+      had been carried upstairs when the second flood came, and it had never gone
+      back down, because Dao had covered it with the kind of organised accumulation
+      that announces itself as permanent work: water-level charts dated back twenty-six
+      months, temperature graphs printed on paper that had rippled slightly from the
+      humidity, and two sets of satellite images pinned side by side on the wall above
+      the table with the calm conviction of someone presenting evidence to a jury.
+      Nik stopped in the doorway. One set of images showed the Chao Phraya delta across
+      six years — the brown edges of the floodplain spreading incrementally, the coastline
+      softening and retreating. The other set showed a glacier retreating from a rock
+      face he recognised without needing to read the label. He walked to the wall
+      and looked at the glacier images for a long time without speaking, and something
+      shifted in his chest — not heartbreak, which he''d expected, but a strange,
+      almost vertiginous clarity, like the feeling at the top of a mountain when the
+      clouds open and the view is suddenly so large it reorganises everything you
+      thought you knew about distance. ''You''ve been tracking both,'' he said, and
+      it wasn''t a question. ''For two years,'' Dao said, with the matter-of-fact
+      precision of someone who finds it slightly puzzling that this would be remarkable.
+      She explained the correlation she''d identified — the rate of glacial melt feeding
+      sea-level anomalies, the intensification of monsoon seasons, the data from the
+      valley meteorological station that Frau Becker, without knowing it, had been
+      compiling at the same time. Nik sat down across from her and put his notebook
+      on the table, and they looked at each other — two fifteen-year-olds on opposite
+      sides of a table covered in evidence about the world they''d been born into.
+      ''My father thinks these are two different problems,'' Nik said. Dao considered
+      this seriously, which he appreciated. ''They''re the same sentence,'' she said.
+      ''Just written in different languages.'''
+  - narrative: 'They wrote by the light of Dao''s headlamp and one candle, because
+      the power had been intermittent all week and they''d both stopped minding it,
+      and outside the window the delta night was warm and full of frogs. Dao''s draft
+      for the regional youth climate coalition was precise and structured and devastating
+      in the specific way that facts are devastating when they are arranged with care
+      — she read sections of it aloud to Nik for comment, and he suggested she change
+      ''anthropogenic forcing'' to something a councillor who hadn''t studied science
+      since 1987 might actually absorb, and she considered this and agreed. Nik''s
+      letter to his father was harder. He started it three times. The first two attempts
+      were arguments, and he recognised that and crossed them out, because what he
+      wanted to write was not an argument — he had tried arguments in the barn, and
+      arguments left everyone standing in the same place just colder. What he wanted
+      to write was closer to a description: the flooded farm, the submerged seedlings,
+      Somchai''s precise and heartbroken calm. He wrote: *I''m not asking you to cancel
+      the snow cannons. I know why you need them and I think I understand it better
+      now than I did. I''m asking you to also say, when you show the brochure to people,
+      what they''re for. Not ''sustainable infrastructure''. What they''re actually
+      for: to buy time. Because time is what we''re running out of, and maybe if we
+      say that out loud, the next conversation gets to be about what to do with the
+      time.* He put down his pen and read it back. It was not a solution. It was not
+      a plan. It was a fourteen-year-old boy telling his father the truth in a language
+      that wasn''t English or German or Thai but something more like honesty, which
+      has no country of origin. Dao looked over his shoulder and read it without being
+      asked, because Dao was not particularly interested in the social convention
+      of privacy when something important was at stake. ''Good,'' she said, which
+      from Dao was considerable praise. Outside, the frogs kept going, indifferent
+      and continuous, the sound of the world conducting its own business regardless.'
+  - narrative: 'The village council met in the hall above the Gasthaus, as it always
+      had, under the same wooden beams and the same framed photographs of the valley
+      in better snow years, and Nik stood at the front of it with Dao''s printed data
+      — her charts, the satellite images, the correlations she had annotated in her
+      meticulous hand — and felt the particular fear of speaking truth in a room full
+      of people who have already decided what they can afford to hear. Leo stood beside
+      him, which had not been a small thing for Leo to decide; Nik had not asked him,
+      had told him only what he planned to present, and Leo had shown up anyway, because
+      whatever Leo''s father had invested in the snow cannon ring, Leo had decided
+      his friendship with Nik was a different kind of investment and one he wasn''t
+      prepared to liquidate. Nik spoke evenly and without drama, which he knew was
+      the only register this room would respect — he was his father''s son in this,
+      if in nothing else tonight. He showed the glacier retreat. He showed the delta
+      flooding. He showed Dao''s correlation. He said: ''These aren''t two different
+      problems we''ve been assigned by accident. This is one system, and Grindelbach
+      is part of it, and so is my uncle''s farm, and so is every village on the Chao
+      Phraya.'' The room was very quiet in the way rooms get quiet when something
+      has been said that people can''t immediately argue with, not because they agree,
+      but because they need a moment to locate their disagreement. His father was
+      sitting in the back row with his arms folded, the way Erik Gerber always sat
+      in rooms where his son was speaking — protectively, Nik had once thought; now
+      he wasn''t sure whether it was protection or resistance, or whether there was
+      always a fold of both. Then, slowly, his father''s arms came apart, and he placed
+      his hands on his knees, and he looked at the charts on the wall with the expression
+      of a man looking at a landscape he has crossed a thousand times and seeing for
+      the first time that it has a name.'
+  - narrative: 'The Steinbach Glacier at dusk does not look defeated. It looks like
+      what it is: ancient, diminished, still present, still moving in its own way,
+      still cold enough to keep the rock it rides on honest. Nik and Leo pushed the
+      first measuring stake into the ice shelf at the new tongue''s edge — not a grand
+      gesture, not a protest, just a mark, a datum, the beginning of a record that
+      would outlast the season if they kept it. Nik wrote the date in the notebook,
+      the coordinates from his phone, the air temperature, the distance from the previous
+      survey stake Frau Becker had helped them identify from the university''s archive.
+      He wrote carefully, the way Dao had taught him to write: *not what you feel
+      about it; what it is.* What it was: smaller than last year, colder than it looked,
+      pink at the edges in the alpenglow, and undeniably, measurably, still there.
+      On the other side of the world, at that same hour of the afternoon — nine hours
+      ahead, summer-warm, heavy with river smell — Dao was kneeling in the recovering
+      mud of her father''s delta with a mangrove seedling in both hands. The mud held
+      her knees gently, and the light came across the water flat and gold the way
+      delta light comes, and her notebook was open on a dry patch of ground beside
+      her with the day''s measurements recorded in her small certain handwriting,
+      waiting for one more entry. She pressed the seedling into the mud and held it
+      there for a moment after she let go, making sure it would stay. Neither she
+      nor Nik were fixing the world. They both knew this — had talked about it in
+      the headlamp light, had written about it, had felt the full enormous weight
+      of what neither of them could do. In the white gutter between two landscapes,
+      between the glacier''s edge and the delta mud, between a Swiss-Thai boy with
+      a notebook and a Thai girl with roots in her hands, there was a sentence that
+      belonged to both of them: *You don''t have to fix the whole world. You have
+      to know which part of it is yours to carry.*'
+characters:
+- slug: nik-gerber
+  name: Nik Gerber
+  role: Protagonist — Swiss-Thai teenager from Grindelbach, climate witness and bridge
+    between two worlds
+  description: A fifteen-year-old boy of Swiss and Thai heritage, thoughtful and precise,
+    who carries the emotional weight of two cultures and two climate crises simultaneously.
+    He is quiet in rooms, observant at windows, and most himself on the moraine above
+    the village. He dresses in layers inherited from his father — a worn green fleece
+    with fraying cuffs — and carries a field notebook and a softened photograph of
+    his grandfather. A small golden Thai amulet rests against his skin beneath his
+    collar, invisible but present.
+  primary_reference: references/nik-gerber.png
+  visual_keywords:
+  - worn green fraying-cuffed fleece
+  - cream-paged field notebook
+  - softened black-and-white photograph
+  - golden Thai monk amulet hidden at collar
+  - grey moraine mud on lace-up boots
+- slug: erik-gerber
+  name: Erik Gerber
+  role: Nik's father — Swiss alpine farmer, pragmatic provider caught between economic
+    survival and environmental truth
+  description: A sturdy, weathered Swiss man of middle age who speaks quietly and
+    economically, as though words are a finite resource. He expresses respect through
+    handshakes rather than embraces, and holds difficult feelings inside himself with
+    the careful posture of someone carrying something full to the brim. He sits in
+    public spaces with arms folded, a habitual protective gesture. His old green fleece
+    — now passed to Nik — is his most visible absence.
+  primary_reference: references/erik-gerber.png
+  visual_keywords:
+  - arms-folded seated posture
+  - firm formal handshake gesture
+  - coat pockets with hands thrust deep
+  - shoulders set rigid when suppressing emotion
+  - weathered barn-worker's hands
+- slug: malee-gerber
+  name: Malee Gerber
+  role: Nik's mother — Thai-born woman living in Grindelbach, keeper of two homelands
+    and emotional translator of the family
+  description: A composed, graceful Thai woman who cooks with unhurried certainty,
+    moving between stove and chopping board as though she brought her own sense of
+    time from Bangkok and never swapped it. She is most expressive in stillness —
+    a slight stiffening of the shoulders signals alarm; turning away from the stove
+    signals a decision made. She stands in doorways and sees everyone completely.
+    Her kitchen smells of lemongrass, galangal, and coconut milk.
+  primary_reference: references/malee-gerber.png
+  visual_keywords:
+  - steaming pot of tom kha on stovetop
+  - silhouette framed in lit doorway
+  - telephone pressed to ear with stiffened shoulders
+  - chopping board and aromatic herbs nearby
+  - calm unreadable expression that holds both people in view
+- slug: dao
+  name: Dao
+  role: Nik's cousin — Thai teenager in the Chao Phraya delta, meticulous self-taught
+    climate scientist and Nik's counterpart
+  description: 'A fifteen-year-old Thai girl of sharp intellect and unsentimental
+    precision who measures the world because measurement is her form of resistance.
+    Her upstairs room is a commandeered scientific workspace: water-level charts,
+    temperature graphs rippled by humidity, and paired satellite images pinned to
+    the wall. She marks flood levels on the doorframe in small, neat handwriting.
+    She works by headlamp and candlelight without complaint, and holds mangrove seedlings
+    in muddy hands as an act of deliberate hope.'
+  primary_reference: references/dao.png
+  visual_keywords:
+  - pencil flood-marks on doorframe in neat dated handwriting
+  - pinned side-by-side satellite images above salvaged table
+  - headlamp worn on forehead indoors
+  - mangrove seedling cupped in mud-coated hands
+  - humidity-rippled temperature charts stacked on tabletop
+- slug: somchai
+  name: Somchai
+  role: Nik's uncle — Thai delta farmer, Malee's brother, emblem of quiet resilience
+    under recurring catastrophe
+  description: A middle-aged Thai man of steady, unhurried movement who navigates
+    waist-deep floodwater with the deliberate calm of someone who has chosen forward
+    motion as his only remaining form of resistance. He speaks rarely and factually,
+    reporting disaster in the register of information rather than plea. He points
+    out seawall fractures and cleared mangrove lines without bitterness, the way Nik's
+    father discusses the snowline. His boots are always moving.
+  primary_reference: references/somchai.png
+  visual_keywords:
+  - rubber boots moving through brown flood-water
+  - pointing at buckled seawall or waterlogged shrimp ponds
+  - crackly phone line at 3 a.m. (suggested by single lamp in darkness)
+  - still figure amid submerged seedling trays
+  - steadiness of posture that signals chosen endurance not defeat
+- slug: leo-z-rcher
+  name: Leo Zürcher
+  role: Nik's best friend — local village boy, son of a snow-cannon investor, loyal
+    despite conflicting loyalties
+  description: 'A good-natured, genuinely enthusiastic teenage boy who loves Grindelbach
+    with uncomplicated pride and whose warmth fills whatever room he occupies. He
+    grins beside his father at the glossy planning brochure with real pride, not cynicism.
+    When the moment demands it, he shows up at Nik''s side at the village council
+    without being asked — choosing friendship over his father''s investment. He is
+    the social warmth of the story: easy in large kitchens, easy in crowds.'
+  primary_reference: references/leo-z-rcher.png
+  visual_keywords:
+  - open wide grin in brightly-lit family kitchen
+  - standing shoulder-to-shoulder with Nik at the council lectern
+  - snow cannon planning brochure held in both hands
+  - glacier measuring stake gripped alongside Nik
+  - posture of uncomplicated belonging in a crowded village room
+- slug: frau-becker
+  name: Frau Becker
+  role: Nik's science teacher — methodical mentor who equips Nik with the tools of
+    precise observation
+  description: A focused, practical schoolteacher whose presence in the narrative
+    is felt through the objects she provides and the instructions she writes. Her
+    red-penned handwriting on the inside cover of a thick cream notebook — 'Write
+    down what you see. Both places. Don't decide what it means yet.' — becomes Nik's
+    guiding discipline. She connects local glacier archive data to Nik's investigation,
+    quietly enabling the central revelation without commanding the stage.
+  primary_reference: references/frau-becker.png
+  visual_keywords:
+  - red-pen handwriting on notebook's inside cover
+  - thick cream-paged field notebook she selected and gifted
+  - university glacier survey archive documents spread open
+  - teacher's desk implied by precise instructional notes
+  - absent figure whose red ink is always present on the page
+- slug: grossvater-ernst
+  name: Grossvater Ernst
+  role: Nik's deceased maternal grandfather — spectral anchor of memory and the glacier's
+    living past
+  description: Known only through a single worn photograph, Ernst is a laughing older
+    man photographed in brilliant white July ice with skis over one shoulder, at a
+    point on the glacier four hundred metres higher than it stands today. He never
+    appears in person but is present in every scene through the softened edges of
+    the photograph Nik handles constantly. He is the human face of what has been lost
+    — cheerful, physical, irretrievable.
+  primary_reference: references/grossvater-ernst.png
+  visual_keywords:
+  - softening-edged black-and-white photograph
+  - skis slung over one shoulder on bright white ice
+  - laughing expression caught mid-moment
+  - image held under Nik's thumb as a tactile comfort
+  - figure existing only within a photo's fading border

@@ -131,6 +131,9 @@ def universe_new(
         str, typer.Option("--langs", help="Comma-separated ISO 639-1 codes.")
     ] = "en,th",
     description: Annotated[str, typer.Option("--description")] = "",
+    style: Annotated[
+        str, typer.Option("--style", help="Illustration style guide applied to every image.")
+    ] = "",
 ) -> None:
     """Create a new universe."""
     _validate_slug(slug)
@@ -142,6 +145,7 @@ def universe_new(
         name=name or slug.replace("-", " ").title(),
         languages=_parse_langs(langs),
         description=description,
+        style_guide=style,
     )
     console.print(
         f"Created universe [bold]{universe.slug}[/bold] "
@@ -173,6 +177,12 @@ def book_new(
         typer.Option("--langs", help="Override the universe's languages (ISO 639-1, e.g. en,th)."),
     ] = None,
     age: Annotated[str, typer.Option("--age", help="Target age group.")] = "4-6",
+    idea: Annotated[
+        str, typer.Option("--idea", help="Book idea that seeds the outline (Step 01).")
+    ] = "",
+    spreads: Annotated[
+        int, typer.Option("--spreads", min=1, max=30, help="Number of double-page spreads.")
+    ] = 5,
 ) -> None:
     """Create a new book from a universe."""
     _validate_slug(slug)
@@ -185,6 +195,8 @@ def book_new(
         parent_universe,
         languages=_parse_langs(langs) if langs else None,
         age_group=age,
+        idea=idea,
+        spreads=spreads,
     )
     console.print(
         f"Created book [bold]{book.slug}[/bold] in universe {parent_universe.slug} "

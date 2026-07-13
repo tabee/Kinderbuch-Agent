@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import re
+import unicodedata
 
 
 def slugify(text: str) -> str:
-    """Lowercase kebab-case: ``"Anna the Bear!" -> "anna-the-bear"``."""
-    slug = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+    """ASCII kebab-case: ``"Leo Zürcher!" -> "leo-zurcher"``."""
+    ascii_text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
+    slug = re.sub(r"[^a-z0-9]+", "-", ascii_text.lower()).strip("-")
     return slug or "character"

@@ -42,6 +42,30 @@ def _is_transient(exc: BaseException) -> bool:
     )
 
 
+def _coerce_json_strings(raw: dict[str, Any], exc: ValidationError) -> dict[str, Any] | None:
+    """Repair the common model mistake of encoding a nested object as a JSON string.
+
+    Models occasionally emit ``{"text": "{\\"en\\": ...}"}`` instead of a nested
+    object. For every ``dict_type``/``list_type`` error whose input is a string,
+    try ``json.loads`` on that field. Returns a repaired copy, or ``None`` if
+    nothing could be repaired. Saves a full corrective round-trip (§7.2).
+    """
+    repaired = dict(raw)
+    changed = False
+    for error in exc.errors():
+        if error["type"] not in ("dict_type", "list_type") or len(error["loc"]) != 1:
+            continue
+        field = str(error["loc"][0])
+        value = repaired.get(field)
+        if isinstance(value, str):
+            try:
+                repaired[field] = json.loads(value)
+                changed = True
+            except ValueError:
+                continue
+    return repaired if changed else None
+
+
 class AnthropicLLMProvider(LLMProvider):
     """Structured outputs through Anthropic's forced tool use."""
 
@@ -69,6 +93,12 @@ class AnthropicLLMProvider(LLMProvider):
             try:
                 return schema.model_validate(raw)
             except ValidationError as exc:
+                coerced = _coerce_json_strings(raw, exc)
+                if coerced is not None:
+                    try:
+                        return schema.model_validate(coerced)
+                    except ValidationError:
+                        pass  # fall through to a corrective re-prompt
                 last_error = str(exc)
                 logger.warning("structured output failed validation, re-prompting: %s", exc)
                 current_prompt = (

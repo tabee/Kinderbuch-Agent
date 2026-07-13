@@ -65,6 +65,7 @@ def render_pdf(
         fonts_dir=fonts_dir.resolve().as_uri(),
         page_w=layout.trim_width_mm + 2 * bleed,
         page_h=layout.trim_height_mm + 2 * bleed,
+        text_font_size=_font_size_pt(book.age_group),
         m={
             "top": margins.top_margin_mm + bleed,
             "bottom": margins.bottom_margin_mm + bleed,
@@ -84,6 +85,20 @@ def render_pdf(
     pdf_path = build_dir / f"{book.slug}.pdf"
     HTML(string=html, base_url=str(book_dir)).write_pdf(str(pdf_path))
     return pdf_path
+
+
+def _font_size_pt(age_group: str) -> float:
+    """Text-page font size by reading age: young readers get large type,
+    young adults get book-sized type so bilingual spreads fit one page."""
+    import re
+
+    match = re.search(r"\d+", age_group)
+    age = int(match.group()) if match else 5
+    if age >= 12:
+        return 9.5
+    if age >= 7:
+        return 12.0
+    return 14.0
 
 
 def _check_ready(book: Book) -> None:

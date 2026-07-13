@@ -269,7 +269,7 @@ Once texts and reference images exist, page image generation is embarrassingly p
 ```bash
 kb --help
 kb universe list | new | show
-kb book new <slug> --universe <name> [--langs en,th] [--age 4-6]
+kb book new <slug> --universe <name> [--langs en,th] [--age 4-6] [--idea "..."] [--spreads N]
 kb book list | status | show <slug>
 
 kb run <slug> [--force] [--recreate-images] [--from-page N] [--pages 3,5,7-9] [--interactive]

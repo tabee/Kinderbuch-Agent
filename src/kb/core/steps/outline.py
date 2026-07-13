@@ -20,11 +20,19 @@ def run(ctx: StepContext) -> None:
     book, universe = ctx.book, ctx.universe
     idea = book.idea or f"A story called '{book.title}'."
     prompt = (
-        f"Create the outline for a children's picture book (age group {book.age_group}).\n"
+        f"Create the outline for an illustrated children's/young readers' book "
+        f"(age group {book.age_group}).\n"
         f"Idea: {idea}\n"
         f"Universe: {universe.name} — {universe.description}\n"
-        "The book has 5 double-page spreads; provide exactly one short synopsis "
-        "per spread in page_synopses, in reading order."
+        f"The book has {book.spreads} double-page spreads; provide exactly one short "
+        "synopsis per spread in page_synopses, in reading order. "
+        "Give the book its own evocative title — never reuse the universe name."
     )
     book.outline = ctx.llm.generate_structured(system=_SYSTEM, prompt=prompt, schema=Outline)
+    if book.title == _default_title(book.slug):
+        book.title = book.outline.title  # adopt the authored title unless the user set one
     ctx.books.save(book)
+
+
+def _default_title(slug: str) -> str:
+    return slug.replace("-", " ").title()

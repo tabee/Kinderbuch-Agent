@@ -1,0 +1,36 @@
+number: 8
+text:
+  en: 'They wrote by headlamp and one candle, the power out again, the delta night
+    warm and loud with frogs beyond the window. Dao''s draft for the youth climate
+    coalition was precise and devastating — facts arranged with such care they became
+    something close to argument. Nik''s letter to his father was harder. He crossed
+    out two attempts before he found it: not an argument but a description, ending
+    with the words *to buy time. Because time is what we''re running out of.* He put
+    the pen down and read it back. It was not a solution. It was a fourteen-year-old
+    telling his father the truth in a language that had no country of origin. Dao
+    read it over his shoulder. ''Good,'' she said — which from Dao was considerable
+    praise.'
+  th: 'พวกเขาเขียนหนังสือโดยอาศัยแสงไฟฉายคาดหัวและเทียนเล่มเดียว ไฟฟ้าดับอีกครั้ง
+    คืนแห่งสามเหลี่ยมปากแม่น้ำอบอุ่นและเต็มไปด้วยเสียงกบร้องนอกหน้าต่าง ร่างของดาวสำหรับแนวร่วมเยาวชนด้านภูมิอากาศนั้นละเอียดและหนักแน่น
+    ส่วนจดหมายของนิคถึงพ่อนั้นยากกว่า เขาขีดฆ่าสองครั้งก่อนจะพบสิ่งที่ต้องการ: ไม่ใช่การโต้แย้ง
+    แต่เป็นคำอธิบาย จบลงด้วยถ้อยคำว่า *เพื่อซื้อเวลา เพราะเวลาคือสิ่งที่เรากำลังจะหมดลง*
+    เขาวางปากกาลงและอ่านทบทวน มันไม่ใช่คำตอบ มันคือเด็กอายุสิบสี่ปีที่บอกความจริงแก่พ่อในภาษาที่ไม่มีประเทศใดเป็นเจ้าของ
+    ดาวอ่านมันข้ามบ่าเขา แล้วพูดว่า ''ดี'' ซึ่งจากดาวนั้นถือว่าเป็นคำชมที่มากอยู่'
+image_prompt: 'Intimate interior scene at night in a modest Thai delta home. A boy
+  of about fourteen (Nik, mixed European-Thai features, slightly dishevelled dark
+  hair) sits at a low wooden table, leaning over a handwritten letter, a candle burning
+  close beside him and a headlamp resting nearby. A girl the same age (Dao, Thai,
+  sharp attentive eyes, hair pulled back practically) stands just behind his left
+  shoulder, reading the letter without apology. The room is dim and warm, the walls
+  bare plaster, a dark window open to the night. Through the window, nothing is visible
+  but soft blackness and the suggestion of tall grass. The candlelight throws gold
+  across the papers — Dao''s neat drafted pages and Nik''s crossed-out attempts —
+  and catches the expression on Nik''s face: exhausted, uncertain, but something resolved
+  underneath. Dao''s expression is unreadable except for the quality of her attention,
+  which is absolute. Rendered in a painterly, textured style with deep shadows and
+  warm amber highlights; mood is quiet, serious, and unexpectedly tender.'
+image_path: images/page-008.png
+characters_present:
+- nik-gerber
+- dao
+status: image_done
