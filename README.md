@@ -2,7 +2,7 @@
 
 `kb` turns an idea into a bilingual (EN/TH) illustrated children's book as a print-ready PDF: outline → story → character bible → pages → PDF, via an idempotent, resumable pipeline.
 
-The authoritative specification is [implementation-spec.md](implementation-spec.md). The complete command and flag reference is in [docs/MANUAL.md](docs/MANUAL.md).
+The authoritative specification is [implementation-spec.md](implementation-spec.md). The complete command and flag reference is in [docs/MANUAL.md](docs/MANUAL.md); architecture and workflow diagrams are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Status
 
