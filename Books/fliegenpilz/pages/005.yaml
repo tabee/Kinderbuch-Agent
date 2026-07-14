@@ -1,0 +1,31 @@
+number: 5
+text:
+  de: Plötzlich sieht Flo die Waldwelt mit neuen Augen! Die großen Bäume schauen ihn
+    freundlich an, und bunte Blätter tanzen um ihn herum. Überall glitzert und glimmert
+    es wie Zauber! Flos Herz hüpft vor Freude – der Wald ist noch schöner, als er
+    je gedacht hat.
+  th: ทันใดนั้น โฟ ก็เห็นป่าไม้ด้วยสายตาใหม่! ต้นไม้ใหญ่โตมองเขาอย่างเป็นมิตร และใบไม้สีสันสดใสเต้นรำรอบตัวเขา
+    ทุกที่กิ่วระยิบระยับเหมือนเวทมนตร์! หัวใจของโฟเต้นแบบไปด้วยความสุข — ป่าไม้ยังสวยงามกว่าที่เขาเคยนึกถึง
+image_prompt: A magical forest clearing flooded with soft, golden afternoon light.
+  Flo, a small mushroom boy with a red-spotted cap, stands in the center with arms
+  outstretched in wonder, gazing upward at the transformed forest. Towering ancient
+  trees surround him with kindly expressions visible in their gnarled bark patterns,
+  their branches forming a protective canopy above. Colorful autumn leaves swirl gently
+  through the air in a slow, dreamlike dance. The ground is dappled with warm light
+  and soft moss. Everything shimmers with an ethereal, magical glow. The forest feels
+  warm, welcoming, and full of gentle enchantment. The Waldschamanin stands at the
+  edge of the clearing watching Flo with a knowing smile, while the Fuchs peers curiously
+  from behind a large tree trunk and the Hase sits contentedly on a mossy rock nearby.
+image_path: images/page-005.png
+characters_present:
+- flo
+- die-waldschamanin
+- der-fuchs
+- der-hase
+character_positions:
+  flo: standing in the center of the clearing with arms outstretched, gazing upward
+    in wonder
+  die-waldschamanin: standing at the edge of the clearing with a knowing, gentle smile
+  der-fuchs: peering curiously from behind a large tree trunk on the left side
+  der-hase: sitting contentedly on a mossy rock on the right side of the clearing
+status: approved

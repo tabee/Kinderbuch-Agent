@@ -1,0 +1,22 @@
+number: 1
+text:
+  de: Im grünen Wald sitzt ein kleiner roter Pilz namens Flo. Er hat weiße Pünktchen
+    auf seinem roten Hut – wie Schneeflocken! Tag für Tag schaut Flo zum blauen Himmel
+    hinauf. Dort fliegen bunte Schmetterlinge und singende Vögel frei umher. "Wie
+    gerne würde ich auch fliegen!", denkt Flo und träumt von den Wolken.
+  th: ในป่าสีเขียวนั่งเห็ดสีแดงตัวเล็ก ชื่อว่า โฟ เขามีจุดสีขาวบนหมวกสีแดงของเขา เหมือนเกล็ดหิมะ!
+    ทุกวัน โฟ มองขึ้นไปที่ท้องฟ้าสีฟ้า ที่นั่นผีเสื้อสีสันสดใสและนกร้องเพลงบินอย่างอิสระ
+    "ฉันอยากบินบ้างนะ!" โฟคิดในใจ และฝันถึงเมฆ
+image_prompt: A warm, sunlit forest clearing in soft golden afternoon light. A small
+  red mushroom with white spots (Flo) sits contentedly in the foreground among soft
+  moss and small forest flowers. Above in the bright blue sky, colorful butterflies
+  and singing birds fly freely with joy. Sunbeams filter through the tall green trees,
+  creating a magical, peaceful atmosphere. Flo gazes upward with a dreamy, wondering
+  expression, his little form peaceful yet yearning.
+image_path: images/page-001.png
+characters_present:
+- flo
+character_positions:
+  flo: sitting contentedly in the center foreground among moss and flowers, gazing
+    upward with wonder
+status: approved

@@ -352,6 +352,29 @@ def run(
 
 
 @app.command()
+def assistant(
+    slug: Annotated[
+        str | None,
+        typer.Argument(help="Existing book to resume; omit to create a universe/book."),
+    ] = None,
+) -> None:
+    """Guide creation from universe or book idea through reviews to the final PDF."""
+    from kb.assistant import AssistantAborted, GuidedAssistant
+
+    try:
+        path = GuidedAssistant(root=Path.cwd(), settings=Settings.from_env(), console=console).run(
+            slug
+        )
+    except AssistantAborted as exc:
+        console.print(f"[yellow]{exc}[/yellow]")
+        return
+    except KBError as exc:
+        console.print(f"[red]error:[/red] {exc}")
+        raise typer.Exit(1) from exc
+    console.print(f"Assistent abgeschlossen. PDF: [bold]{path}[/bold]")
+
+
+@app.command()
 def edit(
     slug: Annotated[str, typer.Argument()],
     page: Annotated[int | None, typer.Option("--page", min=1)] = None,

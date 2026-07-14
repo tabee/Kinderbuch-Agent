@@ -272,6 +272,7 @@ kb universe list | new | show
 kb book new <slug> --universe <name> [--langs en,th] [--age 4-6] [--idea "..."] [--spreads N]
 kb book list | status | show <slug>
 
+kb assistant [<slug>]  # guided creation/review; omit slug for a new universe/book
 kb run <slug> [--force] [--recreate-images] [--from-page N] [--pages 3,5,7-9] [--interactive]
 kb edit <slug> --page N --text "make it shorter..."      # LLM rewrite, all languages
 kb edit <slug> --page N --text-en "..." --text-th "..."  # manual replacement
@@ -305,6 +306,16 @@ Page-selection flags combine by intersection. Steps 01–03 run only if their ar
 | 0 | Success. |
 | 1 | Runtime failure, including partial failure (e.g. some page images failed). |
 | 2 | Usage error (unknown book, invalid `--pages` spec, invalid flag combination). |
+
+### 8.4 Guided Assistant
+
+`kb assistant` guides a user from selecting or creating a Universe and Book
+concept through Outline, Story, Character Bible, every Page, and the final PDF.
+Every stage is a review gate with options to approve, edit fields manually, or
+provide a free-form instruction for a schema-constrained LLM revision (HC-1.1).
+Revising an upstream artifact invalidates its dependent artifacts. Page approval
+uses the lifecycle in §6.2. Pausing persists the current YAML state and prints
+`kb assistant <slug>` as the resume command.
 
 ---
 

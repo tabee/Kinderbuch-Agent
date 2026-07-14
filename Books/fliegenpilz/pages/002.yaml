@@ -1,0 +1,25 @@
+number: 2
+text:
+  de: Jeden Tag sitzt Flo unter den großen Bäumen und beobachtet die Schmetterlinge.
+    Sie tanzen durch die Luft – wie kleine, bunte Träume! Die Vögel singen so schön
+    und fliegen davon, ganz leicht und frei. Flo wünscht sich so sehr, auch einmal
+    abheben zu können! Aber seine Wurzeln halten ihn fest im warmen, dunklen Waldboden.
+  th: ทุกวัน ฟโล นั่งอยู่ใต้ต้นไม้ใหญ่และสังเกตการณ์ผีเสื้อ พวกมันเต้นไปมาในอากาศ
+    เหมือนความฝันเล็กๆ ที่มีสีสัน นกร้องเพลงสวยงาม และบินไปโดยไม่มีสิ่งติดขัด ฟโลต้องการจากใจจริงที่จะบินขึ้นไปสักครั้ง
+    แต่รากของมันยึดเขาไว้ในดินป่าที่อบอุ่น
+image_prompt: A warm, sun-dappled forest clearing. Flo, a small red mushroom with
+  a sweet, wistful expression, is rooted in the rich brown forest soil at centre-left,
+  his eyes lifted longingly skyward. Above him, colourful butterflies dance and swirl
+  through the golden-green light – reds, yellows, and blues flutter gracefully. To
+  the upper right, birds soar freely through the canopy, their wings spread wide in
+  joyful flight, singing. Soft dappled sunlight filters through the leaves above,
+  creating a magical, dreamy atmosphere. The forest floor around Flo is warm and welcoming,
+  with moss and small plants, but his roots are gently visible, grounding him tenderly
+  to the earth. The mood is bittersweet – beautiful and hopeful, yet tinged with the
+  gentle longing of a small creature who watches freedom dance above.
+image_path: images/page-002.png
+characters_present:
+- flo
+character_positions:
+  flo: rooted in the forest floor, centre-left, gazing upward with wonder
+status: approved

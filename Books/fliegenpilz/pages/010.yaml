@@ -1,0 +1,23 @@
+number: 10
+text:
+  de: 'Die Waldschamanin geht voran, und oh, wie wunderbar! Überall zwischen den Bäumen
+    leuchten goldene Lichter auf – wie kleine Feen, die tanzen! Sie winken Flo zu
+    und flüstern: ‚Komm mit uns!'' Die ganze Luft funkelt und glitzert vor Magie.'
+  th: แม่มดป่านำหน้าเดิน และโอ้ มันสวยงามเช่นไร! ทุกที่ระหว่างต้นไม้มีแสงสีทองส่องแสงออกมา
+    เหมือนนางฟ้าตัวน้อยที่กำลังเต้นรำ! พวกเขาโบกมือให้โฟและกระซิบว่า 'มากับเรา!' อากาศทั้งหมดส่องแสงและระยิบระยับไปด้วยเวทมนตร์
+image_prompt: A magical forest scene at golden hour, with soft dappled sunlight filtering
+  through the canopy. The Waldschamanin walks ahead along a forest path, her silhouette
+  moving gracefully between tall, ancient trees. Young Flo follows behind her, eyes
+  wide with wonder and looking upward. All around them, gentle golden light orbs float
+  and dance between the branches and leaves – like tiny glowing fairies – creating
+  a dreamy, enchanted atmosphere. The lighting is warm and ethereal, casting soft
+  glows throughout the scene. The mood is peaceful, magical, and filled with childlike
+  wonder."
+image_path: images/page-010.png
+characters_present:
+- flo
+- die-waldschamanin
+character_positions:
+  flo: following behind in the centre, gazing upward in wonder
+  die-waldschamanin: leading ahead on the forest path, centre-left of the scene
+status: approved

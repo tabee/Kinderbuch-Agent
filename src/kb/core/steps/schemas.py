@@ -8,6 +8,24 @@ from __future__ import annotations
 from pydantic import BaseModel, Field
 
 
+class UniverseRevisionSpec(BaseModel):
+    """Editable universe fields; the stable slug is never LLM-controlled."""
+
+    name: str
+    description: str
+    languages: list[str]
+    style_guide: str
+
+
+class BookConceptSpec(BaseModel):
+    """Editable creative brief before Step 01."""
+
+    title: str
+    idea: str
+    age_group: str
+    spreads: int = Field(ge=1, le=30)
+
+
 class CharacterSpec(BaseModel):
     """One character as emitted by Step 03; the step derives the stable slug."""
 
@@ -57,3 +75,9 @@ class PageTextSpec(BaseModel):
     """LLM-assisted text rewrite (``kb edit --text``): text only, image untouched."""
 
     text: dict[str, str]  # keyed by ISO 639-1 code (HC-1.2)
+
+
+class ImagePromptSpec(BaseModel):
+    """LLM-assisted rewrite of a page's illustration prompt."""
+
+    image_prompt: str

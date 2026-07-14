@@ -12,6 +12,7 @@ flowchart TD
 
     subgraph INTERFACE["Interface"]
         CLI["cli.py — Typer CLI<br/>exit codes 0/1/2 (§8.3)"]
+        GUIDE["assistant.py — guided review gates<br/>manual + structured LLM revisions<br/>pause/resume from YAML"]
         WEB["web/app.py — FastAPI preview<br/>read-only, localhost:8000"]
     end
 
@@ -61,7 +62,8 @@ flowchart TD
     EXT_A[/"Anthropic API"/]
     EXT_G[/"Google Gemini API"/]
 
-    CLI --> PIPE & EDIT & BM & UM & RENDER
+    CLI --> GUIDE & PIPE & EDIT & BM & UM & RENDER
+    GUIDE --> PIPE & EDIT & BM & UM & RENDER
     WEB --> BM
     PIPE --> STEPS
     S1 & S2 & S4 --> PROSE
@@ -92,6 +94,7 @@ offline at zero cost — that is what the test suite and phase gates use.
 ```mermaid
 flowchart TD
     IDEA([" Idea "]) --> NEW["kb book new &lt;slug&gt;<br/>--universe --age --spreads --idea"]
+    IDEA --> GUIDE["kb assistant<br/>review each artifact<br/>manual or LLM revision"]
     UNI["kb universe new<br/>--style --langs"] -.optional, own world/style.-> NEW
     NEW --> RUN
 
@@ -133,6 +136,7 @@ flowchart TD
     APPROVE --> PDF["kb pdf &lt;slug&gt;<br/>216×216mm, 3mm bleed, gutters<br/>embedded Noto fonts (HC-3.5)<br/>Thai via libthai (HC-3.4)"]
     REVIEW -.anytime, free.-> PDF
     PDF --> OUT([" print-ready PDF<br/>Books/&lt;slug&gt;/build/ "])
+    GUIDE -.uses the same steps,<br/>page lifecycle, and renderer.-> OUT
     PREVIEW["kb serve + kb open<br/>web preview"] -.-> REVIEW
 
     RETRY["interrupted / failed pages?<br/>just run kb run again —<br/>only missing work is redone"] -.-> RUN

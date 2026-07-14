@@ -1,0 +1,29 @@
+number: 11
+text:
+  de: 'Flo sitzt unter einem großen Baum und schaut auf seine neuen Freunde. Das Fliegen
+    war wunderbar, aber weißt du was? Die schönsten Momente waren nicht am Himmel
+    – sie waren hier bei den Freunden! Die Waldschamanin lächelt und flüstert: Die
+    wahre Magie ist die Liebe, die wir teilen.'
+  th: 'โฟลโอนั่งใต้ต้นไม้ขนาดใหญ่และมองดูเพื่อนใหม่ของเขา การบินนั้นเป็นเรื่องที่ยอดเยี่ยม
+    แต่คุณรู้ไหม? ช่วงเวลาที่สวยงามที่สุดไม่ได้อยู่บนท้องฟ้า มันอยู่ที่นี่กับเพื่อนๆ!
+    แม่มดของป่าแต่ยิ้มและกระซิบว่า: เวทมนตร์ที่แท้จริงคือความรักที่เราแบ่งปัน'
+image_prompt: 'A warm, golden afternoon scene in a forest clearing. Flo the mushroom
+  sits peacefully on the mossy ground beneath an ancient, gnarled oak tree. Around
+  him sit his three friends: the Forest Shamaness with a knowing, gentle smile; the
+  wise Fox; and the quick-witted Hare. They are close together in a circle, bathed
+  in soft, dappled sunlight filtering through the canopy. The atmosphere is contemplative
+  and joyful—there is a magical, shimmering glow around the group suggesting the presence
+  of unseen magic. Everyone looks content, connected, at peace. Autumn leaves drift
+  gently through the air. This is a moment of quiet realization and deep friendship.'
+image_path: images/page-011.png
+characters_present:
+- flo
+- die-waldschamanin
+- der-fuchs
+- der-hase
+character_positions:
+  flo: sitting in the center of the circle on the mossy ground
+  die-waldschamanin: sitting across from Flo, smiling warmly
+  der-fuchs: sitting to Flo's left, looking serene
+  der-hase: sitting to Flo's right, content and peaceful
+status: approved

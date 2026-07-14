@@ -1,0 +1,31 @@
+number: 4
+text:
+  de: Flo kann sein Glück kaum fassen! Die Schamanin hebt ihren großen Korb hoch –
+    und schon geht es aufwärts! Flo schwebt durch die warme Luft wie in einer wundersamen
+    Flugmaschine. Endlich, endlich fliegt er!
+  th: โฟไม่อาจเชื่อว่ามีความสุขขนาดนี้! แม่มหาศาลหญิงยกตะกร้าใหญ่ขึ้น – และทันใดนั้นพวกเขาก็ลอยขึ้นไปในท้องฟ้า!
+    โฟลอยไปในอากาศอบอุ่นเหมือนอยู่ในเครื่องบินวิศวกรรมสุดมหัศจรรย์! ในที่สุด ในที่สุด
+    เขากำลังบิน!
+image_prompt: 'A magical moment of flight beginning: The forest clearing is bathed
+  in warm golden sunlight filtering through the canopy. The Waldschamanin stands with
+  her arms raised high, holding a large woven basket aloft. Inside and around the
+  basket, glowing threads of light spiral upward into the sky. Flo, the young fox
+  character, is rising joyfully into the air inside or above the basket, with his
+  paws spread wide and an expression of pure amazement and delight on his face. The
+  Hare and the other Fuchs are visible below on the forest floor, watching in wonder
+  as Flo ascends. The entire scene has a warm, dreamy quality with soft light and
+  magical sparkles dancing through the air.'
+image_path: images/page-004.png
+characters_present:
+- flo
+- die-waldschamanin
+- der-hase
+- der-fuchs
+character_positions:
+  flo: rising joyfully into the air inside the basket with paws spread wide, centre
+    and rising upward
+  die-waldschamanin: standing with arms raised high, holding the basket aloft, centre
+    foreground
+  der-hase: watching in wonder on the forest floor below, left foreground
+  der-fuchs: watching in wonder on the forest floor below, right foreground
+status: approved

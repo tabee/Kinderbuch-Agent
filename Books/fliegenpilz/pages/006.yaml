@@ -1,0 +1,30 @@
+number: 6
+text:
+  de: Die Waldschamanin sitzt unter einem großen Baum und lächelt den klugen Fuchs
+    an, der gerade zu ihr gestoßen ist. Der Fuchs mit seinen funkelnden Augen setzt
+    sich gemütlich hin und lauscht ihren sanften Worten. Flo hüpft aufgeregt näher
+    heran – überall im Wald glitzert die geheime Magie in der Dunkelheit!
+  th: แม่สาเร็จจิตญาณของป่านั่งอยู่ใต้ต้นไม้ใหญ่และยิ้มให้กับสุนัขจิ้งจอกที่ฉลาดซึ่งเพิ่งมาถึง
+    สุนัขจิ้งจอกที่มีดวงตาเปล่งประกายนั่งลงอย่างสบายใจและฟังคำพูดอันนุ่มนวลของเธอ
+    ฟโลกระโดดเข้ามาใกล้อย่างตื่นเต้น – ความมหัศจรรย์ลับของป่าระยิบระยับในความมืด!
+image_prompt: A magical forest clearing bathed in soft, ethereal moonlight with hints
+  of purple and blue twilight. The Waldschamanin sits peacefully beneath an ancient,
+  gnarled tree with spreading roots, her gentle expression welcoming. The intelligent
+  Fuchs with bright, gleaming eyes sits beside her, attentively listening, his bushy
+  tail wrapped around himself. Flo the mushroom character hops excitedly nearby, delighted
+  to be part of this secret moment. Soft, glowing wisps of magical light—like fireflies
+  or enchanted sparkles—dance throughout the forest around them, creating an atmosphere
+  of wonder and ancient wisdom. The mood is warm, mysterious, and utterly magical,
+  with no sense of fear.
+image_path: images/page-006.png
+characters_present:
+- die-waldschamanin
+- der-fuchs
+- flo
+- der-hase
+character_positions:
+  die-waldschamanin: sitting peacefully beneath the ancient tree, centre-left
+  der-fuchs: sitting attentively beside the Waldschamanin, centre
+  flo: hopping excitedly nearby to the right, middle ground
+  der-hase: observing from the shadowed forest edge, background right
+status: approved

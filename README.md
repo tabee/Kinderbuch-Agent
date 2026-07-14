@@ -13,7 +13,7 @@ The authoritative specification is [implementation-spec.md](implementation-spec.
 | 3 — Output (PDF + preview) | ✅ complete | Gate 3: offline `kb run && kb pdf` → bilingual EN/TH PDF, zero LLM cost ([tests/test_e2e_pdf.py](tests/test_e2e_pdf.py)) |
 | 4 — Hardening (Google images, polish) | ✅ complete | Gate 4: full §13 suite; real provider config-selectable, never exercised by tests |
 
-All pipeline steps (outline → story → character bible → pages) run with structured LLM outputs, visual-consistency reference management, and parallel image generation. `kb pdf` produces a print-ready PDF: 216 × 216 mm pages (3 mm bleed), verso text / recto full-bleed image spreads, embedded Noto fonts, libthai-backed Thai line breaking, and age-aware typography (larger type for pre-readers, book-sized type for young adults). Example books in `Books/`:
+All pipeline steps (outline → story → character bible → pages) run with structured LLM outputs, visual-consistency reference management, and parallel image generation. `kb assistant` adds review gates with manual or LLM-assisted revisions from the first universe idea through every page and the final PDF; it can be paused and resumed from YAML state. `kb pdf` produces a print-ready PDF: 216 × 216 mm pages (3 mm bleed), verso text / recto full-bleed image spreads, embedded Noto fonts, libthai-backed Thai line breaking, and age-aware typography (larger type for pre-readers, book-sized type for young adults). Example books in `Books/`:
 
 - `demo` — offline (mock) example, zero cost
 - `ninos-two-mountains` — real-generated picture book (age 4-6, 5 spreads)
@@ -52,6 +52,19 @@ docker compose -f docker/docker-compose.yml exec app kb serve --host 0.0.0.0
 ```
 
 ## First book in under 5 minutes
+
+Guided workflow with review and revision after every stage:
+
+```bash
+kb assistant                 # create universe/book and proceed to the PDF
+kb assistant nino            # resume a paused or incomplete book
+```
+
+Every review offers approval, manual editing, and free-form LLM instructions.
+Choose `q` to pause safely; the assistant prints the resume command. Provider
+settings and costs are identical to the commands below.
+
+Direct, non-interactive workflow:
 
 ```bash
 kb universe list                                  # ships with swiss-thai-myths
@@ -123,7 +136,7 @@ uv run pytest           # offline tests, no network
 
 - **Package layout**: `src/kb/` (standard src-layout, importable package `kb`) instead of loose modules directly under `src/` — allowed by spec §5 ("internal module layout may be adjusted"), needed for clean packaging and the `kb` console script.
 - **`docker/nginx.conf`** omitted: the web preview is a local single-user editor aid (`kb serve`, uvicorn on 127.0.0.1); fronting it with nginx adds no value at this scope.
-- **questionary** not used: `--interactive` uses typer's built-in confirmation prompts, which cover the spec requirement without an extra dependency.
+- **questionary** not used: `--interactive` and `kb assistant` use Typer's built-in prompts, which provide the required confirmations and review choices without an extra dependency.
 - **`word-break: keep-all`** (spec §11.3, pre-v5.1 wording): WeasyPrint ignores this property; Thai line segmentation is performed natively by Pango + libthai via `lang="th"` — verified by Gate 3. Spec updated accordingly.
 - **Mock content is themed** (Swiss-Thai myths) and varies deterministically per prompt, so demo books have distinct pages/pictures while remaining fully reproducible.
 - **Google images via Gemini API instead of Vertex AI Imagen**: classic Imagen `:predict` models are closed to new users (verified live, 2026-07). The `imagen` provider therefore calls Gemini image models (`generateContent`), which additionally accept reference images as input — a strict improvement for character consistency (HC-2.2/2.3). Auth is a simple `GOOGLE_API_KEY` instead of a service account.

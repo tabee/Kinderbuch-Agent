@@ -8,14 +8,149 @@ from pathlib import Path
 from kb.consistency.prompt_builder import build_page_image_prompt
 from kb.consistency.reference_manager import select_references
 from kb.core.book_manager import BookManager
-from kb.core.models import Book, Character, Page, Universe
+from kb.core.models import Book, Character, Outline, Page, Story, Universe
 from kb.core.slug import slugify
 from kb.core.steps.prose import prose_guidance
-from kb.core.steps.schemas import CharacterBibleSpec, PageTextSpec
+from kb.core.steps.schemas import (
+    BookConceptSpec,
+    CharacterBibleSpec,
+    ImagePromptSpec,
+    PageTextSpec,
+    UniverseRevisionSpec,
+)
+from kb.core.universe_manager import UniverseManager
 from kb.core.views import write_bible_view, write_story_view
 from kb.errors import KBError
 from kb.image.base import ImageProvider
 from kb.llm.base import LLMProvider
+
+
+def edit_universe(
+    universes: UniverseManager, universe: Universe, llm: LLMProvider, instruction: str
+) -> Universe:
+    """Revise universe settings while preserving its stable slug."""
+    prompt = (
+        f"Revise the reusable story universe '{universe.name}'.\n"
+        f"Description: {universe.description}\n"
+        f"Languages: {', '.join(universe.languages)}\n"
+        f"Illustration style: {universe.style_guide}\n"
+        f"Instruction: {instruction}\n"
+        "Return the complete revised universe. Languages must be ISO 639-1 codes."
+    )
+    spec = llm.generate_structured(
+        system="You design reusable children's-book universes. Always use structured output.",
+        prompt=prompt,
+        schema=UniverseRevisionSpec,
+    )
+    revised = Universe(slug=universe.slug, **spec.model_dump())
+    universes.save(revised)
+    return revised
+
+
+def replace_book_concept(books: BookManager, book: Book, concept: BookConceptSpec) -> Book:
+    """Replace the creative brief and invalidate all generated artifacts."""
+    book.title = concept.title
+    book.idea = concept.idea
+    book.age_group = concept.age_group
+    book.spreads = concept.spreads
+    book.outline = None
+    book.story = None
+    book.characters = []
+    book.pages = []
+    books.clear_generated_artifacts(book.slug)
+    books.save(book)
+    return book
+
+
+def edit_book_concept(books: BookManager, book: Book, llm: LLMProvider, instruction: str) -> Book:
+    """Revise the book's creative brief through structured output (HC-1.1)."""
+    prompt = (
+        f"Revise this book concept.\nTitle: {book.title}\nIdea: {book.idea}\n"
+        f"Age group: {book.age_group}\nSpreads: {book.spreads}\n"
+        f"Instruction: {instruction}\nReturn the complete revised concept."
+    )
+    concept = llm.generate_structured(
+        system="You develop children's-book concepts. Always use structured output.",
+        prompt=prompt,
+        schema=BookConceptSpec,
+    )
+    return replace_book_concept(books, book, concept)
+
+
+def replace_outline(books: BookManager, book: Book, outline: Outline) -> Outline:
+    """Replace the outline and invalidate every downstream artifact."""
+    if len(outline.page_synopses) != book.spreads:
+        raise KBError(
+            f"revised outline has {len(outline.page_synopses)} page synopses; "
+            f"expected {book.spreads}"
+        )
+    book.outline = outline
+    book.title = outline.title
+    book.story = None
+    book.characters = []
+    book.pages = []
+    books.clear_generated_artifacts(book.slug)
+    books.save(book)
+    return outline
+
+
+def replace_story(books: BookManager, book: Book, story: Story) -> Story:
+    """Replace the story and invalidate its bible and pages."""
+    if len(story.beats) != book.spreads:
+        raise KBError(f"revised story has {len(story.beats)} beats; expected {book.spreads}")
+    book.story = story
+    book.characters = []
+    book.pages = []
+    books.clear_generated_artifacts(book.slug)
+    books.save(book)
+    write_story_view(book, books.book_dir(book.slug))
+    return story
+
+
+def edit_outline(books: BookManager, book: Book, llm: LLMProvider, instruction: str) -> Outline:
+    """Revise the complete outline through structured LLM output (HC-1.1)."""
+    if book.outline is None:
+        raise KBError("the book has no outline yet — run Step 01 first")
+    current = "\n".join(
+        f"{number}. {synopsis}"
+        for number, synopsis in enumerate(book.outline.page_synopses, start=1)
+    )
+    prompt = (
+        f"Revise the outline for the book '{book.title}' (age group {book.age_group}).\n"
+        f"Current title: {book.outline.title}\n"
+        f"Current premise: {book.outline.premise}\n"
+        f"Current page synopses:\n{current}\n"
+        f"Instruction: {instruction}\n"
+        f"Return the complete revised outline with exactly {book.spreads} page synopses."
+    )
+    revised = llm.generate_structured(
+        system="You revise children's-book outlines. Always respond via structured output.",
+        prompt=prompt,
+        schema=Outline,
+    )
+    return replace_outline(books, book, revised)
+
+
+def edit_story(books: BookManager, book: Book, llm: LLMProvider, instruction: str) -> Story:
+    """Revise the complete story through structured LLM output (HC-1.1)."""
+    if book.story is None:
+        raise KBError("the book has no story yet — run Step 02 first")
+    current = "\n".join(
+        f"{number}. {beat.narrative}" for number, beat in enumerate(book.story.beats, start=1)
+    )
+    prompt = (
+        f"Revise the story for the book '{book.title}' (age group {book.age_group}).\n"
+        f"Current story beats:\n{current}\n"
+        f"Instruction: {instruction}\n"
+        f"Return the complete revised story with exactly {book.spreads} beats. "
+        f"{prose_guidance(book.age_group)}"
+    )
+    revised = llm.generate_structured(
+        system="You revise children's-book stories. Always respond via structured output.",
+        prompt=prompt,
+        schema=Story,
+    )
+    return replace_story(books, book, revised)
 
 
 def get_page(book: Book, number: int) -> Page:
@@ -62,6 +197,32 @@ def rewrite_text(
     if missing:
         raise KBError(f"page {number}: LLM omitted language(s) {sorted(missing)} (HC-1.2)")
     return edit_text(books, book, number, {lang: spec.text[lang] for lang in book.languages})
+
+
+def rewrite_image_prompt(
+    books: BookManager,
+    book: Book,
+    universe: Universe,
+    llm: LLMProvider,
+    images: ImageProvider,
+    number: int,
+    instruction: str,
+) -> Page:
+    """Have the LLM revise an image prompt, then regenerate the image."""
+    page = get_page(book, number)
+    if page.image_prompt is None:
+        raise KBError(f"page {number} has no image prompt yet — run the pipeline first")
+    prompt = (
+        f"Revise this illustration prompt for page {number} of '{book.title}'.\n"
+        f"Current prompt: {page.image_prompt}\nInstruction: {instruction}\n"
+        "Return one complete replacement prompt. It must describe one coherent scene and no text."
+    )
+    revised = llm.generate_structured(
+        system="You revise storybook illustration prompts. Always use structured output.",
+        prompt=prompt,
+        schema=ImagePromptSpec,
+    )
+    return edit_image(books, book, universe, images, number, revised.image_prompt, replace=True)
 
 
 def edit_image(

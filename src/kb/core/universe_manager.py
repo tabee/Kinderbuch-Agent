@@ -52,5 +52,9 @@ class UniverseManager:
             description=description,
             style_guide=style_guide,
         )
-        atomic_write_yaml(self._file(slug), universe.model_dump(mode="json"))
+        self.save(universe)
         return universe
+
+    def save(self, universe: Universe) -> None:
+        """Persist an updated universe atomically (HC-4.4)."""
+        atomic_write_yaml(self._file(universe.slug), universe.model_dump(mode="json"))

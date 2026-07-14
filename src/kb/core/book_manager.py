@@ -63,6 +63,32 @@ class BookManager:
         pages_dir.mkdir(parents=True, exist_ok=True)
         atomic_write_yaml(pages_dir / f"{page.number:03d}.yaml", page.model_dump(mode="json"))
 
+    def clear_generated_artifacts(self, slug: str) -> None:
+        """Remove generated state made stale by an upstream revision."""
+        book_dir = self.book_dir(slug)
+        pages_dir = book_dir / "pages"
+        if pages_dir.is_dir():
+            for path in pages_dir.glob("*.yaml"):
+                path.unlink()
+        for directory, pattern in (("images", "page-*"), ("references", "*")):
+            derived_dir = book_dir / directory
+            if derived_dir.is_dir():
+                for path in derived_dir.glob(pattern):
+                    if path.is_file():
+                        path.unlink()
+        views_dir = book_dir / "views"
+        if views_dir.is_dir():
+            for name in ("story.md", "bible.md"):
+                path = views_dir / name
+                if path.is_file():
+                    path.unlink()
+        build_dir = book_dir / "build"
+        if build_dir.is_dir():
+            for suffix in ("html", "pdf"):
+                path = build_dir / f"{slug}.{suffix}"
+                if path.is_file():
+                    path.unlink()
+
     def load(self, slug: str) -> Book:
         book_file = self.book_dir(slug) / "book.yaml"
         if not book_file.is_file():

@@ -28,7 +28,39 @@ contain the `Global/` and `Books/` folders.
 
 ---
 
-## 3. `kb universe` — reusable story settings
+## 3. `kb assistant` — guided creation and review
+
+```bash
+kb assistant [<slug>]
+```
+
+Without a slug, the assistant starts with an existing or new universe and then
+creates a book. With an existing book slug, it resumes from the persisted YAML
+state. It guides the complete workflow:
+
+```
+universe → book idea → outline → story → character bible → every page → PDF
+```
+
+At each review, choose from the displayed actions. All creative stages support
+approval, manual replacement, or a free-form instruction to the configured LLM.
+Page reviews separately support manual or LLM-assisted text revision and image
+revision. Approving a page moves it to `approved`; only after every unfinished
+page has been reviewed does the assistant render the PDF.
+
+Choose `q` at any review to pause. All completed work is already stored
+atomically; resume with the command printed by the assistant:
+
+```bash
+kb assistant my-book
+```
+
+Changing an outline removes its old story, bible, pages, page images, and stale
+PDF; changing a story removes its old bible and page outputs. They are generated
+again only after the revised upstream artifact is approved. This prevents mixed
+versions. Provider and cost settings are the same as for `kb run`.
+
+## 4. `kb universe` — reusable story settings
 
 A *universe* defines the world, tone, languages, and illustration style that
 books inherit at creation time.
@@ -66,7 +98,7 @@ Print a universe's name, languages, description, and style guide.
 
 ---
 
-## 4. `kb book` — book management
+## 5. `kb book` — book management
 
 ### `kb book new <slug> --universe <name> [options]`
 
@@ -110,7 +142,7 @@ character/page counts).
 
 ---
 
-## 5. `kb run` — the generation pipeline
+## 6. `kb run` — the generation pipeline
 
 ```
 kb run <slug> [--force] [--recreate-images] [--from-page N] [--pages SPEC] [--interactive]
@@ -157,7 +189,7 @@ kb edit <slug> --page N --image-prompt "<a new, calmer description of the scene>
 Pages that failed for transient reasons (rate limits, network) are listed
 separately with "re-run to retry".
 
-## 6. `kb edit` — targeted changes
+## 7. `kb edit` — targeted changes
 
 ```
 kb edit <slug> [--page N] [operation …]
@@ -187,7 +219,7 @@ todo ──▶ text_done ──▶ image_done ──▶ approved
                 └── edits revoke approval ─┘
 ```
 
-## 7. `kb pdf` — print-ready output
+## 8. `kb pdf` — print-ready output
 
 ```
 kb pdf <slug>
@@ -200,7 +232,7 @@ intermediate is kept next to it for debugging. Requires all pages to have
 images; fails with a clear message otherwise. Free and fast — re-render after
 every edit.
 
-## 8. `kb serve` / `kb open` — web preview
+## 9. `kb serve` / `kb open` — web preview
 
 | Command | Description |
 |---|---|
@@ -219,7 +251,7 @@ docker compose -f docker/docker-compose.yml exec app kb serve --host 0.0.0.0
 
 ---
 
-## 9. Configuration (environment variables)
+## 10. Configuration (environment variables)
 
 Set in the shell or in `.env` (loaded automatically; never committed). See
 [.env.example](../.env.example) for the annotated template.
@@ -238,7 +270,7 @@ Set in the shell or in `.env` (loaded automatically; never committed). See
 
 Zero-cost dry run of anything: `KB_LLM_PROVIDER=mock KB_IMAGE_PROVIDER=mock kb run <slug>`.
 
-## 10. Book folder layout
+## 11. Book folder layout
 
 ```
 Books/<slug>/
@@ -254,10 +286,13 @@ Everything is plain files; a book folder is self-contained and portable.
 `views/` and `build/` are derived artifacts — regenerate them any time, never
 edit them (changes are overwritten and ignored).
 
-## 11. Recipes
+## 12. Recipes
 
 ```bash
 # Full book from scratch (real providers)
+kb assistant
+
+# Non-interactive alternative
 kb book new my-book --universe swiss-thai-myths --age 4-6 --spreads 8 --idea "…"
 KB_IMAGE_PROVIDER=imagen kb run my-book
 kb pdf my-book

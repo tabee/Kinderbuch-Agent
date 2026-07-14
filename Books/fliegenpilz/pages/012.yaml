@@ -1,0 +1,25 @@
+number: 12
+text:
+  de: 'Die Waldschamanin bringt Flo sanft zum Waldrand zurück. Sie setzt ihn ganz
+    vorsichtig auf seinen Platz. Flo schaut ihr dankbar nach – und weiß in seinem
+    Herzen: Das war die größte Reise seines ganzen Lebens!'
+  th: แม่มดป่าอ่อมโยนนำฟโลกลับไปที่ปากป่า เธอวางเขาลงอย่างระมัดระวังที่เดิมของเขา
+    ฟโลมองไปตามเธอด้วยความขอบคุณ และเขารู้ในหัวใจของเขา ว่านี่คือการเดินทางครั้งยิ่งใหญ่ที่สุดของชีวิตเขา
+image_prompt: A magical forest clearing at the edge of the woods during golden sunset
+  light. The Waldschamanin, a wise and gentle forest woman with flowing robes adorned
+  with forest symbols, has just released young Flo the fly from her cupped hands.
+  Flo hovers in the air before her, wings shimmering in the warm golden light, gazing
+  back at her with gratitude and wonder. The forest clearing glows with soft amber
+  and green tones, with moss-covered stones and gentle wildflowers around them. Dappled
+  sunlight filters through the trees behind them, creating a peaceful, dreamy atmosphere
+  of farewell and completion. The mood is warm, peaceful, and filled with the quiet
+  joy of a journey's end.
+image_path: images/page-012.png
+characters_present:
+- flo
+- die-waldschamanin
+character_positions:
+  flo: hovering in the air, wings shimmering, gazing back gratefully
+  die-waldschamanin: standing in the clearing, her hands open and releasing Flo, face
+    gentle and wise
+status: approved

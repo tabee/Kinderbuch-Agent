@@ -1,0 +1,29 @@
+number: 8
+text:
+  de: Plötzlich springt ein mutiger Hase aus dem grünen Wald heraus! Die Schamanin
+    setzt sich hin und lächelt ihrem neuen Freund zu. Sie sprechen über kleine Schritte,
+    große Träume und echte Freundschaft.
+  th: ทันใดนั้น กระต่ายที่กล้าหาญตัวหนึ่งเด้งออกมาจากป่าเขียว! แม่ปราชญ์ของป่านั่งลงและยิ้มให้เพื่อนใหม่ของเธอ
+    พวกเขาพูดคุยเกี่ยวกับก้าวเล็กน้อย ฝันใหญ่โต และมิตรภาพที่แท้จริง
+image_prompt: A warm, sunlit forest clearing dappled with golden light filtering through
+  the canopy. The Waldschamanin sits cross-legged on soft moss, her kind expression
+  radiant as she gazes at a brave young hare who has just emerged from the verdant
+  undergrowth. The hare stands alert but relaxed, ears perked forward in curiosity
+  and trust. Flo the flying mushroom hovers nearby, glowing gently, while the fox
+  watches contentedly from the background. The atmosphere is peaceful, nurturing,
+  and full of gentle wonder—a moment of connection and meaningful conversation among
+  forest friends.
+image_path: images/page-008.png
+characters_present:
+- die-waldschamanin
+- der-hase
+- flo
+- der-fuchs
+character_positions:
+  die-waldschamanin: sitting cross-legged on moss in the centre, facing the hare with
+    a gentle smile
+  der-hase: standing alert in the centre-foreground, freshly emerged from the green
+    undergrowth
+  flo: hovering softly in the mid-ground, glowing with warm light
+  der-fuchs: watching peacefully from the background beneath the trees
+status: approved

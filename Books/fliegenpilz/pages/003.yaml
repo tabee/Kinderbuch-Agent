@@ -1,0 +1,39 @@
+number: 3
+text:
+  de: 'Eines wunderschönen Tages entdeckt eine weise Waldschamanin den kleinen Flo!
+
+    Sie schaut ihn an und lächelt sanft – sie sieht das Besondere in ihm!
+
+    Behutsam hebt sie Flo auf und legt ihn in ihren geheimnisvollen Korb.
+
+    Ein neues Abenteuer beginnt!'
+  th: 'ในวันที่สวยงามวันหนึ่ง แม่มดป่าผู้ปราชญ์ค้นพบ ฟลโล ตัวน้อย!
+
+    เธอมองเขาและยิ้มอย่างอ่อนโยน – เธอเห็นสิ่งพิเศษในตัวเขา!
+
+    เธออุ้มฟลโล ขึ้นด้วยความอ่อนโยน และวางเขาลงในตะกร้าลึกลับของเธอ
+
+    การผจญภัยใหม่เริ่มต้นแล้ว!'
+image_prompt: A warm, enchanted forest clearing bathed in soft golden afternoon light
+  filtering through the canopy above. A wise forest shaman woman with long flowing
+  robes adorned with natural earth tones and mystical symbols kneels gently in the
+  foreground, her face glowing with a tender, knowing smile as she gazes down at a
+  tiny, delicate mushroom (Flo) nestled in the moss before her. Her weathered hands
+  are carefully lifting the small mushroom with reverence. Behind her sits an intricately
+  woven basket decorated with mysterious symbols and natural materials. The atmosphere
+  is magical and peaceful, filled with wonder and gentle enchantment. In the soft
+  background, a curious fox and hare peek through the undergrowth, watching the tender
+  moment unfold. Dappled sunlight creates a dreamy, safe atmosphere.
+image_path: images/page-003.png
+characters_present:
+- die-waldschamanin
+- flo
+- der-fuchs
+- der-hase
+character_positions:
+  die-waldschamanin: kneeling in the forest clearing, centre-foreground, smiling down
+    with outstretched hands
+  flo: nestled in the moss at the shaman's feet, centre-foreground, being gently lifted
+  der-fuchs: peering curiously from the undergrowth, left background
+  der-hase: watching from behind the vegetation, right background
+status: approved

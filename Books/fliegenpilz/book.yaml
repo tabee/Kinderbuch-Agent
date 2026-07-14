@@ -1,0 +1,171 @@
+schema_version: 1
+slug: fliegenpilz
+title: Fliegenpilz - Der Traum vom Fliegen
+universe_slug: fliegenpilz
+languages:
+- de
+- th
+age_group: 4-8 Jahre
+spreads: 12
+idea: "Ein kleiner Fliegenpilz mit leuchtend roten Pünktchen träumt davon, in den\
+  \ Himmel zu fliegen wie die Schmetterlinge und Vögel. Eines Tages wird er von einer\
+  \ weisen Waldschamanin gepflückt und in ihren magischen Körbchen gelegt. Der kleine\
+  \ Pilz glaubt nun, in einem wundersamen Flugobjekt zu sitzen! \n\nWährend die Schamanin\
+  \ durch den Wald wandert, erlebt der Fliegenpilz das größte Abenteuer seines Lebens:\
+  \ Sie treffen auf einen klugen Fuchs, mit dem die Schamanin über die Geheimnisse\
+  \ der Nacht spricht - der Fuchs erzählt von seinen nächtlichen Wanderungen und der\
+  \ Magie, die in der Dunkelheit lebt. Später begegnen sie einem sanften Hasen, und\
+  \ die Schamanin führt ein liebevolles Gespräch über Mut und kleine Schritte - der\
+  \ Hase teilt seine Erfahrungen, wie er trotz seiner Größe große Abenteuer erlebt.\n\
+  \nDer Fliegenpilz sieht die Waldwelt aus neuer Perspektive, entdeckt verborgene\
+  \ Lichter zwischen den Bäumen, und lernt durch die Begegnungen, dass Träume auf\
+  \ überraschende Weise wahr werden. Am Ende versteht er: Nicht das Fliegen selbst\
+  \ war das Wichtigste, sondern die Reise, die Freundschaften und die Magie, die ihn\
+  \ auf dem Weg begleitete. Eine zauberhafte Geschichte über Träume, Perspektivwechsel,\
+  \ die Verbindung zwischen allen Waldwesen und die Schönheit des Unerwarteten."
+outline:
+  title: Fliegenpilz Flo fliegt davon
+  premise: Ein kleiner Fliegenpilz namens Flo träumt sehnlichst davon, wie die Schmetterlinge
+    und Vögel in den Himmel zu fliegen. Als eine weise Waldschamanin ihn eines Tages
+    in ihren magischen Korb legt, glaubt Flo, endlich sein Abenteuer zu erleben. In
+    dieser wundersamen „Flugmaschine" sieht er die Waldwelt aus völlig neuer Perspektive
+    und erlebt unvergessliche Begegnungen mit klugen und freundlichen Waldtieren,
+    die ihm zeigen, dass Träume auf die schönsten und überraschendsten Wege wahr werden
+    können.
+  page_synopses:
+  - 'Flos großer Traum: Der kleine rote Fliegenpilz mit leuchtenden weißen Pünktchen
+    sitzt auf seinem Waldplätzchen und schaut verlangend zum Himmel hinauf, wo Schmetterlinge
+    und Vögel frei fliegen.'
+  - 'Der Wunsch wächst: Tag für Tag beobachtet Flo die fliegenden Waldtiere und träumt
+    davon, eines Tages selbst abheben zu können, während er fest im Boden verwurzelt
+    bleibt.'
+  - 'Die magische Begegnung: Eine weise Waldschamanin mit sanftem Lächeln entdeckt
+    Flo und erkennt das Besondere in ihm; sie hebt ihn behutsam auf und legt ihn in
+    ihren wunderschönen, mit geheimnisvollen Symbolen verzierten Korb.'
+  - 'Der große Moment: Flo kann sein Glück kaum fassen – endlich hebt sich der Korb
+    vom Waldboden ab, und Flo glaubt, in einem fantastischen Flugzeug zu sitzen, das
+    ihn zum Himmel trägt.'
+  - 'Neue Höhen: Der Waldausblick verwandelt sich, während die Schamanin tiefer in
+    den Wald hineingeht; Flo sieht vertraute Orte aus völlig neuen Winkeln und staunende
+    Augen großer Bäume.'
+  - 'Der kluge Fuchs: Die Schamanin trifft auf einen intelligenten Fuchs mit glänzenden
+    Augen, der sich zu ihr gesellt; Flo lauscht gebannt, wie sie über die Geheimnisse
+    und die Magie der Nacht sprechen.'
+  - 'Nachtgeschichten: Der Fuchs erzählt von seinen nächtlichen Wanderungen durch
+    das geheimnisvoll leuchtende Waldreich, während Flo voller Wunder diese verborgene
+    Welt in seiner Vorstellung entdeckt.'
+  - 'Die sanfte Überraschung: Plötzlich springt ein beherzter Hase aus dem Grün herbei;
+    die Schamanin setzt sich hin und beginnt ein liebevolles Gespräch über Mut, kleine
+    Schritte und große Träume.'
+  - 'Hasenweisheit: Der Hase teilt seine Erfahrungen, wie er trotz seiner Kleinheit
+    die Welt erkundet und große Abenteuer erlebt; Flo merkt, dass er dem Hasen ähnlicher
+    ist, als er gedacht hat.'
+  - 'Magische Lichter: Während die Schamanin weiter geht, offenbaren sich zwischen
+    den Bäumen verborgene Lichtflecken und leuchtende Waldwunder, die Flo vorher nie
+    bemerkt hatte.'
+  - 'Die neue Wahrheit: Flo versteht allmählich, dass das Fliegen selbst nicht das
+    Wichtigste ist – sondern die Reise, die Freundschaften und die Magie, die ihn
+    begleitete.'
+  - 'Am Waldrand angekommen: Die Schamanin kommt am Waldausgang an; Flo blickt zurück
+    auf seine wunderbare Reise und weiß, dass er nicht in die Luft fliegen musste,
+    um die größte Reise seines Lebens zu erleben.'
+story:
+  beats:
+  - narrative: Flo ist ein kleiner roter Fliegenpilz mit weißen Pünktchen, und er
+      sitzt auf seinem liebsten Waldplätzchen. Tag für Tag schaut er hinauf zum blauen
+      Himmel, wo bunte Schmetterlinge und singende Vögel frei fliegen. Wie gerne würde
+      Flo auch fliegen!
+  - narrative: Jeden Tag beobachtet Flo die Waldtiere beim Fliegen – die Schmetterlinge
+      tanzen, die Vögel singen, und alle sind so frei! Flo wünscht sich so sehr, eines
+      Tages abheben zu können. Aber seine Wurzeln halten ihn fest im warmen Waldboden.
+  - narrative: Eines wunderschönen Tages entdeckt eine weise Waldschamanin den kleinen
+      Flo. Sie schaut ihn an und lächelt sanft – sie sieht das Besondere in ihm! Behutsam
+      hebt sie Flo auf und legt ihn in ihren wunderschönen Korb, der mit geheimnisvollen
+      Symbolen verziert ist.
+  - narrative: Flo kann sein Glück kaum fassen! Die Schamanin hebt ihren Korb hoch
+      – und plötzlich geht es aufwärts! Flo schwebt durch die Luft wie in einer fantastischen
+      Flugmaschine. Endlich, endlich fliegt er!
+  - narrative: Die Waldwelt verwandelt sich unter Flos Augen. Er sieht vertraute Orte
+      aus völlig neuen Winkeln – die großen Bäume mit ihren staunenden Augen, bunte
+      Blätter, geheime Waldwege! Alles schimmert in neuem Glanz.
+  - narrative: Die Schamanin trifft einen intelligenten Fuchs mit glänzenden Augen.
+      Er gesellt sich zu ihr, und Flo lauscht gebannt ihren Gesprächen. Sie sprechen
+      von den Geheimnissen der Nacht und der Magie, die überall im Wald versteckt
+      ist.
+  - narrative: Der Fuchs erzählt von seinen nächtlichen Wanderungen durch das geheimnisvoll
+      leuchtende Waldreich. Er spricht von versteckten Pfaden, von Sternenglanz und
+      stillen Wundern. Flo träumt sich in diese verborgene Welt hinein.
+  - narrative: Plötzlich springt ein beherzter Hase aus dem Grün herbei! Die Schamanin
+      setzt sich hin und lächelt den neuen Freund an. Sie beginnen ein liebevolles
+      Gespräch über Mut, kleine Schritte und große Träume.
+  - narrative: 'Der Hase teilt seine Erfahrungen – wie er trotz seiner Kleinheit die
+      große Welt erkundet und wunderbare Abenteuer erlebt. Flo hört zu und versteht:
+      Er ist dem mutigen Hasen ähnlicher, als er je gedacht hat!'
+  - narrative: Während die Schamanin weiter geht, offenbaren sich zwischen den Bäumen
+      verborgene Lichtflecken und leuchtende Waldwunder. Goldene Lichter tanzen zwischen
+      den Blättern – wie Feen, die Flo winken!
+  - narrative: 'Flo versteht allmählich ein großes Geheimnis: Das Fliegen selbst war
+      nicht das Wichtigste. Die schönsten Dinge sind die Reise, die neuen Freunde
+      und die Magie, die ihn überall begleitet hat.'
+  - narrative: 'Die Schamanin kommt am Waldausgang an und setzt Flo sanft zurück an
+      seinen Platz. Flo blickt dankbar zurück auf seine wunderbare Reise – und weiß:
+      Er hat die größte Reise seines Lebens erlebt!'
+characters:
+- slug: flo
+  name: Flo
+  role: Protagonist – a young fly agaric mushroom who dreams of flying
+  description: Flo is a small, cheerful red fly agaric mushroom with a gentle spirit.
+    He spends his days observing the world from his forest spot, yearning to soar
+    through the sky. Through his journey with the Shaman, he discovers that the greatest
+    magic lies not in flying itself, but in friendship, wonder, and the beauty of
+    the world seen from new perspectives.
+  primary_reference: references/flo.png
+  visual_keywords:
+  - bright red cap with white polka dots
+  - small cream-coloured stem
+  - tiny dark eyes gazing upward
+  - roots anchored in earth below
+- slug: die-waldschamanin
+  name: Die Waldschamanin
+  role: Guide and wisdom-keeper – an elderly forest shaman who opens Flo's world
+  description: The Forest Shaman is a wise, gentle elder who possesses the magic to
+    help Flo experience flight. With a kind smile and mystical knowledge of the forest's
+    secrets, she recognizes the dreams within the small mushroom and becomes his guide
+    on an unforgettable journey. She represents wisdom, compassion, and the transformative
+    power of sharing wonder.
+  primary_reference: references/die-waldschamanin.png
+  visual_keywords:
+  - long flowing robes in earthy browns and greens
+  - ornately decorated wicker basket with mysterious symbols
+  - silver or grey hair flowing loose
+  - weathered hands that move with intention
+- slug: der-fuchs
+  name: Der Fuchs
+  role: Wise messenger – a clever fox who shares knowledge of the forest's nocturnal
+    magic
+  description: An intelligent and graceful fox who encounters the Shaman and Flo during
+    their journey. With gleaming, knowing eyes, he speaks of night wanderings, hidden
+    paths, and the subtle magic woven throughout the forest. He represents the wisdom
+    found in quiet observation and the hidden wonders that exist beyond the visible
+    world.
+  primary_reference: references/der-fuchs.png
+  visual_keywords:
+  - russet-orange fur with deep auburn accents
+  - bright, glimmering eyes full of intelligence
+  - bushy, full tail held with quiet dignity
+  - alert pointed ears
+- slug: der-hase
+  name: Der Hase
+  role: Courageous friend – a brave rabbit who teaches that small creatures can achieve
+    great things
+  description: A spirited and courageous young hare who springs forth from the greenery
+    with boundless energy. Despite his small size, he has explored the vast world
+    and lived wonderful adventures. Through his conversations with the Shaman, he
+    reveals to Flo that size does not limit dreams, and that brave hearts accomplish
+    extraordinary things. He embodies courage, curiosity, and the power of small steps.
+  primary_reference: references/der-hase.png
+  visual_keywords:
+  - soft grey-brown fur with lighter cream belly
+  - long, alert ears with pink inner flesh
+  - strong hind legs ready for a leap
+  - bright, hopeful dark eyes

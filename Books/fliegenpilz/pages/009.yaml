@@ -1,0 +1,25 @@
+number: 9
+text:
+  de: 'Der Hase erzählt Flo von seinen großen Abenteuern. "Siehst du, ich bin klein,
+    aber ich bin mutig!" sagt er stolz. Flo schaut den Hasen an und lächelt. Jetzt
+    versteht er: Er und der Hase sind sich gar nicht so verschieden!'
+  th: 'กระต่ายเล่าเรื่องการผจญภัยครั้งใหญ่ของเขาให้ฟโล่ฟัง "ดูสิ ฉันมีตัวเล็ก แต่ฉันกล้าหาญ!"
+    เขากล่าวด้วยความภาคภูมิใจ ฟโล่มองกระต่ายและยิ้มแล้ว ตอนนี้เขาเข้าใจแล้ว: เขากับกระต่ายนั้นไม่แตกต่างกันมากเลย!'
+image_prompt: A warm forest clearing bathed in golden afternoon sunlight. The small
+  rabbit sits on a moss-covered stone, gesturing animatedly with his paws as he speaks
+  about his adventures, his eyes bright with joy and pride. The young fledgling Flo
+  sits nearby on the soft forest floor, leaning forward attentively, his eyes wide
+  with wonder and recognition. Around them, gentle forest elements—tall trees with
+  dappled light, wildflowers, perhaps a distant mountain or stream hinted at in the
+  background—suggest the vast world the rabbit has explored. The mood is warm, encouraging,
+  and full of connection. Both characters radiate a sense of courage and belonging.
+image_path: images/page-009.png
+characters_present:
+- der-hase
+- flo
+character_positions:
+  der-hase: sitting on a moss-covered stone, gesturing animatedly as he tells his
+    story
+  flo: sitting on the forest floor nearby, leaning forward attentively, eyes full
+    of wonder
+status: approved

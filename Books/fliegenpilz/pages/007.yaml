@@ -1,0 +1,28 @@
+number: 7
+text:
+  de: 'Der Fuchs setzt sich neben Flo und flüstert: "In meinen Nächten wandere ich
+    durch leuchtende Pfade voller Sterne und Wunder." Flo schließt die Augen und träumt
+    sich tief in diese geheimnisvollen Wälder. Überall funkeln kleine Lichter wie
+    sanfte Glühwürmchen.'
+  th: 'สุนัขจิ้งจอกนั่งลงข้างๆ โฟ และกระซิบอย่างเล่นชา: "ในคืนของฉัน ฉันเดินผ่านเส้นทางที่เรืองแสงเต็มไปด้วยดวงดาวและสิ่งมหัศจรรย์"
+    โฟปิดตาและฝันว่าตัวเองเดินเข้าไปในป่าลึกลับเหล่านี้ ทั่วไปมีแสงเล็กๆ ประกาย เหมือนหนอนเรืองแสง'
+image_prompt: A magical forest scene at twilight or early evening. The forest is gently
+  illuminated by soft, warm golden and silvery light filtering through tall trees.
+  Small glowing lights like fireflies and starlight twinkle throughout the scene.
+  The fox sits close to Flo, gesturing gently toward the enchanted forest path ahead.
+  Flo sits beside the fox with eyes closed, appearing peaceful and dreamy, lost in
+  imagination. The Waldschamanin stands nearby in the background, watching over them
+  with a knowing smile. The overall mood is mystical yet cozy and safe — wonder-filled
+  but never frightening. The forest breathes with gentle magic and quiet beauty.
+image_path: images/page-007.png
+characters_present:
+- der-fuchs
+- flo
+- die-waldschamanin
+character_positions:
+  der-fuchs: sitting close beside Flo, gesturing gently toward the glowing forest
+    path
+  flo: sitting peacefully with eyes closed, lost in dreamy imagination
+  die-waldschamanin: standing in the background, watching over them with a knowing
+    smile
+status: approved
