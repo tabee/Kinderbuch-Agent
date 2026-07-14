@@ -44,7 +44,12 @@ docker compose -f docker/docker-compose.yml up -d --build
 docker compose -f docker/docker-compose.yml exec app kb --help
 ```
 
-`./Books` and `./Global` are bind-mounted — generated files appear on the host immediately.
+`./Books` and `./Global` are bind-mounted — generated files appear on the host immediately. The container runs as your host UID/GID (default `1000:1000`, override with `UID=$(id -u) GID=$(id -g) docker compose … up`), so generated books stay editable on the host. Real images need `KB_IMAGE_PROVIDER=imagen` + `GOOGLE_API_KEY` in `.env` — otherwise the PDF gets placeholder pictures. For the web preview inside Docker, bind all interfaces so the host can reach the published port:
+
+```bash
+docker compose -f docker/docker-compose.yml exec app kb serve --host 0.0.0.0
+# then open http://127.0.0.1:8000 in your host browser
+```
 
 ## First book in under 5 minutes
 
@@ -68,7 +73,8 @@ kb edit demo --page 2 --text-en "..." --text-th "..."    # manual replacement (�
 kb edit demo --page 2 --image "make the child happier"   # regenerate just that image
 kb edit demo --bible "give the naga a red scarf"
 kb edit demo --approve-page 2
-kb run demo --recreate-images --pages 3,5-7              # selective regeneration
+kb run demo --recreate-images                            # ALL images fresh: references first, then pages
+kb run demo --recreate-images --pages 3,5-7              # selective regeneration (page images only)
 kb pdf demo                                              # re-render after any edit
 ```
 
@@ -94,6 +100,8 @@ KB_IMAGE_MODEL=             # default gemini-3.1-flash-image; gemini-3-pro-image
 ```
 
 Note on print resolution (§11.4): Gemini image models return ≈ 1024 px square by default → ≈ 120 DPI at full bleed (216 mm). Fine for proofs; for press-quality output select a higher-resolution model via `KB_IMAGE_MODEL`.
+
+Note on content safety: if Google's filter refuses a scene (dark/violent motifs), the run summary names the page and the fix — soften it with `kb edit <slug> --page N --image "symbolic and dreamlike, no gore"`; retrying alone never helps.
 
 Cost control during development: `KB_LLM_MODEL=claude-haiku-4-5` (cheaper model) or `KB_LLM_PROVIDER=mock` + `KB_IMAGE_PROVIDER=mock` (fully offline, zero cost — exactly what the test suite and phase gates use).
 

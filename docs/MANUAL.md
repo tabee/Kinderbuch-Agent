@@ -39,13 +39,26 @@ List all universes with slug, name, and languages.
 
 ### `kb universe new <slug> [options]`
 
+```
+kb universe new <slug> [--name TEXT] [--langs TEXT] [--description TEXT] [--style TEXT]
+```
+
+`<slug>` is **positional**: write it right after `new`, with no `--` prefix —
+there is no `--slug` flag. Options may follow in any order.
+
 | Flag | Default | Description |
 |---|---|---|
-| `<slug>` | — | Kebab-case identifier (`[a-z0-9-]`), e.g. `swiss-thai-myths`. |
+| `<slug>` | — | Positional, not a flag. Kebab-case identifier (`[a-z0-9-]`), e.g. `swiss-thai-myths`. |
 | `--name TEXT` | title-cased slug | Display name. |
 | `--langs TEXT` | `en,th` | Comma-separated ISO 639-1 codes. |
 | `--description TEXT` | empty | World description; feeds the outline step. |
 | `--style TEXT` | empty | Illustration style guide applied to **every** image (references and pages). |
+
+```bash
+kb universe new duesterwald --name "Düsterwald" --langs de,en \
+  --description "A dark, spooky forest where children get lost every time they go in" \
+  --style "black and white manga, only red for eyes, fire, or blood"
+```
 
 ### `kb universe show <slug>`
 
@@ -57,14 +70,26 @@ Print a universe's name, languages, description, and style guide.
 
 ### `kb book new <slug> --universe <name> [options]`
 
+```
+kb book new <slug> --universe <name> [--langs TEXT] [--age TEXT] [--idea TEXT] [--spreads N]
+```
+
+`<slug>` is **positional**: write it right after `new`, with no `--` prefix —
+there is no `--slug` flag. Options may follow in any order.
+
 | Flag | Default | Description |
 |---|---|---|
-| `<slug>` | — | Kebab-case identifier; also the folder name under `Books/`. |
+| `<slug>` | — | Positional, not a flag. Kebab-case identifier; also the folder name under `Books/`. |
 | `--universe TEXT` | required | Universe the book belongs to. |
 | `--langs TEXT` | universe's languages | Override the inherited languages (copied at creation; independent afterwards). |
 | `--age TEXT` | `4-6` | Target age group. Drives prose complexity **and** PDF typography: `4-6` → short rhythmic sentences, 14 pt; `7+` → middle-grade, 12 pt; `12+` → young-adult prose, 9.5 pt. |
 | `--idea TEXT` | empty | The book idea that seeds the outline (Step 01). The most important creative input. |
 | `--spreads N` | `5` | Number of double-page spreads (1–30). Each spread = one text page + one image page. |
+
+```bash
+kb book new fritz --universe duesterwald --langs de,en --age 7+ --spreads 8 \
+  --idea "Fritz gets lost in the Düsterwald at dusk and must find his way home before dark"
+```
 
 ### `kb book list`
 
@@ -101,7 +126,7 @@ twice in a row does nothing the second time.
 | Flag | Description |
 |---|---|
 | `--force` | Regenerate all **selected** artifacts regardless of status, including `approved` pages. Without page-selection flags this also regenerates outline, story, and bible. |
-| `--recreate-images` | Regenerate images only; texts are kept. Revokes approval on affected pages. |
+| `--recreate-images` | Regenerate images only; texts are kept. Without page-selection flags this includes the character **reference images** (redrawn first, then all page images are conditioned on them); with `--pages`/`--from-page` only the selected page images. Revokes approval on affected pages. |
 | `--from-page N` | Restrict page-level work to pages numbered ≥ N. |
 | `--pages SPEC` | Restrict to a page set. Grammar: comma-separated positive integers and inclusive ranges — `3`, `3,5`, `7-9`, `3,5,7-9`. Invalid specs are a usage error. |
 | `--interactive` | Ask for confirmation before each pipeline step; declining aborts (exit 1). |
@@ -111,6 +136,26 @@ selects pages 3–4 only.
 
 If some page images fail, the run finishes the remaining pages, prints a
 summary, and exits 1 — re-running retries only the failed pages.
+
+**Content-safety refusals.** If the image provider's safety filter refuses a
+scene (e.g. Gemini `finishReason: IMAGE_SAFETY` on graphic content), the
+summary names the affected page(s) explicitly and marks them as *refused* —
+retrying will **not** help. Soften that page's image instead:
+
+```bash
+kb edit <slug> --page N --image "symbolic and dreamlike, no gore, no graphic violence"
+```
+
+The instruction is appended to the original prompt, so the scene is kept but
+defused. If the softened prompt is *still* refused (the original wording keeps
+triggering the filter), replace the prompt entirely:
+
+```bash
+kb edit <slug> --page N --image-prompt "<a new, calmer description of the scene>"
+```
+
+Pages that failed for transient reasons (rate limits, network) are listed
+separately with "re-run to retry".
 
 ## 6. `kb edit` — targeted changes
 
@@ -126,7 +171,8 @@ automatically, so a stale page can never stay `approved`.
 | `--text TEXT` | yes | **LLM rewrite** of the page text in *all* languages at once, following your instruction (e.g. `"shorter and funnier"`, `"HARD LIMIT: 100 words per language"`). Languages stay in sync. |
 | `--text-en TEXT` | yes | Manually replace the English text. |
 | `--text-th TEXT` | yes | Manually replace the Thai text. |
-| `--image TEXT` | yes | Regenerate the page image with the instruction appended to the original prompt. Character reference images are re-attached automatically. |
+| `--image TEXT` | yes | Regenerate the page image with the instruction appended to the original prompt. Character reference images are re-attached automatically. Also the fix for content-safety refusals — see §5. |
+| `--image-prompt TEXT` | yes | **Replace** the page's image prompt entirely and regenerate. The escape hatch when the original scene keeps triggering the provider's safety filter even with a softening `--image` instruction. Mutually exclusive with `--image`. |
 | `--bible TEXT` | no | Revise the character bible per instruction. Reference images are kept for characters whose identity is unchanged; use `kb run --recreate-images` to redraw. |
 | `--approve-page N` | no | Mark a finished page as `approved` (allowed only from status `image_done`). Approved pages are protected from `kb run` unless `--force`. |
 
@@ -158,8 +204,18 @@ every edit.
 
 | Command | Description |
 |---|---|
-| `kb serve` | Local read-only preview at `http://127.0.0.1:8000` (Ctrl+C to stop). Lists all books; shows each book's pages with text and images. |
-| `kb open <slug>` | Open a book in the browser (start `kb serve` first). |
+| `kb serve [--host TEXT] [--port N]` | Local read-only preview (default `http://127.0.0.1:8000`, Ctrl+C to stop). Lists all books; shows each book's pages with text and images. |
+| `kb open <slug>` | Open a book in the host browser (start `kb serve` first). |
+
+**In Docker.** The preview must bind `0.0.0.0` (not the container-internal
+`127.0.0.1`) and the port must be published. `docker-compose.yml` already maps
+`8000:8000`; start the server as a foreground process and open the URL in your
+**host** browser (`kb open` inside the container cannot launch one):
+
+```bash
+docker compose -f docker/docker-compose.yml exec app kb serve --host 0.0.0.0
+# then browse to http://127.0.0.1:8000 on the host
+```
 
 ---
 

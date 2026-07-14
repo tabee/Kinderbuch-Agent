@@ -1,0 +1,47 @@
+number: 7
+text:
+  de: 'Die Erkenntnis traf wie ein Messer. Der Schattenrachen war kein Wald—sondern
+    der lebendige Schlund von etwas Uraltem, das aus lichtsloser Tiefe gefallen war
+    und seitdem geduldig wartete. Die Bäume waren seine Zähne. Der Nebel war sein
+    Atem. Die Kreaturen—der Schattenscheerer, die Furchtfalle, der falsche Vater—nur
+    seine Hände, seine Zunge, seine Methoden, Beute lebendig zu halten während er
+    alles verdaute, das ein Mensch war: Erinnerung, Schatten, Name und Seele. Fritz
+    war bereits halb verschlungen, und das Ding würde ihn bei Bewusstsein halten bis
+    nichts blieb als ein schwaches Echo in seiner Kehle. Er hatte eine Chance. Nur
+    eine. Und sie erforderte, dass er aufhörte, Angst zu haben.'
+  th: 'ความเข้าใจนั้นมาเหมือนมีดแทงเข้ามา สัตว์สีดำราคสไม่ใช่ป่าเลย แต่คือปากที่มีชีวิตของสิ่งโบราณที่หลุดจากที่มืดมิด
+    และรอคอยด้วยความอดทนมาตั้งแต่นั้น ต้นไม้คือฟันของมัน หมอกคือลมหายใจของมัน และสัตว์ร้ายนั่น—ผู้ฉีกเงา
+    กรงกลัว พ่อปลอม—เป็นแค่มือของมัน ลิ้นของมัน วิธีการของมันในการให้เหยื่อมีชีวิตอยู่ขณะที่ย่อยทุกอย่างที่เป็นมนุษย์:
+    ความทรงจำ เงา ชื่อ และจิตใจ ฟริตซ์ถูกกลืนแล้วครึ่งหนึ่ง และสิ่งนี้จะเก็บรักษาเขาให้มีชีวิตแล้วตระหนักจนกว่าจะไม่มีอะไรเหลือนอกแต่เสียงสะท้อนอ่อนๆ
+    ติดอยู่ในจอยของมัน เขามีโอกาสเพียงหนึ่ง เพียงแค่หนึ่งเดียว และมันจะต้องให้เขาหยุดกลัว'
+image_prompt: 'A vast, nightmarish forest-throat landscape where massive gnarled trees
+  with tooth-like bark tower vertically like organic fangs. Sickly pale mist coils
+  through the scene like breath. Fritz stands alone in the center-foreground, arms
+  outstretched, his body translucent as if already being absorbed—half-solid, half-phantom.
+  His eyes are wide with terror but also blazing with desperate resolve. Surrounding
+  him in the shadowed background and mid-ground are the manifestations of the Schattenrachen''s
+  will: the skeletal Shadowflayer crouched on a branch above, the cage-like form of
+  the Fearcage twisted among roots, and the False Father—a tall, gaunt figure bearing
+  Fritz''s own father''s face but wrong, distorted—emerging from the mist. The entire
+  composition suggests an anatomical cross-section: walls of tissue, veins of luminescent
+  sap, everything breathing. Sickly amber and cold violet lighting. The mood is simultaneously
+  claustrophobic and vast, terrifying yet charged with Fritz''s inner defiance.'
+image_path: images/page-007.png
+characters_present:
+- fritz
+- the-schattenrachen
+- the-false-father
+- the-shadowflayer
+- the-fearcage
+character_positions:
+  fritz: standing alone in the center foreground with arms outstretched, his body
+    translucent and half-absorbed
+  the-schattenrachen: the entire landscape itself—trees as teeth, mist as breath,
+    the living organism surrounding everything
+  the-false-father: emerging from the mist in the background, tall and gaunt with
+    Fritz's father's distorted face
+  the-shadowflayer: crouched on a gnarled branch directly above Fritz, skeletal and
+    predatory
+  the-fearcage: coiled among the roots and twisted between tree-trunks in the mid-ground
+    shadows
+status: image_done

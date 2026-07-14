@@ -3,9 +3,17 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
+    # Write bind-mounted files as the host user (default UID/GID 1000) instead
+    # of root, so generated books stay editable on the host. Override per host:
+    # `UID=$(id -u) GID=$(id -g) docker compose ... up`.
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      HOME: /tmp # fontconfig/WeasyPrint cache dir for the non-root user
     env_file:
       - path: ../.env
         required: false # secrets via env only (HC-5.3); optional for mock-only use
+    ports:
+      - "8000:8000" # `kb serve --host 0.0.0.0` web preview reachable on the host
     volumes:
       - ../Books:/app/Books # book state appears immediately on the host (spec §12)
       - ../Global:/app/Global

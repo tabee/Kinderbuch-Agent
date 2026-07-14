@@ -8,7 +8,7 @@ import httpx
 import pytest
 
 from kb.config import Settings
-from kb.errors import KBError
+from kb.errors import ImageSafetyError, KBError
 from kb.image import create_image_provider
 from kb.image.google_image import (
     GoogleImageProvider,
@@ -79,13 +79,28 @@ def test_extract_image_happy_path() -> None:
 
 
 def test_extract_image_without_image_raises() -> None:
-    refusal = {
-        "candidates": [{"content": {"parts": [{"text": "sorry"}]}, "finishReason": "SAFETY"}]
-    }
     with pytest.raises(KBError, match="no image data"):
-        extract_image(refusal)
+        extract_image({"candidates": [{"content": {"parts": [{"text": "hm"}]}}]})
     with pytest.raises(KBError, match="no candidates"):
         extract_image({})
+
+
+@pytest.mark.parametrize("reason", ["SAFETY", "IMAGE_SAFETY", "PROHIBITED_CONTENT"])
+def test_safety_refusal_raises_dedicated_actionable_error(reason: str) -> None:
+    """Safety blocks are permanent — the error must say so and point at kb edit --image."""
+    refusal = {"candidates": [{"content": {"parts": [{"text": "sorry"}]}, "finishReason": reason}]}
+    with pytest.raises(ImageSafetyError) as excinfo:
+        extract_image(refusal)
+    message = str(excinfo.value)
+    assert reason in message
+    assert "Retrying will not help" in message
+    assert "kb edit" in message and "--image" in message
+
+
+def test_prompt_level_block_reason_raises_safety_error() -> None:
+    """Input-level blocks arrive as promptFeedback.blockReason without candidates."""
+    with pytest.raises(ImageSafetyError):
+        extract_image({"promptFeedback": {"blockReason": "SAFETY"}})
 
 
 @pytest.mark.parametrize(

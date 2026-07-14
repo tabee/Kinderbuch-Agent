@@ -71,12 +71,21 @@ def edit_image(
     images: ImageProvider,
     number: int,
     instruction: str,
+    replace: bool = False,
 ) -> Page:
-    """Regenerate the image with the instruction appended to the original prompt (§6.2)."""
+    """Regenerate the image (§6.2).
+
+    By default the instruction is appended to the original prompt; with
+    ``replace=True`` it becomes the new prompt — the escape hatch when the
+    original scene keeps triggering the provider's content-safety filter.
+    """
     page = get_page(book, number)
-    if page.image_prompt is None:
-        raise KBError(f"page {number} has no image prompt yet — run the pipeline first")
-    page.image_prompt = f"{page.image_prompt}\nEdit: {instruction}"
+    if replace:
+        page.image_prompt = instruction
+    else:
+        if page.image_prompt is None:
+            raise KBError(f"page {number} has no image prompt yet — run the pipeline first")
+        page.image_prompt = f"{page.image_prompt}\nEdit: {instruction}"
 
     references = select_references(book, page)  # HC-2.2
     prompt = build_page_image_prompt(universe, page, references)  # HC-2.3/2.4

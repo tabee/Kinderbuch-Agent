@@ -85,6 +85,60 @@ def test_hc24_prompt_contains_distinct_keywords_and_anti_bleed_clause() -> None:
     assert "do not blend or mix character identities" in prompt
 
 
+def test_page_prompt_uses_scene_true_positions_with_fallback() -> None:
+    """HC-2.3 anchoring prefers Step 04's scene positions over generic fallbacks."""
+    characters = [_character(1), _character(2)]
+    page = Page(
+        number=1,
+        image_prompt="Fritz kneels in the mud.",
+        character_positions={"char-1": "kneeling in the mud, centre foreground"},
+    )
+
+    prompt = build_page_image_prompt(UNIVERSE, page, characters)
+
+    assert "Character 1, matching reference image 1, is kneeling in the mud" in prompt
+    assert "Character 2, matching reference image 2, is on the right side" in prompt  # fallback
+
+
+def test_page_prompt_is_a_scene_not_a_character_sheet() -> None:
+    """Page prompts must frame a story scene and mark references as identity-only."""
+    page = Page(number=1, image_prompt="A quiet river at dusk.")
+
+    prompt = build_page_image_prompt(UNIVERSE, page, [_character(1)])
+
+    assert prompt.startswith("A storybook page illustration")
+    assert "not a character sheet" in prompt
+    assert "IDENTITY only" in prompt
+    assert "Do not copy their neutral pose" in prompt
+    assert "Scene: A quiet river at dusk." in prompt
+
+
+def test_no_text_clause_in_page_and_reference_prompts() -> None:
+    """Images must never contain rendered text (picture-book pages are text-free)."""
+    page_prompt = build_page_image_prompt(
+        UNIVERSE, Page(number=1, image_prompt="A scene."), [_character(1)]
+    )
+    reference_prompt = build_reference_prompt(UNIVERSE, _character(1))
+
+    for prompt in (page_prompt, reference_prompt):
+        assert "no written text" in prompt
+        assert "speech bubbles" in prompt
+
+
+def test_full_bleed_clause_in_page_and_reference_prompts() -> None:
+    """Print pages are full-bleed (HC-3.2): no frames, margins, or panel layouts."""
+    page_prompt = build_page_image_prompt(
+        UNIVERSE, Page(number=1, image_prompt="A scene."), [_character(1)]
+    )
+    reference_prompt = build_reference_prompt(UNIVERSE, _character(1))
+
+    for prompt in (page_prompt, reference_prompt):
+        assert "edge to edge" in prompt
+        assert "No borders, no frames" in prompt
+        assert "no white or black margins" in prompt
+    assert "never divide the image into panels" in page_prompt
+
+
 def test_reference_sheet_prompt_is_neutral_full_body() -> None:
     prompt = build_reference_prompt(UNIVERSE, _character(1))
 

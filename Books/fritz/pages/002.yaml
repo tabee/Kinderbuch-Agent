@@ -1,0 +1,37 @@
+number: 2
+text:
+  de: 'Der Wald verschluckte zuerst den Schall. Fritz trat in ein schmieriges graugrünes
+    Licht, wo die Luft sich wie Wasser atmete und die Welt eine Geometrie der Verwundung
+    annahm—Pfade versiegelten sich hinter ihm mit plötzlichen Bäumen, die eben noch
+    nicht existiert hatten. Seine Panik war tierisch und rein. Er rannte, bis seine
+    Beine versagten, stürzte hart über eine Böschung aus Wurzelknochen. Die Erde öffnete
+    sich unter ihm. Er blutete. Der Wald trank, was er verlor, und Fritz verstand
+    mit kristalliner Klarheit: Er war nicht im Wald. Der Wald war jetzt in ihm.'
+  th: 'ป่าไม้กลืนเสียงก่อน ฟริตซ์เดินเข้าสู่แสงสีเทาอุ่นของการสะดุดกิ่งไม้ มีอากาศหนืดราวกับน้ำ
+    และโลกสูญเสียรูปทรงถูกต้อง พื้นดินปิดตัวเองหลังเขาด้วยต้นไม้ที่เพิ่งปรากฏขึ้น
+    ความหวาดระแหวงของเขาบริสุทธิ์และรุนแรง เขาวิ่ง จนกว่าขาจะล้มเหลว ลงไปตามลาดชัน
+    มือจับรากไม้ที่กระดูก บาดแผลเปิดออกมา ป่าไม้ดูดเลือดของเขา แล้วฟริตซ์รู้: เขาไม่ได้อยู่ในป่า
+    ป่าอยู่ในตัวเขาแล้ว'
+image_prompt: A young man (Fritz) lies broken at the bottom of a densely shadowed
+  ravine, limbs tangled among ancient, bone-like roots that seem almost sentient.
+  His pale skin contrasts sharply with spreading blood seeping into the rich dark
+  earth. Above him, the forest canopy twists into impossible angles—trees bend inward
+  as if to observe him, their branches forming a cage-like geometry. A sickly grey-green
+  light filters through, lending an underwater, suffocating atmosphere. The shadows
+  themselves move with malevolent intent, coalescing into vaguely humanoid shapes
+  within the trunks and between the roots. The air feels thick, almost liquid. The
+  overall mood is one of violation and absorption—the boundary between the forest
+  and the bleeding figure below is dissolving, as if the forest is consuming him from
+  without while simultaneously colonizing him from within. No text appears in the
+  image.
+image_path: images/page-002.png
+characters_present:
+- fritz
+- the-shadowflayer
+character_positions:
+  fritz: sprawled at the bottom of a root-twisted ravine, body twisted and gasping,
+    fresh blood seeping into dark earth beneath him
+  the-shadowflayer: manifest as amorphous shadow-shapes moving through the twisted
+    canopy and gnarled trees above and around Fritz, almost indistinguishable from
+    the forest itself
+status: image_done

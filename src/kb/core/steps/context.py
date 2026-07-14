@@ -41,6 +41,7 @@ class RunResult:
     pages_texted: int = 0
     pages_imaged: int = 0
     failed_pages: dict[int, str] = field(default_factory=dict)
+    safety_blocked: set[int] = field(default_factory=set)  # subset of failed_pages
 
 
 @dataclass

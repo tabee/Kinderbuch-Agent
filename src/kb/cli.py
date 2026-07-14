@@ -364,6 +364,14 @@ def edit(
     image: Annotated[
         str | None, typer.Option("--image", help="Regenerate the page image with an instruction.")
     ] = None,
+    image_prompt: Annotated[
+        str | None,
+        typer.Option(
+            "--image-prompt",
+            help="REPLACE the page's image prompt entirely and regenerate "
+            "(use when the safety filter keeps refusing the original scene).",
+        ),
+    ] = None,
     bible: Annotated[
         str | None, typer.Option("--bible", help="Edit the character bible with an instruction.")
     ] = None,
@@ -374,11 +382,14 @@ def edit(
     """Edit book content (semantics per §6.2)."""
     book = _load_book(slug)
     texts = {lang: value for lang, value in (("en", text_en), ("th", text_th)) if value is not None}
-    if not (texts or text or image or bible or approve_page):
+    if not (texts or text or image or image_prompt or bible or approve_page):
         raise typer.BadParameter(
-            "nothing to do — provide --text, --text-*, --image, --bible, or --approve-page"
+            "nothing to do — provide --text, --text-*, --image, --image-prompt, "
+            "--bible, or --approve-page"
         )
-    if (texts or text or image) and page is None:
+    if image and image_prompt:
+        raise typer.BadParameter("--image and --image-prompt are mutually exclusive")
+    if (texts or text or image or image_prompt) and page is None:
         raise typer.BadParameter("--page is required for text and image edits")
 
     settings = Settings.from_env()
@@ -395,6 +406,18 @@ def edit(
             universe = _load_universe(book.universe_slug)
             editing.edit_image(books, book, universe, create_image_provider(settings), page, image)
             console.print(f"Page {page}: image regenerated (approval revoked, §6.2).")
+        if image_prompt and page is not None:
+            universe = _load_universe(book.universe_slug)
+            editing.edit_image(
+                books,
+                book,
+                universe,
+                create_image_provider(settings),
+                page,
+                image_prompt,
+                replace=True,
+            )
+            console.print(f"Page {page}: image prompt replaced and image regenerated (§6.2).")
         if bible:
             llm = create_llm_provider(settings, languages=book.languages)
             revised = editing.edit_bible(books, book, llm, bible)
@@ -423,14 +446,26 @@ def pdf(slug: Annotated[str, typer.Argument()]) -> None:
 
 
 @app.command()
-def serve() -> None:
-    """Start the local web preview on http://127.0.0.1:8000 (editor aid only)."""
+def serve(
+    host: Annotated[
+        str,
+        typer.Option("--host", help="Bind address. Use 0.0.0.0 to reach it from outside Docker."),
+    ] = "127.0.0.1",
+    port: Annotated[
+        int, typer.Option("--port", min=1, max=65535, help="Port to listen on.")
+    ] = 8000,
+) -> None:
+    """Start the local web preview (editor aid only).
+
+    Inside Docker, run ``kb serve --host 0.0.0.0`` and publish the port so the
+    host browser can reach it (see docker-compose.yml ``ports``).
+    """
     import uvicorn
 
     from kb.web.app import create_app
 
-    console.print("Serving preview on [bold]http://127.0.0.1:8000[/bold] (Ctrl+C to stop).")
-    uvicorn.run(create_app(Path.cwd() / "Books"), host="127.0.0.1", port=8000, log_level="warning")
+    console.print(f"Serving preview on [bold]http://{host}:{port}[/bold] (Ctrl+C to stop).")
+    uvicorn.run(create_app(Path.cwd() / "Books"), host=host, port=port, log_level="warning")
 
 
 @app.command("open")

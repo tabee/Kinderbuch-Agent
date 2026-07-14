@@ -1,0 +1,41 @@
+number: 5
+text:
+  de: 'Das Fearcage kroch über ihn: ein abgeflachter Brustkorb aus gelblichem Knochen,
+    zusammengehalten von schwarzem Gewebe, das sich mit einem Klang wie brechende
+    Zähne um Torso und Beine schloss. Es zwang jede versperrte Erinnerung an die Oberfläche
+    und ließ sie endlos wiederkehren—den letzten Atemzug seiner Mutter, seines Vaters
+    Gesicht in der Nacht, als er fortging, die Worte, die Fritz nie gesprochen hatte,
+    die Dinge, die auszusprechen er zu feige gewesen war. Der Käfig zog sich zusammen,
+    während die Erinnerungen sich wiederholten, Knochen gegen Gedächtnis mahlend,
+    Gliedmaßen brechend, die keinen Namen hatten. Er existierte im Raum zwischen Schmerz
+    und Auslöschung, wissend, dass er auseinandergerissen wurde und hilflos, es zu
+    stoppen.'
+  th: โครงกระดูกผิดรูปสีเหลืองหรี่ที่ยึดด้วยเอ็นสีดำคดเคี่ยว—นั่นคือ Fearcage—เคลื่อนที่มาปกเขา
+    แล้วล็อกรอบลำตัวและขาของเขา ด้วยเสียงเหมือนฟันแตกหัก มันบังคับให้ความทรงจำที่ถูกปิดกั้นทั้งหมดพุ่งออกมา
+    และวนซ้ำไม่สิ้นสุด—ลมหายใจครั้งสุดท้ายของแม่ของเขา หน้าของพ่อในคืนที่เขาจากไป
+    คำที่ Fritz ไม่เคยพูด สิ่งที่เขากลัวเกินไปที่จะบอก กรงแน่นตัวลง ขณะที่ความทรงจำวนซ้ำ
+    กระดูกบดทับความจำ หักแขนขาที่ไม่มีชื่อ เขาอยู่ในช่องว่างระหว่างความเจ็บปวดและการถูกลบ
+    ตระหนักว่าตัวของเขากำลังถูกทำลาย แต่ไม่มีทางหยุด
+image_prompt: 'A nightmarish scene bathed in sickly phosphorescent light: a man—Fritz—is
+  imprisoned within a grotesque cage of yellowed, splintered bone held together by
+  writhing black ligament. His body is contorted within the structure, limbs folded
+  at impossible angles, his face twisted between agony and a terrible awareness. Fragmented
+  images—a woman''s last breath, a man''s face in shadow, unspoken words—seem to writhe
+  like smoke through the cage itself, looping endlessly around him. The cage sits
+  in an undefined, liminal space of gathering darkness; at its edges, barely-visible
+  and watching, stands a figure wearing an achingly familiar face. The atmosphere
+  is claustrophobic and crushing, the color palette sickly greens and grays with deep,
+  consuming blacks. No dialogue or text appears anywhere in the illustration.'
+image_path: images/page-005.png
+characters_present:
+- the-fearcage
+- fritz
+- the-false-father
+character_positions:
+  the-fearcage: enveloping Fritz's torso and legs, yellowed bone glinting in dim light,
+    black ligaments taut and crushing
+  fritz: trapped within the cage's bone structure, body contorted in silent agony,
+    eyes wide with fragmented memory and despair, limbs folded at impossible angles
+  the-false-father: hovering at the periphery of the scene, watching from shadow and
+    mist, face barely visible but presence unmistakable and malevolent
+status: image_done

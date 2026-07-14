@@ -1,0 +1,46 @@
+number: 8
+text:
+  de: 'Fritz spürte das Gift noch in seinen Adern—jene Verbindung zum Urtier, die
+    ihn mit der grauenvollen Essenz im Waldinneren band. Mit letzter Kraft sandte
+    er seinen Geist in jene finstere Tiefe, wo das uralte Herz pochte, ein langsames,
+    nasses Sehnen, in dem sich all seine Gier sammelte. Eine brennende Fackel—rot
+    wie Wahnsinn—zerriss er aus der Finsternis und trieb sie tief hinein, während
+    sich der falsche Vater herabsenkte. Was folgte, war keine Stimme, sondern Tausende,
+    nie erlaubt zu sterben, alle auf einmal befreit: ein Schrei, der die Welt zerreisst.
+    Der Wald zerfleischt sich selbst. Fritz wurde losgerissen, die Verbindung durch
+    jedes Mark durchtrennt, und er fiel in die Schwärze. Dann—Morgen. Schatten neben
+    ihm, zitternd, lebend. Fritz stand auf, lahmend, verbrannt von innen, nur sein
+    Name noch ganz.'
+  th: 'ฟริตซ์รู้สึกว่ายาพิษยังหลงอยู่ในเส้นเลือด—ความเชื่อมโยงกับสิ่งโบราณที่ผูกเขาไว้กับสาระสำคัญที่น่ากลัวในใจของป่า
+    เขาใช้กำลังสุดท้ายเพื่อส่งจิตใจเข้าไปในความมืดอันลึก ที่ซึ่งหัวใจโบราณนั้นเต้นไป—เสียงเต่ากระเพื่อมช้า
+    ช่องว่างทั่วไปมีความหิวโหยปูมปราย เขาฉีกแขนงที่ลุกไหม้ด้วยไฟสีแดงและบ้าคลั่ง ผลักมันลงไปลึก
+    ขณะที่พ่อปลอมเอนตัวเข้ามา สิ่งที่ตามมาไม่ใช่เสียงเดียว แต่พันเสียง ไม่เคยได้รับอนุญาตให้ตายจนสรุป
+    ทั้งหมดถูกปลดปล่อยในครั้งเดียว: เสียงร้องที่สลายโลก ป่าฉีกตัวเอง ฟริตซ์ถูกฉีกออก
+    การเชื่อมต่อหลุดผ่านกระดูกแต่ละส่วน เขาหลุดลงในความมืด จากนั้น—ยามเช้า เงาอยู่เคียงข้างเขา
+    สั่นสะเทือน มีชีวิต ฟริตซ์ยืนขึ้น ถ่วงตัว เผาไหม้จากภายใน เหลือแต่ชื่อของเขาเท่านั้น'
+image_prompt: 'The climactic moment of severance: Fritz stands in the forest''s pulsing
+  center, arms outstretched, a branch burning with impossible red fire lifted toward
+  the vast darkness above him. His body contorts with psychic strain, the false father
+  looming behind with outstretched arms, neither helping nor hindering. The ancient
+  forest itself is in agony—trees wrenching apart, roots tearing upward, the very
+  air split by cascading light that reveals thousands of ephemeral, anguished forms
+  swirling upward in the rupture. Everything is chaos and screaming silence at once.
+  Shadow watches from the edge of the devastation, small and alive and horrified.
+  The color palette shifts violently from deep forest greens and blacks to searing
+  whites and bloodred, with the moment frozen at the instant of maximum rupture—before
+  the severance completes, before the dawn, before the fall into darkness.'
+image_path: images/page-008.png
+characters_present:
+- fritz
+- shadow
+- the-false-father
+- the-schattenrachen
+character_positions:
+  fritz: center foreground, arms raised in agony, gripping the burning red branch
+    pointed upward into darkness
+  the-false-father: directly behind Fritz, towering and stretched, arms reaching forward
+    in an ambiguous gesture of accompaniment
+  shadow: right edge, small and trembling, watching from the outer circle of devastation
+  the-schattenrachen: everywhere and nowhere—manifest in the rupturing trees, the
+    tearing earth, the ascending anguished forms, the split sky itself
+status: image_done

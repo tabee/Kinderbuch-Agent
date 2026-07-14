@@ -1,0 +1,32 @@
+number: 4
+text:
+  de: 'Die Shadowflayer kam zuerst: ein hohes Wesen aus Ästen und Rauch mit glattem
+    dunklem Gesicht und Gelenken, die sich in zu viele Richtungen bogen. Sie schälte
+    Fritzs Schatten von seinem Körper wie ein Mann nasse Haut abstreift, und der Schmerz
+    war absolut—eine Verletzung, die physischen Schmerz zu einer sanften Lüge machte.
+    Jedes abgelöste Stück hinterließ ihn nackter als Nacktheit, exponierter als jeder
+    Körper sein konnte. Das Geschöpf faltete seinen Schatten zärtlich, ehrfürchtig,
+    und verstaute ihn in einer Höhle in seiner eigenen Brust. Fritz lag ausgehöhlt,
+    kaum noch er selbst, und konnte nicht einmal schreien.'
+  th: สิ่งสูงของกิ่งไม้และควันมาก่อน—หน้าเรียบสีดำและข้อต่อที่งอได้หลายทิศ มันปลดชั้นเงาของฟริตซ์จากกายเขา
+    เหมือนชายคนหนึ่งฉีกผิวเปียก และความเจ็บปวดนั้นสมบูรณ์—การละเมิดที่ทำให้ความเจ็บปวดทางกายกลายเป็นเท็จที่อ่อนโยน
+    แต่ละชั้นที่ถูกปลดออกทิ้งเขาไว้เปลือยกว่าความเปลือย เปิดเผยมากกว่าร่างกายใดๆ ที่จะเป็นได้
+    สิ่งสัตว์นั้นพับเงาของเขาอย่างอ่อนโยนและเคารพ เก็บมันไว้ในช่องในหน้าอกตัวเองเหมือนเก็บสิ่งล้ำค่า
+    ฟริตซ์นอนอยู่ว่างเปล่า แทบไม่ใช่ตัวเอง และไม่สามารถร้องไห้ได้
+image_prompt: 'In a black void between the trees, the Shadowflayer — a towering skeletal
+  figure of twisted branches and coiling smoke with a smooth featureless obsidian
+  face — bends over the sleeping figure of a young man. With long branch-like fingers
+  it gently lifts the young man''s shadow off the ground like a sheet of translucent
+  dark silk; the glowing shadow floats between them, still holding his silhouette.
+  The man is unharmed, eyes closed, peaceful. Mood: eerie, dreamlike, silent theft
+  — symbolic, no touching, no harm.'
+image_path: images/page-004.png
+characters_present:
+- the-shadowflayer
+- fritz
+character_positions:
+  the-shadowflayer: towering above, its twisted branches and smoke form dominating
+    the upper half of the scene, joints bending impossibly
+  fritz: prone on the cold ground in the foreground, body contorted in silent agony
+    as his shadow is being extracted from him
+status: image_done

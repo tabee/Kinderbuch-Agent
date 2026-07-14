@@ -1,0 +1,40 @@
+number: 1
+text:
+  de: 'Fritz lebte am verschrobenen Rand des Dorfes mit Shadow, einem schwarzen Hund,
+    der von Gewalt gezeichnet war, die keiner von ihnen erinnerte. Seine Mutter war
+    gestorben, als er klein war, hustend in weißes Leinen. Vor fünf Jahren war sein
+    Vater in die Schattenrachen gegangen und verschwunden—der Wald hatte ihn wie so
+    viele andere verschlungen, und das Dorf hatte sich einfach um das Loch geschlossen.
+    Mit neunzehn war Fritz still wie zerbrochene Dinge, sein Trauer so vollständig,
+    dass sie unsichtbar geworden war. Als Shadow bei der Dämmerung in die dunklen
+    Bäume davonlief und etwas jagte, das Fritz nicht sehen konnte, rannte er hinterher—ohne
+    zu denken. Er brach das älteste Gesetz des Dorfes: Geh nicht in die Schattenrachen.
+    Folge nicht dem, das sie nimmt.'
+  th: 'ฟริตซ์อาศัยอยู่ที่ขอบหมู่บ้านที่พิลึก พร้อมกับเชโดว์ สุนัขสีดำที่เต็มไปด้วยแผลเป็นจากความรุนแรงที่ไม่มีใครจำได้
+    แม่ของเขาเสียชีวิตตั้งแต่วัยเด็ก ไอออกมาเป็นผ้าสีขาว ห้าปีที่แล้ว บิดาของเขาเดินเข้าไปในชัตเทนราเคนและหายวับ
+    ป่าได้กลืนเขาเหมือนผู้คนอื่น ๆ และหมู่บ้านก็ปิดตัวแบบเงียบ เมื่ออายุสิบเก้า ฟริตซ์เป็นคนเงียบ
+    เหมือนสิ่งของที่แตกหัก ความเศร้าของเขาสมบูรณ์จนกลายเป็นมองไม่เห็น เมื่อเชโดว์วิ่งออกไปสู่ต้นไม้มืดในเวลาพลบค่ำ
+    จึงติดตามสิ่งที่ฟริตซ์มองไม่เห็น เขาวิ่งไปโดยไม่คิด ละเมิดกฎหมายที่เก่าแก่ที่สุดของหมู่บ้านที่เขียนด้วยเลือด:
+    อย่าเข้าชัตเทนราเคน อย่าติดตามสิ่งที่มันเอาไป'
+image_prompt: A young man with hollow, grief-worn features stands at the boundary
+  between a modest village and an ancient, gnarled forest—the Schattenrachen. Twilight
+  bathes the scene in purple-blue cold light. Behind him, village cottages with lit
+  windows fade into warm amber distance. Ahead, the forest is impossibly dark, its
+  twisted trees interwoven like skeletal fingers, their shadows seeming to move independently
+  of their forms. A black dog—scarred and lean—sprints forward into the darkness,
+  its body already half-swallowed by shadow. The young man (Fritz) is mid-stride,
+  torn between the safe village at his back and the compulsion to follow the dog into
+  the forbidden woods. His posture expresses both desperation and the numbness of
+  someone who has already lost everything. The forest exhales an almost physical darkness
+  that seems to press against the twilight. No human figures visible except Fritz—only
+  the echo of absence.
+image_path: images/page-001.png
+characters_present:
+- fritz
+- shadow
+character_positions:
+  fritz: mid-stride at the forest's edge, caught between village and darkness, body
+    leaning forward into shadow
+  shadow: sprinting into the twisted trees, already half-consumed by the darkness
+    of the Schattenrachen
+status: image_done

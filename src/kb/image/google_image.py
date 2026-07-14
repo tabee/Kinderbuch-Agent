@@ -30,13 +30,16 @@ from tenacity import (
 )
 
 from kb.core.persistence import atomic_write_bytes
-from kb.errors import KBError
+from kb.errors import ImageSafetyError, KBError
 from kb.image.base import ImageProvider
 
 logger = logging.getLogger(__name__)
 
 _API_ROOT = "https://generativelanguage.googleapis.com/v1beta"
 _DEFAULT_MODEL = "gemini-3.1-flash-image"
+
+# finishReason / blockReason values that mean "content refused" — permanent, never retried.
+_SAFETY_REASONS = frozenset({"PROHIBITED_CONTENT", "BLOCKLIST", "SPII"})
 
 
 def _is_transient(exc: BaseException) -> bool:
@@ -75,17 +78,31 @@ def build_request(prompt: str, references: Sequence[bytes]) -> dict[str, Any]:
 
 
 def extract_image(data: dict[str, Any]) -> bytes:
-    """Return the first inline image from a ``generateContent`` response."""
+    """Return the first inline image from a ``generateContent`` response.
+
+    A safety refusal (``IMAGE_SAFETY`` etc.) raises :class:`ImageSafetyError` so
+    callers can tell the user to soften the prompt instead of retrying.
+    """
     candidates = data.get("candidates") or []
     if candidates:
         for part in candidates[0].get("content", {}).get("parts", []):
             inline = part.get("inlineData")
             if inline and inline.get("data"):
                 return base64.b64decode(inline["data"])
-    raise KBError(
-        "Gemini response contained no image data "
-        f"(finishReason: {candidates[0].get('finishReason') if candidates else 'no candidates'})"
+    reason = (
+        (candidates[0].get("finishReason") if candidates else None)
+        or (data.get("promptFeedback") or {}).get("blockReason")
+        or "no candidates"
     )
+    if "SAFETY" in reason or reason in _SAFETY_REASONS:
+        raise ImageSafetyError(
+            f"the provider's content-safety filter refused this image ({reason}). "
+            "Retrying will not help — soften the scene instead, e.g.: "
+            'kb edit <book> --page <N> --image "symbolic and dreamlike, no gore, '
+            'no graphic violence"; if it is still refused, replace the prompt '
+            'entirely: kb edit <book> --page <N> --image-prompt "<new calmer scene>"'
+        )
+    raise KBError(f"Gemini response contained no image data (finishReason: {reason})")
 
 
 class GoogleImageProvider(ImageProvider):

@@ -111,11 +111,80 @@ def test_recreate_images_keeps_texts(demo: Path) -> None:
     assert _page(demo, 1)["text"] == before_text  # texts kept (§8.2)
 
 
+def test_recreate_images_redraws_reference_images(demo: Path) -> None:
+    """Unrestricted --recreate-images regenerates character references too (§8.2)."""
+    book = yaml.safe_load((demo / "book.yaml").read_text("utf-8"))
+    references = [demo / c["primary_reference"] for c in book["characters"]]
+    assert references
+    before = {p: _mtime(p) for p in references}
+    bible_text_before = [
+        (c["name"], c["description"], c["visual_keywords"]) for c in book["characters"]
+    ]
+
+    result = runner.invoke(app, ["run", "demo", "--recreate-images"])
+    assert result.exit_code == 0
+
+    for path in references:
+        assert _mtime(path) > before[path]  # every reference redrawn
+    book_after = yaml.safe_load((demo / "book.yaml").read_text("utf-8"))
+    bible_text_after = [
+        (c["name"], c["description"], c["visual_keywords"]) for c in book_after["characters"]
+    ]
+    assert bible_text_after == bible_text_before  # bible TEXT untouched
+
+
+def test_page_restricted_recreate_images_keeps_references(demo: Path) -> None:
+    """--recreate-images --pages N regenerates only that page image (§8.2)."""
+    book = yaml.safe_load((demo / "book.yaml").read_text("utf-8"))
+    references = [demo / c["primary_reference"] for c in book["characters"]]
+    before = {p: _mtime(p) for p in references}
+
+    result = runner.invoke(app, ["run", "demo", "--recreate-images", "--pages", "1"])
+    assert result.exit_code == 0
+
+    for path in references:
+        assert _mtime(path) == before[path]  # references untouched
+
+
 def test_interactive_abort_exits_one(demo: Path) -> None:
     """--interactive with a declined confirmation aborts the run (§8.2)."""
     result = runner.invoke(app, ["run", "demo", "--force", "--interactive"], input="n\n")
     assert result.exit_code == 1
     assert "aborted" in result.output
+
+
+def test_safety_refusal_reports_page_and_edit_command(
+    demo: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A content-safety refusal names the page and the exact kb edit fix (§7.3)."""
+    from collections.abc import Sequence
+
+    from kb.errors import ImageSafetyError
+    from kb.image.mock import MockImageProvider
+
+    class SafetyBlockedProvider(MockImageProvider):
+        async def _generate(
+            self, *, prompt: str, out_path: Path, references: Sequence[Path], size: int
+        ) -> Path:
+            if "page-002" in out_path.name:
+                raise ImageSafetyError(
+                    "the provider's content-safety filter refused this image (IMAGE_SAFETY)"
+                )
+            return await super()._generate(
+                prompt=prompt, out_path=out_path, references=references, size=size
+            )
+
+    monkeypatch.setattr("kb.cli.create_image_provider", lambda settings: SafetyBlockedProvider())
+
+    result = runner.invoke(app, ["run", "demo", "--recreate-images"])
+
+    assert result.exit_code == 1
+    assert "REFUSED" in result.output
+    assert "content-safety filter" in result.output
+    assert "retrying will not help" in result.output
+    assert "kb edit demo --page 2 --image" in result.output
+    # non-safety pages still regenerated fine and are not blamed
+    assert "page(s) 2" in result.output
 
 
 # ----------------------------------------------------------------- §6.2 edits
@@ -150,6 +219,29 @@ def test_image_edit_appends_instruction_and_revokes_approval(demo: Path) -> None
     assert "Edit: make it happier" in str(updated["image_prompt"])  # appended (§6.2)
     assert updated["status"] == "image_done"
     assert _mtime(demo / "images" / "page-001.png") > before
+
+
+def test_image_prompt_edit_replaces_prompt_entirely(demo: Path) -> None:
+    """--image-prompt is the safety-refusal escape hatch: full prompt replacement."""
+    before = _mtime(demo / "images" / "page-001.png")
+
+    result = runner.invoke(
+        app, ["edit", "demo", "--page", "1", "--image-prompt", "A calm meadow at sunrise."]
+    )
+    assert result.exit_code == 0
+
+    updated = _page(demo, 1)
+    assert updated["image_prompt"] == "A calm meadow at sunrise."  # replaced, not appended
+    assert updated["status"] == "image_done"
+    assert _mtime(demo / "images" / "page-001.png") > before
+
+
+def test_image_and_image_prompt_are_mutually_exclusive(demo: Path) -> None:
+    result = runner.invoke(
+        app,
+        ["edit", "demo", "--page", "1", "--image", "x", "--image-prompt", "y"],
+    )
+    assert result.exit_code == 2
 
 
 def test_approve_page_requires_image_done(demo: Path) -> None:

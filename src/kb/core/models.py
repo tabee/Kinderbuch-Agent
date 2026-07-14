@@ -35,6 +35,9 @@ class Page(BaseModel):
     image_prompt: str | None = None
     image_path: Path | None = None  # relative to the book directory
     characters_present: list[str] = Field(default_factory=list)  # Character.slug, salience order
+    character_positions: dict[str, str] = Field(
+        default_factory=dict
+    )  # Character.slug → scene-true spatial phrase for HC-2.3 anchoring
     status: PageStatus = "todo"
 
 

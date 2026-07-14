@@ -1,0 +1,43 @@
+number: 6
+text:
+  de: 'Eine dritte Gestalt kniete neben ihm: ein Mann mit dem exakten Gesicht seines
+    Vaters, den müden Augen, der vertrauten Form seiner Hände. »Der Schatten wartet
+    draußen«, sagte der falsche Vater, seine Stimme durchdrungen von etwas, das wie
+    Trauer klang. »Es tut mir leid, dass ich gegangen bin. Lass mich dich nach Hause
+    bringen.« Die Erleichterung, die durch Fritz flutete, war so überwältigend, dass
+    sie fast sein Herz stillgelegt hätte – seinen Vater zurückzuhaben, vergeben zu
+    werden, den Hunger endlich gestillt zu bekommen. Aber das Gift, das durch seine
+    Adern sang, ließ die Wahrheit durch die Risse sickern: Das war nicht sein Vater.
+    Es war die Zunge des Waldes, geformt in die eine Gestalt, die einen sterbenden
+    Jungen am ehesten dazu bringen würde, den letzten Biss zu akzeptieren und dem
+    Verzehrtwerden zuzustimmen.'
+  th: 'บุคคลที่สามคนหนึ่งได้เข่าลงข้างเขา: ชายคนหนึ่งที่มีใบหน้าเหมือนกันทุกประการกับพ่อของเขา
+    ตาที่เหนื่อยล้า และรูปร่างของมือที่คุ้นเคย "เงามืดอยู่ข้างนอก" พ่อปลอมกล่าวว่า
+    เสียงของเขาดีซึ่งมีอะไรบางอย่างที่ฟังเหมือนความเศร้า "ขออภัยที่ฉันจากไป ให้ฉันพาเธอกลับบ้าน"
+    ความโล่งใจที่ท่วมท้นฟริตซ์นั้นแรงมากจนเกือบหยุดหัวใจของเขา - เพื่อให้พ่อกลับมา
+    จะได้รับอภัย และความหิวกระหายจะหายไป แต่พิษที่ร้องเพลงผ่านเส้นเลือดของเขาทำให้ความจริงซึมผ่านรอยแตก:
+    นี่ไม่ใช่พ่อของเขา มันคือลิ้นของป่า นั่นเอง หล่อหลอมให้มีรูปแบบที่น่าจะทำให้เด็กชายที่กำลังจะตายยอมรับการกัดครั้งสุดท้าย'
+image_prompt: 'Deep in a forest clearing shrouded in twilight mist, a young man (Fritz)
+  lies half-conscious on the damp ground, his body weakened and trembling. Beside
+  him kneels a figure bearing the exact face of his father—gentle, worn, sorrowful—reaching
+  toward him with weathered hands in a gesture of comfort and promise. The false father''s
+  eyes hold terrible compassion. In the background, barely visible through the gloom
+  and tangled underbrush, a massive shadow moves—the true predator watching, waiting.
+  The forest itself seems to breathe around them: gnarled roots, hanging vines, bioluminescent
+  fungi casting sickly green light across the wet leaves. Fritz''s expression is torn
+  between desperate longing and dawning horror, his hand half-reaching toward this
+  beloved false father while poison burns through his veins. The scene is suffused
+  with intimate menace—the comfort of deception inches away from the hunger of the
+  forest itself.'
+image_path: images/page-006.png
+characters_present:
+- fritz
+- the-false-father
+- shadow
+character_positions:
+  fritz: lying weakened on the damp ground, centre foreground, body trembling
+  the-false-father: kneeling directly beside Fritz, reaching toward him with weathered
+    hands, centre-left
+  shadow: massive shape barely visible in the gloom and tangled undergrowth, background
+    right, watching and waiting
+status: image_done

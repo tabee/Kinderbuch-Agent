@@ -19,7 +19,15 @@ from kb.core.views import write_bible_view
 _SYSTEM = (
     "You are a character designer for children's picture books. "
     "Give each character DISTINCT visual keywords that cannot be confused with "
-    "any other character's. Always respond via the structured output tool."
+    "any other character's. Visual keywords must be CONCRETE, PAINTABLE features "
+    "— colours, clothing, body shape, accessories, physical traits. Never use "
+    "sounds, smells, emotions, story events, or poetic phrases: they cannot be "
+    "drawn and end up rendered as garbled text in the image. "
+    "Keywords are pasted into every image request, so they must pass image-model "
+    "content filters: never blood, gore, open wounds, or injuries — use "
+    "non-graphic equivalents instead (torn clothes, pale exhausted face, old "
+    "faded scar). "
+    "Always respond via the structured output tool."
 )
 
 
@@ -39,7 +47,9 @@ def run(ctx: StepContext) -> None:
         f"(age group {book.age_group}).\n"
         f"Story:\n{beats}\n"
         "List every recurring character with role, description, and 3-5 distinct "
-        "visual keywords. Keywords must be unique per character."
+        "visual keywords. Keywords must be unique per character, and each keyword "
+        "must name something VISIBLE (e.g. 'ragged red scarf', 'ash-grey fur') — "
+        "never a sound, feeling, or story event."
     )
     spec = ctx.llm.generate_structured(system=_SYSTEM, prompt=prompt, schema=CharacterBibleSpec)
 
@@ -50,6 +60,16 @@ def run(ctx: StepContext) -> None:
     asyncio.run(_generate_references(ctx))
     ctx.books.save(book)
     write_bible_view(book, ctx.book_dir)
+
+
+def recreate_references(ctx: StepContext) -> None:
+    """Redraw every character's reference image; the bible text is kept.
+
+    Used by unrestricted ``--recreate-images`` runs (§8.2: images only, texts
+    kept) so page images are subsequently conditioned on fresh references.
+    """
+    asyncio.run(_generate_references(ctx))
+    ctx.books.save(ctx.book)
 
 
 def _to_characters(spec: CharacterBibleSpec) -> list[Character]:

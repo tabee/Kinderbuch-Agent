@@ -1,0 +1,37 @@
+number: 3
+text:
+  de: 'Das Fieber brachte Wahnsinn. Fritz fand leuchtende Pilze, weiß wie Zähne, ihr
+    Duft süße Verwesung, die Gefühllosigkeit versprach—und er aß sie, weil der Schmerz
+    unerträglich geworden war. Die Dunkelheit flutete seine Adern wie flüssiges Nichts,
+    färbte sein Sehen rot, und öffnete eine Verbindung zwischen seinem zersplitterten
+    Verstand und etwas Ungeheuerem und Geduldigem, das seit vor seinem Urgroßvater
+    speiste. Er konnte es in seinen Rippen spüren: ein Dasein, weder lebendig noch
+    tot, das ihn mit einer Intelligenz kostete, älter als Erbarmen. *Nicht mehr lange,*
+    flüsterte es durch seine Knochen. *Nicht mehr lange jetzt.*'
+  th: 'ความวิกลจริตมาพร้อมกับไข้สูง เฟรตซ์พบเห็ดสีเรืองแสงดูเหมือนฟัน กลิ่นอันหวานของการเน่าเสีย
+    ที่สัญญาความชา—และเขากินมันเพราะความเจ็บปวดกลายเป็นสิ่งที่ทนไม่ได้ ความมืดไหลหลั่งเข้าสู่หลอดเลือดของเขาเหมือนความว่างเปล่าที่เหลวลง
+    ทำให้การมองเห็นของเขาแดงเป็นเลือด และเปิดการเชื่อมต่อระหว่างจิตใจที่แตกสลายของเขากับสิ่งที่มหาศาลและอดทนซึ่งได้ให้อาหารตั้งแต่ก่อนบรรพบุรุษของเขา
+    เขาสามารถรู้สึกว่ามันอยู่ในซี่โครงของเขา: การมีอยู่ที่ไม่ทั้งมีชีวิตหรือตาย ที่รสชาติเขาด้วยปัญญาที่เก่ากว่าเมตตา
+    *ไม่นานแล้ว,* มันดูเหมือนจะกระซิบผ่านกระดูกของเขา *ไม่นานแล้ว เดี๋ยวนี้.*'
+image_prompt: 'A sickbed scene of fever-dream horror: Fritz lies contorted on cracked
+  stone, bathed in sickly reddish light filtered through his delirium. His body writhes
+  in semi-consciousness, luminous mushroom fragments—pale as teeth—scattered on the
+  ground near his outstretched hands. His mouth hangs open as though in conversation
+  with the invisible. Around him, darkness moves with terrible intention: shadows
+  pool and coil from his chest and open mouth, taking almost-shapes—suggestions of
+  mass and malevolence rather than clear form. The red-tinted light fights against
+  encroaching blackness. Sickly bioluminescence, cold and ancient, emanates from the
+  gathering shadow. The scene is claustrophobic despite its emptiness: just Fritz
+  and the patient hunger consuming him from within.'
+image_path: images/page-003.png
+characters_present:
+- fritz
+- the-schattenrachen
+character_positions:
+  fritz: sprawled in fevered delirium on a stone floor, body contorted, mouth open
+    as if speaking to something unseen, glowing mushroom fragments scattered around
+    his trembling hands
+  the-schattenrachen: vast and shadowy presence coalescing around Fritz's body—tendrils
+    of darkness pooling from his mouth and ribs, barely substantial, suggested by
+    rippling shadow and sickly luminescence rather than clear form
+status: image_done

@@ -71,6 +71,14 @@ class Pipeline:
             step.run(ctx)
             result.steps_run.append(name)
 
+        # §8.2 --recreate-images regenerates images only — that includes character
+        # reference images, unless the run is restricted to specific pages.
+        if options.recreate_images and not options.page_restricted and book.characters:
+            self._check_confirm("Recreate character reference images?")
+            logger.info("recreating %d character reference image(s)", len(book.characters))
+            bible.recreate_references(ctx)
+            result.steps_run.append("03b reference images")
+
         self._check_confirm("Run step 04 pages?")
         pages.run(ctx)
         if result.pages_texted or result.pages_imaged:
