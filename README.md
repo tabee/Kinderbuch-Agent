@@ -19,24 +19,59 @@ All pipeline steps (outline → story → character bible → pages) run with st
 - `ninos-two-mountains` — real-generated picture book (age 4-6, 5 spreads)
 - `the-weight-of-water` — real-generated young-adult book (age 12-14, 10 spreads, own universe/style) about climate change between a Swiss glacier village and the Chao Phraya delta
 
-## Quickstart
+## Quickstart — from `git clone` to a finished PDF
 
-### Local (uv)
+Everything the book needs ships with the repository, including the Noto fonts
+for English and Thai — beyond the tools below there is nothing to download.
+
+**1. System prerequisites (once).** `uv` plus the Pango/libthai libraries that
+WeasyPrint needs for print-ready, Thai-capable PDFs:
 
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh   # if uv is missing
+sudo apt-get install -y libpango-1.0-0 libpangocairo-1.0-0 libcairo2 \
+  libthai0 libthai-data libgdk-pixbuf-2.0-0 shared-mime-info fontconfig   # Debian/Ubuntu
+curl -LsSf https://astral.sh/uv/install.sh | sh                           # uv, if missing
+```
+
+On macOS use `brew install pango` instead of the apt line — or skip both and
+use the Docker route below.
+
+**2. Clone and install:**
+
+```bash
+git clone https://github.com/tabee/Kinderbuch-Agent.git
+cd Kinderbuch-Agent
 uv sync
-uv run kb --help
-alias kb='uv run kb'          # the rest of this README assumes this alias (or use Docker)
+alias kb='uv run kb'          # the rest of this README assumes this alias
 ```
 
-For real generation, create your .env first:
+**3. Start the guided assistant.** Free dry run — no API keys, deterministic
+text, placeholder images:
 
 ```bash
-cp .env.example .env          # then fill in ANTHROPIC_API_KEY (+ GOOGLE_API_KEY for images)
+KB_LLM_PROVIDER=mock KB_IMAGE_PROVIDER=mock uv run kb assistant
 ```
 
-### Docker
+Real generation — add your keys first:
+
+```bash
+cp .env.example .env          # then edit: ANTHROPIC_API_KEY=...  and for real
+                              # images KB_IMAGE_PROVIDER=imagen + GOOGLE_API_KEY=...
+uv run kb assistant
+```
+
+**4. Inside the assistant.** It walks you through
+universe → book idea → outline → story → character bible → every page → PDF:
+
+- Type `swiss-thai-myths` to use the bundled universe (or any new slug to create your own world), then enter a book slug and your idea — every other prompt has a sensible default.
+- After each step, review the result: **Enter** approves and continues; otherwise answer with a number, letter, or word — `2`/`m`/`manuell` edits fields yourself, `3`/`l`/`llm` sends a free-form revision instruction to the LLM, `q`/`pausieren` pauses (resume any time with `kb assistant <slug>`). Type `temp` at any menu to adjust LLM creativity.
+- When the last page is approved, the assistant renders the print-ready PDF and prints its path: `Books/<slug>/build/<slug>.pdf`.
+
+With mock providers the whole flow takes under a minute and costs nothing —
+press Enter through every review and you hold a complete (placeholder-image)
+book.
+
+### Alternative: Docker
 
 ```bash
 cp .env.example .env          # fill in ANTHROPIC_API_KEY for real LLM use
@@ -51,22 +86,10 @@ docker compose -f docker/docker-compose.yml exec app kb serve --host 0.0.0.0
 # then open http://127.0.0.1:8000 in your host browser
 ```
 
-## First book in under 5 minutes
+## Direct workflow (scriptable)
 
-Guided workflow with review and revision after every stage:
-
-```bash
-kb assistant                 # create universe/book and proceed to the PDF
-kb assistant nino            # resume a paused or incomplete book
-```
-
-Every review offers approval, manual editing, and free-form LLM instructions
-via a numbered menu — answer with the number, the key letter, or a word
-(`freigeben`, `llm`, `pausieren`). Choose `q` to pause safely; the assistant
-prints the resume command. Provider settings and costs are identical to the
-commands below.
-
-Direct, non-interactive workflow:
+The Quickstart's `kb assistant` is the guided path; the same pipeline is fully
+scriptable as individual commands:
 
 ```bash
 kb universe list                                  # ships with swiss-thai-myths

@@ -3,7 +3,7 @@
 All book content is set exclusively in fonts from this directory — they are
 embedded into the PDF for fully deterministic output. No system-font fallback.
 
-Required files (not committed; download before running `kb pdf`):
+Required files (committed to the repository — nothing to download after cloning):
 
 | File | Family |
 |------|--------|
