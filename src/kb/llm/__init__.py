@@ -18,8 +18,10 @@ def create_llm_provider(settings: Settings, *, languages: list[str] | None = Non
         from kb.llm.anthropic_provider import AnthropicLLMProvider
 
         if settings.llm_model:
-            return AnthropicLLMProvider(model=settings.llm_model)
-        return AnthropicLLMProvider()
+            return AnthropicLLMProvider(
+                model=settings.llm_model, temperature=settings.llm_temperature
+            )
+        return AnthropicLLMProvider(temperature=settings.llm_temperature)
     raise KBError(
         f"unknown LLM provider {settings.llm_provider!r} (expected 'anthropic' or 'mock')"
     )

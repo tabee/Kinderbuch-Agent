@@ -328,6 +328,7 @@ All configuration is via environment variables, read once at startup (`.env` sup
 | `ANTHROPIC_API_KEY` | for real LLM use | — | Anthropic authentication. |
 | `KB_LLM_PROVIDER` | no | `anthropic` | LLM provider selection: `anthropic` or `mock` (offline, deterministic, zero cost). |
 | `KB_LLM_MODEL` | no | provider default | Anthropic model ID; set a cheaper model (e.g. a Haiku-class model) for low-cost development. |
+| `KB_LLM_TEMPERATURE` | no | provider default | LLM sampling temperature, `0.0`–`1.0`; tunes creativity of all text generation. |
 | `KB_IMAGE_PROVIDER` | no | `mock` | Image provider selection: `mock` or `imagen`. |
 | `KB_IMAGE_MODEL` | no | provider default | Gemini image model ID (default `gemini-3.1-flash-image`; `gemini-3-pro-image` for higher quality). |
 | `GOOGLE_API_KEY` | for `imagen` | — | Google AI Studio key (Gemini API). The `imagen` provider targets current Gemini image models; classic Imagen `:predict` models are closed to new users (verified 2026-07). |

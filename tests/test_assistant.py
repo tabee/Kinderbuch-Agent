@@ -82,6 +82,35 @@ def test_assistant_pauses_resumes_reviews_and_renders_pdf(
     assert (workspace / "Books" / "demo" / "build" / "demo.pdf").is_file()
 
 
+def test_assistant_accepts_numbers_and_words(
+    workspace: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Menu input works via option number ('3', '1') and via word ('pausieren')."""
+    monkeypatch.setenv("KB_LLM_PROVIDER", "mock")
+    monkeypatch.setenv("KB_IMAGE_PROVIDER", "mock")
+
+    result = runner.invoke(
+        app,
+        ["assistant"],
+        input=(
+            "swiss-thai-myths\n"
+            "3\n"
+            "Mehr Berge, weniger Meer.\n"
+            "1\n"
+            "mini\n"
+            "\n"
+            "Eine kleine Idee.\n"
+            "\n"
+            "\n"
+            "pausieren\n"
+        ),
+    )
+    assert result.exit_code == 0, result.output
+    assert "Assistent pausiert" in result.output
+    assert "assistant mini" in result.output
+    assert (workspace / "Books" / "mini" / "book.yaml").is_file()
+
+
 def test_outline_revision_removes_stale_downstream_artifacts(workspace: Path) -> None:
     runner.invoke(app, ["book", "new", "demo", "--universe", "swiss-thai-myths"])
     manager = BookManager(workspace / "Books")

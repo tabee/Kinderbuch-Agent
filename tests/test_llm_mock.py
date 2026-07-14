@@ -96,3 +96,35 @@ def test_kb_llm_model_empty_falls_back_to_default(monkeypatch: pytest.MonkeyPatc
     monkeypatch.setenv("KB_LLM_MODEL", "")
 
     assert Settings.from_env().llm_model is None
+
+
+def test_kb_llm_temperature_parsed(monkeypatch: pytest.MonkeyPatch) -> None:
+    """KB_LLM_TEMPERATURE tunes creativity globally (spec §9); empty → provider default."""
+    monkeypatch.setenv("KB_LLM_TEMPERATURE", "0.4")
+    assert Settings.from_env().llm_temperature == 0.4
+
+    monkeypatch.setenv("KB_LLM_TEMPERATURE", "")
+    assert Settings.from_env().llm_temperature is None
+
+
+@pytest.mark.parametrize("raw", ["hot", "-0.1", "1.5"])
+def test_kb_llm_temperature_invalid_is_error(monkeypatch: pytest.MonkeyPatch, raw: str) -> None:
+    monkeypatch.setenv("KB_LLM_TEMPERATURE", raw)
+    with pytest.raises(KBError, match="KB_LLM_TEMPERATURE"):
+        Settings.from_env()
+
+
+def test_kb_llm_temperature_reaches_anthropic_provider(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The configured temperature is handed to the provider. Offline: no API call."""
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key-no-network")
+    monkeypatch.setenv("KB_LLM_PROVIDER", "anthropic")
+    monkeypatch.setenv("KB_LLM_TEMPERATURE", "0.2")
+
+    from kb.llm.anthropic_provider import AnthropicLLMProvider
+
+    provider = create_llm_provider(Settings.from_env())
+
+    assert isinstance(provider, AnthropicLLMProvider)
+    assert provider.temperature == 0.2

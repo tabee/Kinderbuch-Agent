@@ -42,11 +42,16 @@ state. It guides the complete workflow:
 universe → book idea → outline → story → character bible → every page → PDF
 ```
 
-At each review, choose from the displayed actions. All creative stages support
-approval, manual replacement, or a free-form instruction to the configured LLM.
-Page reviews separately support manual or LLM-assisted text revision and image
-revision. Approving a page moves it to `approved`; only after every unfinished
-page has been reviewed does the assistant render the PDF.
+At each review the assistant shows the current artifact in a panel, a progress
+header (`Schritt 3/7 · Outline`), and a numbered action menu that explains every
+option. Select an action by its **number** (`1`), its **key letter** (`a`, `m`,
+`l`, `q`, …) or a **word** (`freigeben`, `manuell`, `llm`, `pausieren`);
+pressing Enter picks the highlighted default (approve). All creative stages
+support approval, manual replacement, or a free-form instruction to the
+configured LLM. Page reviews separately support manual or LLM-assisted text
+revision and image revision. Approving a page moves it to `approved`; only
+after every unfinished page has been reviewed does the assistant render the
+PDF.
 
 Choose `q` at any review to pause. All completed work is already stored
 atomically; resume with the command printed by the assistant:
@@ -261,6 +266,7 @@ Set in the shell or in `.env` (loaded automatically; never committed). See
 | `ANTHROPIC_API_KEY` | — | Required for real text generation. |
 | `KB_LLM_PROVIDER` | `anthropic` | `anthropic` or `mock` (offline, deterministic, zero cost). |
 | `KB_LLM_MODEL` | `claude-sonnet-4-5` | Anthropic model ID. Cheap development: `claude-haiku-4-5`. |
+| `KB_LLM_TEMPERATURE` | provider default | LLM creativity, `0.0`–`1.0`: `0.0` = focused and reproducible, `1.0` = most varied. Applies to all text generation (outline, story, pages, edits). |
 | `KB_IMAGE_PROVIDER` | `mock` | `mock` (placeholder gradients) or `imagen` (Google Gemini image models). |
 | `KB_IMAGE_MODEL` | `gemini-3.1-flash-image` | Gemini image model. Higher quality: `gemini-3-pro-image`. |
 | `GOOGLE_API_KEY` | — | Required for `imagen`. Get one at <https://aistudio.google.com/apikey>. |

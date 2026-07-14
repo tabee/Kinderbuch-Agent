@@ -20,6 +20,7 @@ class Settings(BaseModel):
 
     llm_provider: str = "anthropic"
     llm_model: str | None = None  # None → provider default
+    llm_temperature: float | None = None  # None → provider default; 0.0 focused … 1.0 varied
     image_provider: str = "mock"
     image_model: str | None = None  # None → provider default
     max_concurrency: int = 4
@@ -44,9 +45,25 @@ class Settings(BaseModel):
                 f"KB_LOG_LEVEL must be one of {', '.join(sorted(_LOG_LEVELS))}, got {log_level!r}"
             )
 
+        raw_temperature = os.environ.get("KB_LLM_TEMPERATURE", "").strip()
+        llm_temperature: float | None = None
+        if raw_temperature:
+            try:
+                llm_temperature = float(raw_temperature)
+            except ValueError as exc:
+                raise KBError(
+                    f"KB_LLM_TEMPERATURE must be a number between 0.0 and 1.0, "
+                    f"got {raw_temperature!r}"
+                ) from exc
+            if not 0.0 <= llm_temperature <= 1.0:
+                raise KBError(
+                    f"KB_LLM_TEMPERATURE must be between 0.0 and 1.0, got {llm_temperature}"
+                )
+
         return cls(
             llm_provider=os.environ.get("KB_LLM_PROVIDER", "anthropic"),
             llm_model=os.environ.get("KB_LLM_MODEL") or None,
+            llm_temperature=llm_temperature,
             image_provider=os.environ.get("KB_IMAGE_PROVIDER", "mock"),
             image_model=os.environ.get("KB_IMAGE_MODEL") or None,
             max_concurrency=max_concurrency,

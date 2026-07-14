@@ -60,9 +60,11 @@ kb assistant                 # create universe/book and proceed to the PDF
 kb assistant nino            # resume a paused or incomplete book
 ```
 
-Every review offers approval, manual editing, and free-form LLM instructions.
-Choose `q` to pause safely; the assistant prints the resume command. Provider
-settings and costs are identical to the commands below.
+Every review offers approval, manual editing, and free-form LLM instructions
+via a numbered menu — answer with the number, the key letter, or a word
+(`freigeben`, `llm`, `pausieren`). Choose `q` to pause safely; the assistant
+prints the resume command. Provider settings and costs are identical to the
+commands below.
 
 Direct, non-interactive workflow:
 
@@ -110,6 +112,7 @@ ANTHROPIC_API_KEY=...       # https://console.anthropic.com
 GOOGLE_API_KEY=...          # https://aistudio.google.com/apikey
 KB_IMAGE_PROVIDER=imagen    # Gemini image models with reference-image conditioning
 KB_IMAGE_MODEL=             # default gemini-3.1-flash-image; gemini-3-pro-image = higher quality
+KB_LLM_TEMPERATURE=         # creativity 0.0-1.0 (focused ... varied); empty = provider default
 ```
 
 Note on print resolution (§11.4): Gemini image models return ≈ 1024 px square by default → ≈ 120 DPI at full bleed (216 mm). Fine for proofs; for press-quality output select a higher-resolution model via `KB_IMAGE_MODEL`.

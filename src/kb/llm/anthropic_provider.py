@@ -69,7 +69,7 @@ def _coerce_json_strings(raw: dict[str, Any], exc: ValidationError) -> dict[str,
 class AnthropicLLMProvider(LLMProvider):
     """Structured outputs through Anthropic's forced tool use."""
 
-    def __init__(self, model: str = _DEFAULT_MODEL) -> None:
+    def __init__(self, model: str = _DEFAULT_MODEL, temperature: float | None = None) -> None:
         api_key = os.environ.get("ANTHROPIC_API_KEY")
         if not api_key:
             raise KBError(
@@ -78,11 +78,17 @@ class AnthropicLLMProvider(LLMProvider):
             )
         self._client = anthropic.Anthropic(api_key=api_key)
         self._model = model
+        self._temperature = temperature
 
     @property
     def model(self) -> str:
         """The Anthropic model ID in use (configurable via ``KB_LLM_MODEL``, spec §9)."""
         return self._model
+
+    @property
+    def temperature(self) -> float | None:
+        """Sampling temperature (``KB_LLM_TEMPERATURE``); None → provider default."""
+        return self._temperature
 
     def generate_structured(self, *, system: str, prompt: str, schema: type[T]) -> T:
         """Call the model and validate; re-prompt with errors on invalid output (§7.2)."""
@@ -124,6 +130,7 @@ class AnthropicLLMProvider(LLMProvider):
         response = self._client.messages.create(
             model=self._model,
             max_tokens=8192,
+            temperature=self._temperature if self._temperature is not None else anthropic.omit,
             system=system,
             messages=[{"role": "user", "content": prompt}],
             tools=[
