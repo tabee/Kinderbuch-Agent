@@ -73,6 +73,14 @@ def _books() -> BookManager:
     return BookManager(Path.cwd() / "Books")
 
 
+def _load_settings(temperature: float | None) -> Settings:
+    """Settings from the environment; ``--temperature`` overrides KB_LLM_TEMPERATURE."""
+    settings = Settings.from_env()
+    if temperature is not None:
+        settings = settings.model_copy(update={"llm_temperature": temperature})
+    return settings
+
+
 def _load_universe(slug: str) -> Universe:
     try:
         return _universes().load(slug)
@@ -308,6 +316,15 @@ def run(
     interactive: Annotated[
         bool, typer.Option("--interactive", help="Confirm between pipeline steps.")
     ] = False,
+    temperature: Annotated[
+        float | None,
+        typer.Option(
+            "--temperature",
+            min=0.0,
+            max=1.0,
+            help="LLM creativity for this run (0.0-1.0); overrides KB_LLM_TEMPERATURE.",
+        ),
+    ] = None,
 ) -> None:
     """Run the pipeline (Steps 01-04). Idempotent by default (HC-4.1); flags per §8.2."""
     book = _load_book(slug)
@@ -319,7 +336,7 @@ def run(
             raise typer.BadParameter(str(exc), param_hint="--pages") from exc
 
     universe = _load_universe(book.universe_slug)
-    settings = Settings.from_env()
+    settings = _load_settings(temperature)
     options = RunOptions(
         force=force,
         recreate_images=recreate_images,
@@ -357,14 +374,24 @@ def assistant(
         str | None,
         typer.Argument(help="Existing book to resume; omit to create a universe/book."),
     ] = None,
+    temperature: Annotated[
+        float | None,
+        typer.Option(
+            "--temperature",
+            min=0.0,
+            max=1.0,
+            help="Initial LLM creativity (0.0-1.0); adjustable any time by typing "
+            "'temp' at a menu.",
+        ),
+    ] = None,
 ) -> None:
     """Guide creation from universe or book idea through reviews to the final PDF."""
     from kb.assistant import AssistantAborted, GuidedAssistant
 
     try:
-        path = GuidedAssistant(root=Path.cwd(), settings=Settings.from_env(), console=console).run(
-            slug
-        )
+        path = GuidedAssistant(
+            root=Path.cwd(), settings=_load_settings(temperature), console=console
+        ).run(slug)
     except AssistantAborted as exc:
         console.print(f"[yellow]{exc}[/yellow]")
         return
@@ -401,6 +428,15 @@ def edit(
     approve_page: Annotated[
         int | None, typer.Option("--approve-page", min=1, help="Approve a finished page.")
     ] = None,
+    temperature: Annotated[
+        float | None,
+        typer.Option(
+            "--temperature",
+            min=0.0,
+            max=1.0,
+            help="LLM creativity for this edit (0.0-1.0); overrides KB_LLM_TEMPERATURE.",
+        ),
+    ] = None,
 ) -> None:
     """Edit book content (semantics per §6.2)."""
     book = _load_book(slug)
@@ -415,7 +451,7 @@ def edit(
     if (texts or text or image or image_prompt) and page is None:
         raise typer.BadParameter("--page is required for text and image edits")
 
-    settings = Settings.from_env()
+    settings = _load_settings(temperature)
     books = _books()
     try:
         if text and page is not None:

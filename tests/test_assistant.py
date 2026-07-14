@@ -111,6 +111,36 @@ def test_assistant_accepts_numbers_and_words(
     assert (workspace / "Books" / "mini" / "book.yaml").is_file()
 
 
+def test_assistant_temperature_adjustable_at_any_menu(
+    workspace: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Typing 'temp' at a menu changes creativity live; invalid values are rejected."""
+    monkeypatch.setenv("KB_LLM_PROVIDER", "mock")
+    monkeypatch.setenv("KB_IMAGE_PROVIDER", "mock")
+
+    result = runner.invoke(
+        app,
+        ["assistant", "--temperature", "0.3"],
+        input=("swiss-thai-myths\ntemp\n0.9\ntemp\n2.5\nq\n"),
+    )
+    assert result.exit_code == 0, result.output
+    assert "Kreativität: 0.30" in result.output  # --temperature flag applied
+    assert "Kreativität: 0.90" in result.output  # live change via 'temp'
+    assert "Außerhalb von 0.0-1.0" in result.output  # invalid value rejected
+    assert "Assistent pausiert" in result.output
+
+
+def test_run_temperature_flag_out_of_range_is_usage_error(
+    workspace: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("KB_LLM_PROVIDER", "mock")
+    monkeypatch.setenv("KB_IMAGE_PROVIDER", "mock")
+    runner.invoke(app, ["book", "new", "demo", "--universe", "swiss-thai-myths"])
+
+    result = runner.invoke(app, ["run", "demo", "--temperature", "1.5"])
+    assert result.exit_code == 2
+
+
 def test_outline_revision_removes_stale_downstream_artifacts(workspace: Path) -> None:
     runner.invoke(app, ["book", "new", "demo", "--universe", "swiss-thai-myths"])
     manager = BookManager(workspace / "Books")

@@ -142,6 +142,9 @@ _PDF_ACTIONS = (
 
 _STAGES = ("Universum", "Buchidee", "Outline", "Story", "Figurenbibel", "Seiten", "PDF")
 
+# Typed at any action menu to adjust LLM creativity mid-session.
+_TEMPERATURE_TOKENS = {"temp", "temperatur", "kreativität", "kreativitaet"}
+
 
 class GuidedAssistant:
     """Review-gated workflow over the normal file-backed pipeline."""
@@ -160,6 +163,7 @@ class GuidedAssistant:
         self._universes = UniverseManager(root / "Global" / "universes")
         self._llm: LLMProvider | None = None
         self._images: ImageProvider | None = None
+        self._languages: list[str] | None = None
 
     def run(self, slug: str | None = None) -> Path:
         """Run or resume the assistant and return the final PDF path."""
@@ -167,41 +171,41 @@ class GuidedAssistant:
         if slug is None:
             self._stage("Universum")
             universe = self._choose_universe()
-            self._llm = create_llm_provider(self._settings, languages=universe.languages)
+            self._set_llm(universe.languages)
             universe = self._review_universe(universe)
-            self._llm = create_llm_provider(self._settings, languages=universe.languages)
+            self._set_llm(universe.languages)
             self._stage("Buchidee")
             book = self._create_book(universe)
         else:
             book = self._books.load(slug)
             universe = self._universes.load(book.universe_slug)
-            self._llm = create_llm_provider(self._settings, languages=book.languages)
+            self._set_llm(book.languages)
             self._stage("Buchidee")
 
         self._images = create_image_provider(self._settings)
         book = self._review_book(book)
-        ctx = self._context(book, universe)
 
         self._stage("Outline")
         if book.outline is None:
             with self._work("Outline wird erzeugt …"):
-                outline.run(ctx)
+                outline.run(self._context(book, universe))
         self._review_outline(book)
 
         self._stage("Story")
         if book.story is None:
             with self._work("Story wird geschrieben …"):
-                story.run(ctx)
+                story.run(self._context(book, universe))
         self._review_story(book)
 
         self._stage("Figurenbibel")
+        ctx = self._context(book, universe)
         if not bible.is_done(ctx):
             with self._work("Figurenbibel und Referenzbilder werden erzeugt …"):
                 bible.run(ctx)
         self._review_bible(ctx)
 
         with self._work("Seitentexte und Illustrationen werden erzeugt …"):
-            pages.run(ctx)
+            pages.run(self._context(book, universe))
         total = len(book.pages)
         for page in book.pages:
             if page.status != "approved":
@@ -216,6 +220,11 @@ class GuidedAssistant:
         if self._llm is None:
             raise KBError("LLM provider is not initialized")
         return self._llm
+
+    def _set_llm(self, languages: Sequence[str]) -> None:
+        """(Re)create the LLM provider — called on start and after a temperature change."""
+        self._languages = list(languages)
+        self._llm = create_llm_provider(self._settings, languages=self._languages)
 
     @property
     def images(self) -> ImageProvider:
@@ -561,7 +570,8 @@ class GuidedAssistant:
                 "[bold]Ablauf:[/bold]  " + "  →  ".join(_STAGES) + "\n"
                 "[dim]Nach jedem Schritt prüfst du das Ergebnis: freigeben, selbst ändern "
                 "oder vom LLM überarbeiten lassen. Jeder Stand wird sofort gespeichert — "
-                "Pausieren ist jederzeit verlustfrei möglich.[/dim]",
+                "Pausieren ist jederzeit verlustfrei möglich. Mit [/dim][bold]temp[/bold]"
+                "[dim] änderst du an jedem Menü die LLM-Kreativität.[/dim]",
                 title="[bold cyan]kb Assistent[/bold cyan]",
                 title_align="left",
                 border_style="cyan",
@@ -589,6 +599,8 @@ class GuidedAssistant:
                 table,
                 title="[bold]Was möchtest du tun?[/bold]",
                 title_align="left",
+                subtitle=f"[dim]Kreativität: {self._temperature_label()} — ändern mit 'temp'[/dim]",
+                subtitle_align="right",
                 border_style="cyan",
             )
         )
@@ -598,13 +610,52 @@ class GuidedAssistant:
                 lookup.setdefault(token.casefold(), action.key)
         while True:
             raw = cast(str, typer.prompt("Auswahl", default="1")).strip().casefold()
+            if raw in _TEMPERATURE_TOKENS:
+                self._change_temperature()
+                continue
             if raw in lookup:
                 return lookup[raw]
             options = ", ".join(
                 f"{index}/{action.key} = {action.label}"
                 for index, action in enumerate(actions, start=1)
             )
-            self._console.print(f"[red]Ungültige Eingabe.[/red] Möglich: {options}")
+            self._console.print(f"[red]Ungültige Eingabe.[/red] Möglich: {options} — oder 'temp'")
+
+    def _temperature_label(self) -> str:
+        value = self._settings.llm_temperature
+        return "Standard" if value is None else f"{value:.2f}"
+
+    def _change_temperature(self) -> None:
+        """Adjust LLM creativity mid-session; takes effect on the next LLM request."""
+        self._console.print(
+            "[dim]0.0 = fokussiert und reproduzierbar, 1.0 = maximal kreativ; "
+            "leer = Provider-Standard.[/dim]"
+        )
+        raw = cast(
+            str,
+            typer.prompt(
+                f"Neue Kreativität (aktuell: {self._temperature_label()})",
+                default="",
+                show_default=False,
+            ),
+        ).strip()
+        if raw:
+            try:
+                value: float | None = float(raw.replace(",", "."))
+            except ValueError:
+                self._console.print(f"[red]Keine Zahl:[/red] {raw!r} — Wert unverändert.")
+                return
+            if value is not None and not 0.0 <= value <= 1.0:
+                self._console.print(
+                    f"[red]Außerhalb von 0.0-1.0:[/red] {value} — Wert unverändert."
+                )
+                return
+        else:
+            value = None
+        self._settings = self._settings.model_copy(update={"llm_temperature": value})
+        if self._languages is not None:
+            self._set_llm(self._languages)
+        self._done(f"Kreativität: {self._temperature_label()} — gilt ab der nächsten LLM-Anfrage.")
 
     def _instruction(self, hint: str) -> str:
         self._console.print(f"[dim]{hint}[/dim]")

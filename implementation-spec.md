@@ -274,6 +274,8 @@ kb book list | status | show <slug>
 
 kb assistant [<slug>]  # guided creation/review; omit slug for a new universe/book
 kb run <slug> [--force] [--recreate-images] [--from-page N] [--pages 3,5,7-9] [--interactive]
+#   run/edit/assistant additionally accept --temperature X (0.0-1.0, overrides KB_LLM_TEMPERATURE;
+#   inside the assistant also adjustable live by typing 'temp' at any menu)
 kb edit <slug> --page N --text "make it shorter..."      # LLM rewrite, all languages
 kb edit <slug> --page N --text-en "..." --text-th "..."  # manual replacement
 kb edit <slug> --page N --image "make the child happier..."

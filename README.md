@@ -115,6 +115,8 @@ KB_IMAGE_MODEL=             # default gemini-3.1-flash-image; gemini-3-pro-image
 KB_LLM_TEMPERATURE=         # creativity 0.0-1.0 (focused ... varied); empty = provider default
 ```
 
+Creativity is also adjustable at runtime: per call via `--temperature` on `kb run`, `kb edit`, and `kb assistant`, and live inside the assistant by typing `temp` at any menu.
+
 Note on print resolution (§11.4): Gemini image models return ≈ 1024 px square by default → ≈ 120 DPI at full bleed (216 mm). Fine for proofs; for press-quality output select a higher-resolution model via `KB_IMAGE_MODEL`.
 
 Note on content safety: if Google's filter refuses a scene (dark/violent motifs), the run summary names the page and the fix — soften it with `kb edit <slug> --page N --image "symbolic and dreamlike, no gore"`; retrying alone never helps.

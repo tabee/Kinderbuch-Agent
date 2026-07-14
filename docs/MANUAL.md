@@ -31,7 +31,7 @@ contain the `Global/` and `Books/` folders.
 ## 3. `kb assistant` — guided creation and review
 
 ```bash
-kb assistant [<slug>]
+kb assistant [<slug>] [--temperature X]
 ```
 
 Without a slug, the assistant starts with an existing or new universe and then
@@ -52,6 +52,14 @@ configured LLM. Page reviews separately support manual or LLM-assisted text
 revision and image revision. Approving a page moves it to `approved`; only
 after every unfinished page has been reviewed does the assistant render the
 PDF.
+
+**LLM creativity is adjustable at any time.** Every action menu shows the
+current value in its footer; type `temp` (or `temperatur`) at the `Auswahl`
+prompt to change it mid-session — `0.0` = focused and reproducible, `1.0` =
+most varied, empty input = back to the provider default. The change takes
+effect on the next LLM request. Start with a specific value via
+`kb assistant --temperature 0.8` or set a lasting default with
+`KB_LLM_TEMPERATURE` (§10).
 
 Choose `q` at any review to pause. All completed work is already stored
 atomically; resume with the command printed by the assistant:
@@ -150,7 +158,7 @@ character/page counts).
 ## 6. `kb run` — the generation pipeline
 
 ```
-kb run <slug> [--force] [--recreate-images] [--from-page N] [--pages SPEC] [--interactive]
+kb run <slug> [--force] [--recreate-images] [--from-page N] [--pages SPEC] [--interactive] [--temperature X]
 ```
 
 Runs Steps 01–04: outline → story → character bible (one reference image per
@@ -167,6 +175,7 @@ twice in a row does nothing the second time.
 | `--from-page N` | Restrict page-level work to pages numbered ≥ N. |
 | `--pages SPEC` | Restrict to a page set. Grammar: comma-separated positive integers and inclusive ranges — `3`, `3,5`, `7-9`, `3,5,7-9`. Invalid specs are a usage error. |
 | `--interactive` | Ask for confirmation before each pipeline step; declining aborts (exit 1). |
+| `--temperature X` | LLM creativity for this run only (`0.0`–`1.0`); overrides `KB_LLM_TEMPERATURE`. |
 
 Page-selection flags combine by **intersection**: `--from-page 3 --pages 1-4`
 selects pages 3–4 only.
@@ -212,6 +221,7 @@ automatically, so a stale page can never stay `approved`.
 | `--image-prompt TEXT` | yes | **Replace** the page's image prompt entirely and regenerate. The escape hatch when the original scene keeps triggering the provider's safety filter even with a softening `--image` instruction. Mutually exclusive with `--image`. |
 | `--bible TEXT` | no | Revise the character bible per instruction. Reference images are kept for characters whose identity is unchanged; use `kb run --recreate-images` to redraw. |
 | `--approve-page N` | no | Mark a finished page as `approved` (allowed only from status `image_done`). Approved pages are protected from `kb run` unless `--force`. |
+| `--temperature X` | no | LLM creativity for this edit only (`0.0`–`1.0`); overrides `KB_LLM_TEMPERATURE`. |
 
 Operations can be combined in one call; they execute in the order: text
 rewrite, manual text, image, bible, approval.
