@@ -8,6 +8,7 @@ functionality not yet implemented in the current phase exits 1.
 from __future__ import annotations
 
 import re
+import sys
 from pathlib import Path
 from typing import Annotated
 
@@ -24,6 +25,7 @@ from kb.core.models import Book, Universe
 from kb.core.pagespec import parse_page_spec
 from kb.core.pipeline import Pipeline
 from kb.core.steps.context import RunOptions
+from kb.core.text import clean_text
 from kb.core.universe_manager import UniverseManager
 from kb.errors import KBError, NotFoundError
 from kb.image import create_image_provider
@@ -385,7 +387,13 @@ def assistant(
         ),
     ] = None,
 ) -> None:
-    """Guide creation from universe or book idea through reviews to the final PDF."""
+    """Guide creation from universe or book idea through reviews to the final PDF.
+
+    The current LLM creativity (temperature) is always visible: in the welcome
+    panel and in the footer of every action menu. Type 'temp' at any menu to
+    change it mid-session; --temperature sets the starting value, otherwise
+    KB_LLM_TEMPERATURE from the environment applies.
+    """
     from kb.assistant import AssistantAborted, GuidedAssistant
 
     try:
@@ -543,6 +551,10 @@ def open_book(slug: Annotated[str, typer.Argument()]) -> None:
 
 def main() -> None:
     """Console-script entry point; maps errors to exit codes (§8.3)."""
+    # Repair argv values that arrived through a mis-decoding terminal (e.g. a
+    # docker-exec TTY splitting UTF-8 umlauts) before they reach any UTF-8
+    # encoder — the same hygiene the assistant applies to interactive input.
+    sys.argv = [clean_text(arg) for arg in sys.argv]
     load_dotenv()
     try:
         setup_logging(Settings.from_env().log_level)

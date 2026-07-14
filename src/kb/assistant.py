@@ -22,6 +22,7 @@ from kb.core.models import Book, Outline, Story, StoryBeat, Universe
 from kb.core.steps import bible, outline, pages, story
 from kb.core.steps.context import RunOptions, RunResult, StepContext
 from kb.core.steps.schemas import BookConceptSpec
+from kb.core.text import clean_text
 from kb.core.universe_manager import UniverseManager
 from kb.core.views import write_bible_view
 from kb.errors import KBError
@@ -265,17 +266,17 @@ class GuidedAssistant:
             "[dim]Vorhandenen Slug wählen — oder einen neuen eingeben, "
             "um ein Universum anzulegen.[/dim]"
         )
-        slug = cast(str, typer.prompt("Universum-Slug (vorhanden oder neu)"))
+        slug = _text_prompt("Universum-Slug (vorhanden oder neu)")
         _validate_slug(slug)
         if self._universes.exists(slug):
             self._done(f"Universum [bold]{slug}[/bold] geladen.")
             return self._universes.load(slug)
 
         self._console.print(f"[bold]{slug}[/bold] ist neu — lege das Universum jetzt an.")
-        name = typer.prompt("Name", default=slug.replace("-", " ").title())
+        name = _text_prompt("Name", default=slug.replace("-", " ").title())
         languages = self._prompt_languages("en,th")
-        description = typer.prompt("Idee und Regeln des Universums")
-        style = typer.prompt("Illustrationsstil (gilt für jedes Bild)")
+        description = _text_prompt("Idee und Regeln des Universums")
+        style = _text_prompt("Illustrationsstil (gilt für jedes Bild)")
         universe = self._universes.create(
             slug=slug,
             name=name,
@@ -305,10 +306,10 @@ class GuidedAssistant:
                     )
                 self._done("Universum überarbeitet — bitte prüfen.")
             elif action == "m":
-                universe.name = typer.prompt("Name", default=universe.name)
-                universe.description = typer.prompt("Beschreibung", default=universe.description)
+                universe.name = _text_prompt("Name", default=universe.name)
+                universe.description = _text_prompt("Beschreibung", default=universe.description)
                 universe.languages = self._prompt_languages(",".join(universe.languages))
-                universe.style_guide = typer.prompt(
+                universe.style_guide = _text_prompt(
                     "Illustrationsstil", default=universe.style_guide
                 )
                 self._universes.save(universe)
@@ -318,13 +319,13 @@ class GuidedAssistant:
         self._console.print(
             "[dim]Der Slug wird Ordnername unter Books/ — kebab-case, z. B. 'ninos-berge'.[/dim]"
         )
-        slug = cast(str, typer.prompt("Buch-Slug"))
+        slug = _text_prompt("Buch-Slug")
         _validate_slug(slug)
         if self._books.exists(slug):
             raise KBError(f"book {slug!r} already exists; resume with `kb assistant {slug}`")
-        title = typer.prompt("Arbeitstitel", default=slug.replace("-", " ").title())
-        idea = typer.prompt("Buchidee (der wichtigste kreative Input)")
-        age = typer.prompt("Altersgruppe", default="4-6")
+        title = _text_prompt("Arbeitstitel", default=slug.replace("-", " ").title())
+        idea = _text_prompt("Buchidee (der wichtigste kreative Input)")
+        age = _text_prompt("Altersgruppe", default="4-6")
         spreads = self._prompt_spreads(5)
         book = self._books.create(
             slug,
@@ -356,9 +357,9 @@ class GuidedAssistant:
                 self._done("Buchidee überarbeitet — bitte prüfen.")
             elif action == "m":
                 concept = BookConceptSpec(
-                    title=typer.prompt("Titel", default=book.title),
-                    idea=typer.prompt("Idee", default=book.idea),
-                    age_group=typer.prompt("Altersgruppe", default=book.age_group),
+                    title=_text_prompt("Titel", default=book.title),
+                    idea=_text_prompt("Idee", default=book.idea),
+                    age_group=_text_prompt("Altersgruppe", default=book.age_group),
                     spreads=self._prompt_spreads(book.spreads),
                 )
                 book = editing.replace_book_concept(self._books, book, concept)
@@ -384,15 +385,15 @@ class GuidedAssistant:
             elif action == "m":
                 current = book.outline
                 synopses = [
-                    typer.prompt(f"Doppelseite {number}", default=synopsis)
+                    _text_prompt(f"Doppelseite {number}", default=synopsis)
                     for number, synopsis in enumerate(current.page_synopses, start=1)
                 ]
                 editing.replace_outline(
                     self._books,
                     book,
                     Outline(
-                        title=typer.prompt("Titel", default=current.title),
-                        premise=typer.prompt("Prämisse", default=current.premise),
+                        title=_text_prompt("Titel", default=current.title),
+                        premise=_text_prompt("Prämisse", default=current.premise),
                         page_synopses=synopses,
                     ),
                 )
@@ -418,7 +419,7 @@ class GuidedAssistant:
             elif action == "m":
                 beats = [
                     StoryBeat(
-                        narrative=typer.prompt(f"Doppelseite {number}", default=beat.narrative)
+                        narrative=_text_prompt(f"Doppelseite {number}", default=beat.narrative)
                     )
                     for number, beat in enumerate(book.story.beats, start=1)
                 ]
@@ -450,13 +451,13 @@ class GuidedAssistant:
             elif action == "m":
                 for character in book.characters:
                     self._console.print(f"\n[bold cyan]{character.name}[/bold cyan]")
-                    character.name = typer.prompt("Name", default=character.name)
-                    character.role = typer.prompt("Rolle", default=character.role)
-                    character.description = typer.prompt(
+                    character.name = _text_prompt("Name", default=character.name)
+                    character.role = _text_prompt("Rolle", default=character.role)
+                    character.description = _text_prompt(
                         "Beschreibung", default=character.description
                     )
                     character.visual_keywords = _parse_list(
-                        typer.prompt(
+                        _text_prompt(
                             "Sichtbare Merkmale (kommagetrennt)",
                             default=", ".join(character.visual_keywords),
                         )
@@ -482,7 +483,7 @@ class GuidedAssistant:
                     return
                 if action == "m":
                     texts = {
-                        lang: typer.prompt(f"Text {lang}", default=page.text.get(lang, ""))
+                        lang: _text_prompt(f"Text {lang}", default=page.text.get(lang, ""))
                         for lang in book.languages
                     }
                     editing.edit_text(self._books, book, number, texts)
@@ -568,10 +569,11 @@ class GuidedAssistant:
             Panel(
                 f"{mode}\n\n"
                 "[bold]Ablauf:[/bold]  " + "  →  ".join(_STAGES) + "\n"
-                "[dim]Nach jedem Schritt prüfst du das Ergebnis: freigeben, selbst ändern "
+                f"[bold]LLM-Kreativität:[/bold] {self._temperature_label()}"
+                "[dim] — ändern mit 'temp' an jedem Menü.\n"
+                "Nach jedem Schritt prüfst du das Ergebnis: freigeben, selbst ändern "
                 "oder vom LLM überarbeiten lassen. Jeder Stand wird sofort gespeichert — "
-                "Pausieren ist jederzeit verlustfrei möglich. Mit [/dim][bold]temp[/bold]"
-                "[dim] änderst du an jedem Menü die LLM-Kreativität.[/dim]",
+                "Pausieren ist jederzeit verlustfrei möglich.[/dim]",
                 title="[bold cyan]kb Assistent[/bold cyan]",
                 title_align="left",
                 border_style="cyan",
@@ -609,7 +611,7 @@ class GuidedAssistant:
             for token in (str(index), action.key, action.label.casefold(), *action.words):
                 lookup.setdefault(token.casefold(), action.key)
         while True:
-            raw = cast(str, typer.prompt("Auswahl", default="1")).strip().casefold()
+            raw = _text_prompt("Auswahl", default="1").strip().casefold()
             if raw in _TEMPERATURE_TOKENS:
                 self._change_temperature()
                 continue
@@ -659,7 +661,7 @@ class GuidedAssistant:
 
     def _instruction(self, hint: str) -> str:
         self._console.print(f"[dim]{hint}[/dim]")
-        return cast(str, typer.prompt("Deine Anweisung"))
+        return _text_prompt("Deine Anweisung")
 
     def _work(self, message: str) -> Status:
         return self._console.status(f"[cyan]{message}[/cyan]", spinner="dots")
@@ -669,7 +671,7 @@ class GuidedAssistant:
 
     def _prompt_languages(self, default: str) -> list[str]:
         while True:
-            raw = cast(str, typer.prompt("Sprachen (ISO 639-1, kommagetrennt)", default=default))
+            raw = _text_prompt("Sprachen (ISO 639-1, kommagetrennt)", default=default)
             languages = _parse_list(raw)
             if languages and all(re.fullmatch(r"[a-z]{2}", code) for code in languages):
                 return languages
@@ -768,6 +770,13 @@ class GuidedAssistant:
             f"[dim]· Status:[/dim] [{status_style}]{page.status}[/{status_style}]",
             rows,
         )
+
+
+def _text_prompt(label: str, default: str | None = None) -> str:
+    """Free-text prompt whose result is safe for UTF-8 encoders (see clean_text)."""
+    if default is None:
+        return clean_text(cast(str, typer.prompt(label)))
+    return clean_text(cast(str, typer.prompt(label, default=default)))
 
 
 def _parse_list(value: str) -> list[str]:

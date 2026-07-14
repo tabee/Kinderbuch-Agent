@@ -141,6 +141,29 @@ def test_run_temperature_flag_out_of_range_is_usage_error(
     assert result.exit_code == 2
 
 
+def test_clean_text_repairs_mis_decoded_terminal_input() -> None:
+    """docker-exec TTYs split UTF-8 chars; surrogates must never reach encoders."""
+    from kb.core.text import clean_text
+
+    assert clean_text("über und ähnlich") == "über und ähnlich"  # clean stays untouched
+    assert clean_text("\udcc3\udcbcber") == "über"  # mis-split umlaut restored
+    repaired = clean_text("nicht vorkommen, \udcc3aber weiter")  # the production crash input
+    repaired.encode("utf-8")  # must be strictly encodable again
+    assert "aber weiter" in repaired
+
+
+def test_text_prompt_sanitizes_interactive_input(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Every assistant free-text prompt yields UTF-8-safe strings."""
+    from kb import assistant as assistant_module
+
+    monkeypatch.setattr(
+        assistant_module.typer, "prompt", lambda *args, **kwargs: "kaputt \udcc3 weiter"
+    )
+    value = assistant_module._text_prompt("Deine Anweisung")
+    value.encode("utf-8")  # exactly what UnicodeEncodeError'd in production
+    assert "weiter" in value
+
+
 def test_outline_revision_removes_stale_downstream_artifacts(workspace: Path) -> None:
     runner.invoke(app, ["book", "new", "demo", "--universe", "swiss-thai-myths"])
     manager = BookManager(workspace / "Books")
