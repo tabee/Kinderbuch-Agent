@@ -1,0 +1,20 @@
+number: 5
+text:
+  de: Die Autos und Fahrräder sausen vorbei—die Straße ist sicher! Thomas strahlt
+    über das ganze Gesicht. Er hat allen geholfen! Was für ein wundervoller Tag in
+    Mühleberg!
+  en: The cars and bikes zoom through—the road is safe! Thomas beams with a big, proud
+    smile. He helped everyone. What a wonderful day in Mühleberg!
+image_prompt: A sunny afternoon scene on a tree-lined country road in Mühleberg. Thomas,
+  a young child, stands to the side of the road with arms raised in joy and a beaming
+  smile, bathed in warm golden sunlight. Behind him, vehicles (colorful cars and bicycles)
+  move smoothly and safely along the now-clear road, passing by without obstacles.
+  The branch that once blocked the way is gone. Dappled shadows from trees create
+  a peaceful, celebratory atmosphere. The sky is bright and clear, and the whole scene
+  radiates warmth, accomplishment, and community safety.
+image_path: images/page-005.png
+characters_present:
+- thomas
+character_positions:
+  thomas: standing joyfully at the roadside, center-right, with arms raised in celebration
+status: approved

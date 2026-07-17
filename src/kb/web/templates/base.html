@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}kb{% endblock %}</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, sans-serif; max-width: 68rem; margin: 2rem auto; padding: 0 1rem 4rem; line-height: 1.5; color: #1a1a1a; }
+  a { color: #0b5fff; }
+  h1 { font-size: 1.5rem; margin: 0 0 1rem; }
+  h2 { font-size: 1.1rem; margin: 0; }
+  h3 { font-size: 1rem; margin: 0 0 0.4rem; }
+  nav { margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; border-bottom: 1px solid #e5e5e5; padding-bottom: 1rem; }
+  nav .brand { font-weight: 700; text-decoration: none; font-size: 1.1rem; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 1rem; }
+  th, td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid #e5e5e5; }
+  .card { border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+  details.stage { border: 1px solid #ddd; border-radius: 8px; margin-bottom: 0.75rem; }
+  details.stage[open] { border-color: #0b5fff; }
+  details.stage > summary { cursor: pointer; padding: 0.75rem 1rem; font-weight: 600; display: flex; gap: 0.6rem; align-items: center; list-style: none; }
+  details.stage > summary::-webkit-details-marker { display: none; }
+  details.stage > .body { padding: 0 1.25rem 1.25rem; }
+  details:not(.stage) > summary { cursor: pointer; color: #0b5fff; font-size: 0.9rem; margin: 0.6rem 0; }
+  .badge { font-size: 0.75rem; font-weight: 600; padding: 0.1rem 0.55rem; border-radius: 999px; }
+  .badge.done { background: #dcf5e2; color: #146c2e; }
+  .badge.pending { background: #eee; color: #555; }
+  fieldset { border: 1px solid #e5e5e5; border-radius: 6px; margin-bottom: 0.75rem; padding: 0.75rem 1rem; }
+  legend { font-weight: 600; padding: 0 0.4rem; }
+  label { display: block; font-weight: 600; margin: 0.6rem 0 0.2rem; font-size: 0.85rem; }
+  input[type=text], input[type=number], textarea, select { width: 100%; padding: 0.4rem 0.5rem; font: inherit; border: 1px solid #ccc; border-radius: 4px; }
+  textarea { min-height: 4rem; resize: vertical; }
+  button { cursor: pointer; padding: 0.45rem 1rem; border-radius: 6px; border: 1px solid #0b5fff; background: #0b5fff; color: white; font: inherit; }
+  button.secondary { background: white; color: #0b5fff; }
+  .actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.6rem; }
+  .btn { display: inline-block; padding: 0.45rem 1rem; border-radius: 6px; background: #0b5fff; color: white; text-decoration: none; }
+  .flash { padding: 0.6rem 1rem; border-radius: 6px; margin-bottom: 1rem; }
+  .flash.ok { background: #dcf5e2; color: #146c2e; }
+  .flash.err { background: #fde3e3; color: #941a1a; }
+  .banner { padding: 0.6rem 1rem; border-radius: 6px; margin-bottom: 1rem; background: #fff2cc; color: #8a6100; }
+  .page-card { display: grid; grid-template-columns: 10rem 1fr; gap: 1rem; }
+  .page-card img { width: 100%; border-radius: 4px; border: 1px solid #ddd; display: block; }
+  .lang-text { font-size: 0.9rem; margin: 0.2rem 0; }
+  .muted { color: #777; font-size: 0.9rem; }
+  form.inline { display: inline-block; }
+  .temp-form { display: flex; gap: 0.4rem; align-items: center; font-size: 0.85rem; }
+  .temp-form label { margin: 0; white-space: nowrap; }
+  .temp-form input { width: 5rem; }
+</style>
+</head>
+<body>
+<nav>
+  <div><a class="brand" href="/">kb</a> {% block crumb %}{% endblock %}</div>
+  <form class="temp-form" method="post" action="/settings/temperature">
+    <label>Kreativität</label>
+    <input type="text" name="temperature" value="{{ '%.2f'|format(temperature) if temperature is not none else '' }}" placeholder="Standard">
+    <input type="hidden" name="next_url" value="{{ path }}">
+    <button type="submit" class="secondary">setzen</button>
+  </form>
+</nav>
+{% if ok %}<div class="flash ok">&check; {{ ok }}</div>{% endif %}
+{% if err %}<div class="flash err">&#9888; {{ err }}</div>{% endif %}
+{% block content %}{% endblock %}
+</body>
+</html>

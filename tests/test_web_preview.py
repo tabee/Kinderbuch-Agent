@@ -1,4 +1,4 @@
-"""Web preview tests (spec §12) — offline, read-only."""
+"""Web preview tests (spec §12) — read/serve behavior of the web editor."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ def client(workspace: Path, monkeypatch: pytest.MonkeyPatch) -> TestClient:
     created = runner.invoke(cli_app, ["book", "new", "demo", "--universe", "swiss-thai-myths"])
     assert created.exit_code == 0
     assert runner.invoke(cli_app, ["run", "demo"]).exit_code == 0
-    return TestClient(create_app(workspace / "Books"))
+    return TestClient(create_app(workspace))
 
 
 def test_index_lists_books(client: TestClient) -> None:
@@ -33,7 +33,7 @@ def test_index_lists_books(client: TestClient) -> None:
 def test_book_view_shows_pages_and_both_languages(client: TestClient) -> None:
     response = client.get("/books/demo")
     assert response.status_code == 200
-    assert "Page 1" in response.text
+    assert "Seite 1" in response.text
     assert 'lang="th"' in response.text
 
 

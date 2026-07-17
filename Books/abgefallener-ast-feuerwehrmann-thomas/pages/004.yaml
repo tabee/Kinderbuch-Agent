@@ -1,0 +1,21 @@
+number: 4
+text:
+  de: Schieb, schieb, schieb! Thomas arbeitet fleißig und verschiebt das große Ast
+    Stück für Stück. Seine starken Arme und sein mutiges Herz helfen, die Straße wieder
+    frei zu machen. Gute Arbeit, Thomas!
+  en: Push, push, push! Thomas works hard, moving the big branch piece by piece. His
+    strong arms and brave heart help the road become clear again. Good job, Thomas!
+image_prompt: A cheerful scene of Thomas the tank engine or train character in warm
+  daylight, actively pushing against a large fallen branch on a sunny country road.
+  Thomas is shown mid-effort, with determination on his face, his body angled forward
+  as he pushes against the wooden branch. The branch is being moved piece by piece,
+  with some sections already cleared to the side of the road. The setting shows a
+  clear blue sky, green grass beside the road, and dappled sunlight. The road stretches
+  ahead, becoming clearer as Thomas works. The mood is hopeful and encouraging, showing
+  Thomas as capable and strong despite the challenge.
+image_path: images/page-004.png
+characters_present:
+- thomas
+character_positions:
+  thomas: centre, actively pushing against the branch with determined effort
+status: approved

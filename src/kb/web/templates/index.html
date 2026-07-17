@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}kb — Bücher{% endblock %}
+{% block content %}
+<h1>Bücher</h1>
+{% if books %}
+<table>
+<tr><th>Buch</th><th>Universum</th><th>Fortschritt</th><th></th></tr>
+{% for b in books %}
+<tr>
+  <td><a href="/books/{{ b.slug }}">{{ b.title }}</a> <span class="muted">({{ b.slug }})</span></td>
+  <td>{{ b.universe_slug }}</td>
+  <td><span class="badge {{ 'done' if b.done else 'pending' }}">{{ b.stage_label }}</span></td>
+  <td><a href="/books/{{ b.slug }}">öffnen &rarr;</a></td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+<p class="muted">Noch keine Bücher.</p>
+{% endif %}
+<p><a class="btn" href="/books/new">+ Neues Buch</a></p>
+
+<h1>Universen</h1>
+{% if universes %}
+<table>
+<tr><th>Slug</th><th>Name</th><th>Sprachen</th><th></th></tr>
+{% for u in universes %}
+<tr>
+  <td>{{ u.slug }}</td><td>{{ u.name }}</td><td>{{ u.languages|join(', ') }}</td>
+  <td><a href="/universes/{{ u.slug }}">bearbeiten &rarr;</a></td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+<p class="muted">Noch keine Universen.</p>
+{% endif %}
+<p><a class="btn" href="/universes/new">+ Neues Universum</a></p>
+{% endblock %}

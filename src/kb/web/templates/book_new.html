@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Neues Buch{% endblock %}
+{% block crumb %}<span class="muted">/ Neues Buch</span>{% endblock %}
+{% block content %}
+<h1>Neues Buch</h1>
+{% if not universes %}
+<p class="muted">Zuerst ein <a href="/universes/new">Universum anlegen</a>.</p>
+{% else %}
+<div class="card">
+<form method="post" action="/books/new">
+  <label>Slug (kebab-case, wird der Ordnername unter Books/)</label>
+  <input type="text" name="slug" required pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="ninos-berge">
+  <label>Universum</label>
+  <select name="universe_slug" required>
+    {% for u in universes %}<option value="{{ u.slug }}">{{ u.name }} ({{ u.slug }})</option>{% endfor %}
+  </select>
+  <label>Arbeitstitel</label><input type="text" name="title" placeholder="wird sonst von der Outline übernommen">
+  <label>Buchidee (der wichtigste kreative Input)</label><textarea name="idea"></textarea>
+  <label>Altersgruppe</label><input type="text" name="age_group" value="4-6">
+  <label>Doppelseiten</label><input type="number" name="spreads" value="5" min="1" max="30">
+  <div class="actions"><button type="submit">Anlegen</button></div>
+</form>
+</div>
+{% endif %}
+{% endblock %}

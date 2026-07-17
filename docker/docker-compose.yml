@@ -13,8 +13,11 @@ services:
       - path: ../.env
         required: false # secrets via env only (HC-5.3); optional for mock-only use
     ports:
-      - "8000:8000" # `kb serve --host 0.0.0.0` web preview reachable on the host
+      - "8000:8000" # kb editor (kb serve --host 0.0.0.0), reachable on the host
     volumes:
       - ../Books:/app/Books # book state appears immediately on the host (spec §12)
       - ../Global:/app/Global
     init: true
+    # Autostart the web editor; `docker compose exec app kb ...` still works for
+    # one-off CLI commands independently of this foreground process (spec §12).
+    command: ["kb", "serve", "--host", "0.0.0.0"]

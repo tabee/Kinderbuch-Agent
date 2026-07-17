@@ -25,6 +25,7 @@ COPY pyproject.toml README.md ./
 COPY src ./src
 RUN pip install .
 
-# Books/ and Global/ are bind-mounted at runtime (docker-compose.yml).
-# The container idles; developers exec into it: docker compose exec app kb ...
+# Books/ and Global/ are bind-mounted at runtime (docker-compose.yml), which also
+# overrides this CMD to autostart the web editor (`kb serve --host 0.0.0.0`).
+# Developers run one-off commands via: docker compose exec app kb ...
 CMD ["sleep", "infinity"]

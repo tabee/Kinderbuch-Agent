@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+{% block title %}{{ book.title }}{% endblock %}
+{% block crumb %}<span class="muted">/ {{ book.title }}</span>{% endblock %}
+{% block content %}
+<h1>{{ book.title }} <span class="muted">({{ book.slug }})</span></h1>
+
+{% if job and job.slug == book.slug %}
+  {% if not job.done %}
+    <div class="banner">&#8987; {{ job.description }} …</div>
+    <meta http-equiv="refresh" content="1">
+  {% elif job.error %}
+    <div class="flash err">&#9888; {{ job.error }}</div>
+  {% else %}
+    <div class="flash ok">&check; Fertig.</div>
+  {% endif %}
+{% endif %}
+
+{% if current_stage != 'pdf' %}
+<form method="post" action="/books/{{ book.slug }}/generate">
+  <div class="actions"><button type="submit">Weiter: {{ stage_action_label }}</button></div>
+</form>
+{% endif %}
+
+<details class="stage">
+  <summary><span class="badge done">&check;</span> Universum</summary>
+  <div class="body">
+    <p><strong>{{ universe.name }}</strong> <span class="muted">({{ universe.slug }})</span> —
+      Sprachen: {{ universe.languages|join(', ') }}</p>
+    <p class="muted">{{ universe.description }}</p>
+    <p><a href="/universes/{{ universe.slug }}">Universum bearbeiten &rarr;</a></p>
+  </div>
+</details>
+
+<details class="stage" {% if current_stage == 'concept' %}open{% endif %}>
+  <summary><span class="badge done">&check;</span> Buchidee</summary>
+  <div class="body">
+    <form method="post" action="/books/{{ book.slug }}/concept/edit"
+          onsubmit="return confirm('Änderungen an der Buchidee löschen Outline, Story, Bibel und Seiten. Fortfahren?');">
+      <label>Titel</label><input type="text" name="title" value="{{ book.title }}">
+      <label>Idee</label><textarea name="idea">{{ book.idea }}</textarea>
+      <label>Altersgruppe</label><input type="text" name="age_group" value="{{ book.age_group }}">
+      <label>Doppelseiten</label><input type="number" name="spreads" value="{{ book.spreads }}" min="1" max="30">
+      <div class="actions"><button type="submit">Speichern</button></div>
+    </form>
+    <form method="post" action="/books/{{ book.slug }}/concept/revise"
+          onsubmit="return confirm('Die LLM-Überarbeitung löscht Outline, Story, Bibel und Seiten. Fortfahren?');">
+      <label>Vom LLM überarbeiten lassen</label>
+      <textarea name="instruction" placeholder="z. B. 'mach den Helden mutiger'" required></textarea>
+      <div class="actions"><button type="submit" class="secondary">Überarbeiten</button></div>
+    </form>
+  </div>
+</details>
+
+<details class="stage" {% if current_stage == 'outline' %}open{% endif %}>
+  <summary>
+    <span class="badge {{ 'done' if book.outline else 'pending' }}">{{ '✓' if book.outline else '…' }}</span>
+    Outline
+  </summary>
+  <div class="body">
+    {% if book.outline %}
+      <form method="post" action="/books/{{ book.slug }}/outline/edit"
+            onsubmit="return confirm('Änderungen an der Outline löschen Story, Bibel und Seiten. Fortfahren?');">
+        <label>Titel</label><input type="text" name="title" value="{{ book.outline.title }}">
+        <label>Prämisse</label><textarea name="premise">{{ book.outline.premise }}</textarea>
+        {% for synopsis in book.outline.page_synopses %}
+        <label>Doppelseite {{ loop.index }}</label>
+        <textarea name="synopsis_{{ loop.index }}">{{ synopsis }}</textarea>
+        {% endfor %}
+        <div class="actions"><button type="submit">Speichern</button></div>
+      </form>
+      <form method="post" action="/books/{{ book.slug }}/outline/revise"
+            onsubmit="return confirm('Die LLM-Überarbeitung löscht Story, Bibel und Seiten. Fortfahren?');">
+        <label>Vom LLM überarbeiten lassen</label>
+        <textarea name="instruction" placeholder="z. B. 'mehr Spannung ab Seite 3'" required></textarea>
+        <div class="actions"><button type="submit" class="secondary">Überarbeiten</button></div>
+      </form>
+    {% else %}
+      <p class="muted">Noch nicht erzeugt.</p>
+    {% endif %}
+  </div>
+</details>
+
+<details class="stage" {% if current_stage == 'story' %}open{% endif %}>
+  <summary>
+    <span class="badge {{ 'done' if book.story else 'pending' }}">{{ '✓' if book.story else '…' }}</span>
+    Story
+  </summary>
+  <div class="body">
+    {% if book.story %}
+      <form method="post" action="/books/{{ book.slug }}/story/edit"
+            onsubmit="return confirm('Änderungen an der Story löschen Bibel und Seiten. Fortfahren?');">
+        {% for beat in book.story.beats %}
+        <label>Doppelseite {{ loop.index }}</label>
+        <textarea name="beat_{{ loop.index }}">{{ beat.narrative }}</textarea>
+        {% endfor %}
+        <div class="actions"><button type="submit">Speichern</button></div>
+      </form>
+      <form method="post" action="/books/{{ book.slug }}/story/revise"
+            onsubmit="return confirm('Die LLM-Überarbeitung löscht Bibel und Seiten. Fortfahren?');">
+        <label>Vom LLM überarbeiten lassen</label>
+        <textarea name="instruction" placeholder="z. B. 'kürzere Sätze' oder 'mehr Dialog'" required></textarea>
+        <div class="actions"><button type="submit" class="secondary">Überarbeiten</button></div>
+      </form>
+    {% else %}
+      <p class="muted">Noch nicht erzeugt.</p>
+    {% endif %}
+  </div>
+</details>
+
+<details class="stage" {% if current_stage == 'bible' %}open{% endif %}>
+  <summary>
+    <span class="badge {{ 'done' if book.characters else 'pending' }}">{{ '✓' if book.characters else '…' }}</span>
+    Figurenbibel
+  </summary>
+  <div class="body">
+    {% if book.characters %}
+    <form method="post" action="/books/{{ book.slug }}/bible/edit">
+      {% for c in book.characters %}
+      <fieldset>
+        <legend>{{ c.name }}</legend>
+        <div class="page-card" style="grid-template-columns: 8rem 1fr;">
+          <div>
+            {% if c.primary_reference %}
+              <img src="/books/{{ book.slug }}/files/{{ c.primary_reference.as_posix() }}" alt="{{ c.name }}">
+            {% endif %}
+          </div>
+          <div>
+            <label>Name</label><input type="text" name="name_{{ loop.index }}" value="{{ c.name }}">
+            <label>Rolle</label><input type="text" name="role_{{ loop.index }}" value="{{ c.role }}">
+            <label>Beschreibung</label><textarea name="description_{{ loop.index }}">{{ c.description }}</textarea>
+            <label>Sichtbare Merkmale (kommagetrennt)</label>
+            <input type="text" name="keywords_{{ loop.index }}" value="{{ c.visual_keywords|join(', ') }}">
+          </div>
+        </div>
+      </fieldset>
+      {% endfor %}
+      <div class="actions"><button type="submit">Speichern (zeichnet Referenzen neu)</button></div>
+    </form>
+
+    <form method="post" action="/books/{{ book.slug }}/bible/revise">
+      <label>Vom LLM überarbeiten lassen</label>
+      <textarea name="instruction" placeholder="z. B. 'gib der Naga einen roten Schal'" required></textarea>
+      <div class="actions"><button type="submit" class="secondary">Überarbeiten</button></div>
+    </form>
+
+    <form method="post" action="/books/{{ book.slug }}/bible/references">
+      <div class="actions"><button type="submit" class="secondary">Nur Referenzbilder neu zeichnen</button></div>
+    </form>
+    {% else %}
+      <p class="muted">Noch nicht erzeugt.</p>
+    {% endif %}
+  </div>
+</details>
+
+<details class="stage" {% if current_stage == 'pages' %}open{% endif %}>
+  <summary>
+    <span class="badge {{ 'done' if current_stage in ('pdf',) else 'pending' }}">
+      {{ '✓' if current_stage == 'pdf' else '…' }}</span>
+    Seiten
+    {% if book.pages %}<span class="muted">
+      ({{ book.pages|selectattr('status', 'equalto', 'approved')|list|length }}/{{ book.pages|length }} freigegeben)</span>
+    {% endif %}
+  </summary>
+  <div class="body">
+    {% if book.pages %}
+      {% for page in book.pages %}
+      <div class="card page-card">
+        <div>
+          {% if page.image_path %}
+            <img src="/books/{{ book.slug }}/files/{{ page.image_path.as_posix() }}" alt="Seite {{ page.number }}">
+          {% else %}
+            <p class="muted">Noch kein Bild.</p>
+          {% endif %}
+        </div>
+        <div>
+          <h3>Seite {{ page.number }} <span class="badge {{ 'done' if page.status == 'approved' else 'pending' }}">{{ page.status }}</span></h3>
+          {% for lang in book.languages %}
+            <p class="lang-text" lang="{{ lang }}"><strong>{{ lang }}:</strong> {{ page.text.get(lang, '—') }}</p>
+          {% endfor %}
+          {% if page.image_prompt %}<p class="muted">Bildprompt: {{ page.image_prompt }}</p>{% endif %}
+
+          <form class="inline" method="post" action="/books/{{ book.slug }}/pages/{{ page.number }}/approve">
+            <div class="actions"><button type="submit">Seite freigeben</button></div>
+          </form>
+
+          <details>
+            <summary>Text manuell ersetzen</summary>
+            <form method="post" action="/books/{{ book.slug }}/pages/{{ page.number }}/text">
+              {% for lang in book.languages %}
+              <label>Text {{ lang }}</label><textarea name="text_{{ lang }}">{{ page.text.get(lang, '') }}</textarea>
+              {% endfor %}
+              <div class="actions"><button type="submit">Speichern</button></div>
+            </form>
+          </details>
+
+          <details>
+            <summary>Text vom LLM umschreiben</summary>
+            <form method="post" action="/books/{{ book.slug }}/pages/{{ page.number }}/rewrite">
+              <textarea name="instruction" placeholder="z. B. 'kürzer und lustiger'" required></textarea>
+              <div class="actions"><button type="submit" class="secondary">Umschreiben</button></div>
+            </form>
+          </details>
+
+          <details>
+            <summary>Bild anpassen</summary>
+            <form method="post" action="/books/{{ book.slug }}/pages/{{ page.number }}/image">
+              <textarea name="instruction" placeholder="z. B. 'mehr Schnee, warmes Abendlicht' — wird an den Prompt angehängt" required></textarea>
+              <div class="actions"><button type="submit" class="secondary">Bild neu erzeugen</button></div>
+            </form>
+          </details>
+
+          <details>
+            <summary>Bildprompt neu schreiben (Ausweg bei Safety-Refusals)</summary>
+            <form method="post" action="/books/{{ book.slug }}/pages/{{ page.number }}/image-prompt">
+              <textarea name="instruction" placeholder="z. B. 'ruhigere Szene am Seeufer, kein Sturm' — ersetzt den Prompt" required></textarea>
+              <div class="actions"><button type="submit" class="secondary">Prompt ersetzen</button></div>
+            </form>
+          </details>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p class="muted">Noch nicht erzeugt.</p>
+    {% endif %}
+  </div>
+</details>
+
+<details class="stage" {% if current_stage == 'pdf' %}open{% endif %}>
+  <summary><span class="badge {{ 'done' if pdf_exists else 'pending' }}">{{ '✓' if pdf_exists else '…' }}</span> PDF</summary>
+  <div class="body">
+    {% if pdf_exists %}
+      <iframe src="/books/{{ book.slug }}/files/build/{{ book.slug }}.pdf"
+              style="width:100%;height:32rem;border:1px solid #ddd;border-radius:6px;"></iframe>
+      <p><a class="btn" href="/books/{{ book.slug }}/files/build/{{ book.slug }}.pdf" download>PDF herunterladen</a></p>
+    {% else %}
+      <p class="muted">Noch nicht gerendert. Voraussetzung: jede Seite hat ein Bild.</p>
+    {% endif %}
+    <form method="post" action="/books/{{ book.slug }}/pdf">
+      <div class="actions"><button type="submit">PDF {{ 'neu rendern' if pdf_exists else 'rendern' }}</button></div>
+    </form>
+  </div>
+</details>
+{% endblock %}

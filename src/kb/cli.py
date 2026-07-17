@@ -24,6 +24,7 @@ from kb.core.book_manager import BookManager
 from kb.core.models import Book, Universe
 from kb.core.pagespec import parse_page_spec
 from kb.core.pipeline import Pipeline
+from kb.core.slug import validate_slug
 from kb.core.steps.context import RunOptions
 from kb.core.text import clean_text
 from kb.core.universe_manager import UniverseManager
@@ -44,7 +45,6 @@ app.add_typer(book_app, name="book")
 
 console = Console()
 
-_SLUG_RE = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
 _LANG_RE = re.compile(r"[a-z]{2}")
 
 
@@ -52,9 +52,10 @@ _LANG_RE = re.compile(r"[a-z]{2}")
 
 
 def _validate_slug(slug: str) -> str:
-    if not _SLUG_RE.fullmatch(slug):
-        raise typer.BadParameter(f"slug must be kebab-case ([a-z0-9-]), got {slug!r}")
-    return slug
+    try:
+        return validate_slug(slug)
+    except KBError as exc:
+        raise typer.BadParameter(str(exc)) from exc
 
 
 def _parse_langs(langs: str) -> list[str]:
@@ -521,18 +522,34 @@ def serve(
     port: Annotated[
         int, typer.Option("--port", min=1, max=65535, help="Port to listen on.")
     ] = 8000,
+    temperature: Annotated[
+        float | None,
+        typer.Option(
+            "--temperature",
+            min=0.0,
+            max=1.0,
+            help="Initial LLM creativity (0.0-1.0); adjustable any time in the web UI.",
+        ),
+    ] = None,
 ) -> None:
-    """Start the local web preview (editor aid only).
+    """Start the web editor — full parity with `kb assistant`, plus free navigation
+    between stages and books already created.
 
     Inside Docker, run ``kb serve --host 0.0.0.0`` and publish the port so the
-    host browser can reach it (see docker-compose.yml ``ports``).
+    host browser can reach it (see docker-compose.yml ``ports``); this is also
+    the container's default startup command.
     """
     import uvicorn
 
     from kb.web.app import create_app
 
-    console.print(f"Serving preview on [bold]http://{host}:{port}[/bold] (Ctrl+C to stop).")
-    uvicorn.run(create_app(Path.cwd() / "Books"), host=host, port=port, log_level="warning")
+    console.print(f"Serving kb editor on [bold]http://{host}:{port}[/bold] (Ctrl+C to stop).")
+    uvicorn.run(
+        create_app(Path.cwd(), _load_settings(temperature)),
+        host=host,
+        port=port,
+        log_level="warning",
+    )
 
 
 @app.command("open")

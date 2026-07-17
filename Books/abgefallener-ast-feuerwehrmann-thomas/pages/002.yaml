@@ -1,0 +1,22 @@
+number: 2
+text:
+  de: Oh nein! Ein großer Ast liegt quer auf der Straße. Thomas schaut ihn sich genau
+    an. Autos und Fahrräder können nicht durchfahren. Aber Thomas weiß genau, was
+    zu tun ist!
+  en: Oh no! A big branch is lying right across the road. Thomas looks at it carefully.
+    Cars and bicycles cannot get through. But Thomas knows just what to do!
+image_prompt: A bright, sunny day on a country road. A large fallen branch stretches
+  across the asphalt, casting a gentle shadow. Thomas, a helpful character with a
+  determined but cheerful expression, stands at the edge of the road studying the
+  branch thoughtfully, one hand on his chin in contemplation. The road stretches ahead
+  and behind, with green fields and trees visible in the soft, natural daylight. The
+  mood is hopeful and warm, conveying that Thomas is about to solve this problem.
+  The branch blocks the path clearly, but there's no sense of danger—just a puzzle
+  waiting to be solved.
+image_path: images/page-002.png
+characters_present:
+- thomas
+character_positions:
+  thomas: standing beside the road, studying the branch thoughtfully with hand on
+    chin
+status: approved

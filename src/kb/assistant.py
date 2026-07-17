@@ -19,6 +19,7 @@ from kb.config import Settings
 from kb.core import editing
 from kb.core.book_manager import BookManager
 from kb.core.models import Book, Outline, Story, StoryBeat, Universe
+from kb.core.slug import validate_slug
 from kb.core.steps import bible, outline, pages, story
 from kb.core.steps.context import RunOptions, RunResult, StepContext
 from kb.core.steps.schemas import BookConceptSpec
@@ -784,5 +785,7 @@ def _parse_list(value: str) -> list[str]:
 
 
 def _validate_slug(value: str) -> None:
-    if re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", value) is None:
-        raise typer.BadParameter(f"Slug muss kebab-case sein, erhalten: {value!r}")
+    try:
+        validate_slug(value)
+    except KBError as exc:
+        raise typer.BadParameter(str(exc)) from exc

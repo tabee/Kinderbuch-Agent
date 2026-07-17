@@ -1,0 +1,64 @@
+schema_version: 1
+slug: abgefallener-ast-feuerwehrmann-thomas
+title: Thomas Clears the Branch
+universe_slug: feuerwehrmann-thomas
+languages:
+- de
+- en
+age_group: 3-5
+spreads: 5
+idea: Thomas wakes up at 4 o'clock in the morning when his alarm rings. He must hurry
+  to remove a fallen branch from the road so cars can drive through safely. Thomas
+  sets up a barrier to warn people, but some cyclists don't stop and ride past it
+  anyway. Thomas tells them they must wait until the branch is cleared from the road.
+outline:
+  title: Thomas Clears the Branch
+  premise: Thomas, an dedicated firefighter in Mühleberg, wakes early when his alarm
+    rings at 4 o'clock in the morning. A large branch blocks the road and endangers
+    traffic safety. Thomas immediately sets out to solve the problem and protect the
+    people in his village.
+  page_synopses:
+  - Outside it is still dark and the moon is shining when Thomas' alarm clock rings
+    at 4 o'clock in the morning. He jumps quickly out of bed, puts on his firefighter
+    gear and makes his way to the street in Mühleberg.
+  - 'Thomas arrives at the street and sees the large, fallen branch that blocks the
+    entire road. He knows that cars and bicycles cannot pass through. Thomas immediately
+    begins his plan: First, he sets up a warning barrier.'
+  - Thomas places his red warning barriers and lights to warn people that the road
+    is not passable. The barrier gleams in the early morning sun and is clearly visible.
+  - 'Some cyclists come along the street and see the warning barrier, but they think
+    it doesn''t apply to them and begin to ride around it. Thomas quickly calls out
+    to them: ''Wait! You must wait – I cannot clear the branch safely if you ride
+    around it!'''
+  - With all his strength and endurance, Thomas clears the large branch piece by piece
+    from the road. Finally the road is clear and safe. Cars and cyclists can now pass
+    safely, and Thomas can proudly begin his day.
+story:
+  beats:
+  - narrative: Ring-ring-ring! Thomas' alarm goes off early in the morning. He jumps
+      out of bed and puts on his bright red firefighter coat and hat. Time to help
+      the village of Mühleberg!
+  - narrative: Oh no! A big branch is lying across the road. Thomas looks at it carefully.
+      Cars and bicycles cannot get through. But Thomas knows just what to do!
+  - narrative: Thomas sets up his bright warning signs on the road. Their lights go
+      gleam, gleam, gleam! Everyone can see them from far away. The road is safe and
+      marked.
+  - narrative: Thomas gets to work! Push, push, push! He moves the big branch, piece
+      by piece. His arms are strong and his heart is brave. Soon the road is clear
+      again!
+  - narrative: The cars and bicycles zoom through—the road is safe! Thomas smiles
+      big and proud. He helped everyone. What a wonderful day in Mühleberg!
+characters:
+- slug: thomas
+  name: Thomas
+  role: Brave firefighter protagonist
+  description: A dedicated firefighter who wakes early to help the village of Mühleberg.
+    Thomas is strong, capable, and quick to respond to emergencies. He uses safety
+    equipment and careful planning to clear obstacles and keep the community safe.
+  primary_reference: references/thomas.png
+  visual_keywords:
+  - bright red firefighter coat
+  - red firefighter hat with emblem
+  - sturdy work boots
+  - glasses with dark frames
+  - short dark hair

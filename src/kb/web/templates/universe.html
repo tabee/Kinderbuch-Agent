@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Neues Universum' if not universe else universe.name }}{% endblock %}
+{% block crumb %}<span class="muted">/ {{ 'Neues Universum' if not universe else universe.name }}</span>{% endblock %}
+{% block content %}
+{% if universe %}
+<h1>{{ universe.name }} <span class="muted">({{ universe.slug }})</span></h1>
+
+{% if job and job.slug == universe.slug %}
+  {% if not job.done %}
+    <div class="banner">&#8987; {{ job.description }} …</div>
+    <meta http-equiv="refresh" content="1">
+  {% elif job.error %}
+    <div class="flash err">&#9888; {{ job.error }}</div>
+  {% else %}
+    <div class="flash ok">&check; Fertig.</div>
+  {% endif %}
+{% endif %}
+
+<div class="card">
+<form method="post" action="/universes/{{ universe.slug }}/edit">
+  <label>Name</label><input type="text" name="name" value="{{ universe.name }}">
+  <label>Sprachen (kommagetrennt, ISO 639-1)</label>
+  <input type="text" name="languages" value="{{ universe.languages|join(', ') }}">
+  <label>Beschreibung</label><textarea name="description">{{ universe.description }}</textarea>
+  <label>Illustrationsstil</label><textarea name="style_guide">{{ universe.style_guide }}</textarea>
+  <div class="actions"><button type="submit">Speichern</button></div>
+</form>
+</div>
+
+<div class="card">
+<form method="post" action="/universes/{{ universe.slug }}/revise">
+  <label>Vom LLM überarbeiten lassen</label>
+  <textarea name="instruction" placeholder="z. B. 'düsterer und geheimnisvoller' oder 'Stil: grobe Buntstift-Texturen'" required></textarea>
+  <div class="actions"><button type="submit" class="secondary">Überarbeiten</button></div>
+</form>
+</div>
+
+{% else %}
+<h1>Neues Universum</h1>
+<div class="card">
+<form method="post" action="/universes/new">
+  <label>Slug (kebab-case)</label>
+  <input type="text" name="slug" required pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="swiss-thai-myths">
+  <label>Name</label><input type="text" name="name" placeholder="Swiss-Thai Myths">
+  <label>Sprachen (kommagetrennt, ISO 639-1)</label><input type="text" name="languages" value="en,th">
+  <label>Beschreibung</label><textarea name="description" placeholder="Idee und Regeln des Universums"></textarea>
+  <label>Illustrationsstil</label><textarea name="style_guide" placeholder="Gilt für jedes Bild"></textarea>
+  <div class="actions"><button type="submit">Anlegen</button></div>
+</form>
+</div>
+{% endif %}
+{% endblock %}

@@ -247,22 +247,55 @@ intermediate is kept next to it for debugging. Requires all pages to have
 images; fails with a clear message otherwise. Free and fast — re-render after
 every edit.
 
-## 9. `kb serve` / `kb open` — web preview
+## 9. `kb serve` / `kb open` — web editor
+
+```
+kb serve [--host TEXT] [--port N] [--temperature X]
+```
+
+Starts a local web UI with the same capabilities as `kb assistant`, laid out
+as an always-visible accordion instead of a strict linear flow: every stage
+of every book — including books that are already finished — stays open for
+editing at any time, in any order.
 
 | Command | Description |
 |---|---|
-| `kb serve [--host TEXT] [--port N]` | Local read-only preview (default `http://127.0.0.1:8000`, Ctrl+C to stop). Lists all books; shows each book's pages with text and images. |
+| `kb serve [--host TEXT] [--port N] [--temperature X]` | Local web editor (default `http://127.0.0.1:8000`, Ctrl+C to stop). `--temperature` sets the initial LLM creativity; changeable any time in the page header. |
 | `kb open <slug>` | Open a book in the host browser (start `kb serve` first). |
 
-**In Docker.** The preview must bind `0.0.0.0` (not the container-internal
-`127.0.0.1`) and the port must be published. `docker-compose.yml` already maps
-`8000:8000`; start the server as a foreground process and open the URL in your
-**host** browser (`kb open` inside the container cannot launch one):
+**What the browser can do — all backed by the same functions as the CLI:**
 
-```bash
-docker compose -f docker/docker-compose.yml exec app kb serve --host 0.0.0.0
-# then browse to http://127.0.0.1:8000 on the host
-```
+- Dashboard: every universe and book, with a progress badge per book (`kb book list` / `kb universe list` equivalent).
+- Create universes and books (same fields as `kb universe new` / `kb book new`).
+- Per book, an accordion: Universum → Buchidee → Outline → Story → Figurenbibel → Seiten → PDF.
+  Each stage — even a finished one — can be reopened and edited: manually, or
+  via a free-form instruction to the LLM, exactly like the corresponding
+  `kb edit`/`kb assistant` action. Editing an upstream stage (concept,
+  outline, story, bible) clears the now-stale downstream artifacts, same as
+  `kb edit`/`kb run` (spec §6.2); the page asks for confirmation first.
+  A "Weiter" button generates the next missing stage (equivalent to `kb run`
+  for that step).
+- Per page: approve, manually replace the text in every language, LLM
+  rewrite, image edit (instruction appended), and image-prompt replace (the
+  escape hatch for content-safety refusals) — the same five actions as
+  `kb assistant`'s page review, individually addressable per page.
+- Render the PDF, preview it inline, and download it (`kb pdf` equivalent).
+
+LLM and image calls run as a single background job (one at a time, to keep
+file writes race-free) so a request never blocks; the page shows a spinner
+and refreshes automatically until the job is done, then shows the result.
+
+**In Docker.** `docker compose up -d` starts the web editor **automatically**
+(the container's default command is `kb serve --host 0.0.0.0`; `0.0.0.0` is
+required so the published port is reachable, not the container-internal
+`127.0.0.1`). Just open `http://127.0.0.1:8000` on the host — no extra `exec`
+needed. `docker compose exec app kb ...` still works independently for
+one-off CLI commands (it runs regardless of the server's own process).
+
+**Security.** No authentication — this is a local, single-user tool by design
+(spec §12), same as every other `kb` command. Do not expose the port beyond
+your own machine or trusted network. Cross-site `POST` requests (e.g. from a
+malicious page open in the same browser) are rejected with `403`.
 
 ---
 

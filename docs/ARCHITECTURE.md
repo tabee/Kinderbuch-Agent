@@ -13,7 +13,7 @@ flowchart TD
     subgraph INTERFACE["Interface"]
         CLI["cli.py — Typer CLI<br/>exit codes 0/1/2 (§8.3)"]
         GUIDE["assistant.py — guided review gates<br/>manual + structured LLM revisions<br/>pause/resume from YAML"]
-        WEB["web/app.py — FastAPI preview<br/>read-only, localhost:8000"]
+        WEB["web/app.py — FastAPI editor<br/>full parity with assistant.py<br/>accordion UI, any stage/book, any order<br/>localhost:8000"]
     end
 
     subgraph CORE["Core (src/kb/core)"]
@@ -64,7 +64,7 @@ flowchart TD
 
     CLI --> GUIDE & PIPE & EDIT & BM & UM & RENDER
     GUIDE --> PIPE & EDIT & BM & UM & RENDER
-    WEB --> BM
+    WEB --> PIPE & EDIT & BM & UM & RENDER
     PIPE --> STEPS
     S1 & S2 & S4 --> PROSE
     STEPS --> LLMABC & IMGABC
@@ -137,7 +137,7 @@ flowchart TD
     REVIEW -.anytime, free.-> PDF
     PDF --> OUT([" print-ready PDF<br/>Books/&lt;slug&gt;/build/ "])
     GUIDE -.uses the same steps,<br/>page lifecycle, and renderer.-> OUT
-    PREVIEW["kb serve + kb open<br/>web preview"] -.-> REVIEW
+    PREVIEW["kb serve<br/>web editor: same review actions as the<br/>assistant, any stage/book, any order"] -.-> REVIEW
 
     RETRY["interrupted / failed pages?<br/>just run kb run again —<br/>only missing work is redone"] -.-> RUN
 ```

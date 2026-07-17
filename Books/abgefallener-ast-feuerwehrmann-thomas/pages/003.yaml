@@ -1,0 +1,23 @@
+number: 3
+text:
+  de: Thomas stellt die leuchtenden Warnzeichen auf. Glimmer, glimmer, glimmer! Ihre
+    Lichter leuchten weit und breit. Jetzt können alle sehen, dass die Straße sicher
+    ist.
+  en: Thomas puts down the bright warning signs. Gleam, gleam, gleam! Their lights
+    shine far and wide. Now everyone can see the road is safe.
+image_prompt: "A sunny afternoon on a quiet country road. Thomas, a cheerful figure\
+  \ in work clothes, kneels on the asphalt to position the last of several tall orange-and-white\
+  \ warning signs arranged in a line down the road stretching into the distance. The\
+  \ warning signs glow with warm yellow lights that pulse gently, creating a safe,\
+  \ welcoming atmosphere. The road is clean and clear. Autumn trees line both sides.\
+  \ Golden sunlight bathes the scene, catching the gleam of the lights. The mood is\
+  \ proud and purposeful — Thomas has made the road safe for everyone.\nEdit: die\
+  \ absperrung soll so aussehen wie es in der schweiz z.B. bei einem unfall auch ist.\
+  \ niemand würde soviel dinger in einer reihe aufstellen.- korrigiere das\r\n"
+image_path: images/page-003.png
+characters_present:
+- thomas
+character_positions:
+  thomas: kneeling on the road, carefully placing the final warning sign in the middle
+    distance
+status: approved

@@ -1,0 +1,22 @@
+number: 1
+text:
+  de: Ring, ring, ring! Thomas' Wecker klingelt früh am Morgen. Er springt aus dem
+    Bett und zieht seinen leuchtend roten Feuerwehrmantel an. Jetzt geht es los –
+    Zeit, das Dorf Mühleberg zu helfen!
+  en: Ring, ring, ring! Thomas' alarm goes off early in the morning. He jumps out
+    of bed and puts on his bright red firefighter coat and hat. Time to help the village
+    of Mühleberg!
+image_prompt: A cozy bedroom filled with warm morning sunlight streaming through a
+  window. Thomas, a young firefighter with rosy cheeks, stands beside his bed with
+  a big happy smile, wearing his bright red firefighter coat and matching red hat.
+  His alarm clock sits on the nightstand nearby, its bell still ringing. Soft golden
+  light illuminates the cheerful scene, creating a sense of excitement and readiness
+  for the day ahead. The room is simple and welcoming, with gentle morning rays casting
+  warm shadows across the walls.
+image_path: images/page-001.png
+characters_present:
+- thomas
+character_positions:
+  thomas: standing beside his bed in the center of the room, wearing his bright red
+    firefighter coat and hat, beaming with excitement
+status: approved
