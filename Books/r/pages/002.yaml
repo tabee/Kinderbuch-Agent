@@ -1,0 +1,26 @@
+number: 2
+text:
+  en: A tall, kind shadow rose from the misty rocks. His eyes sparkled with lonely
+    magic. He held out his hand to Emma with a gentle smile. Down, down, down they
+    floated together into the soft, glowing earth.
+  th: บุคคลสูงใหญ่ที่เป็นเงากำลังลุกขึ้นจากหินและหมอก เขามีดวงตาเศร้าๆ ที่ส่องประกายไปด้วยเวทมนตร์โดดเดี่ยว
+    เขาเหยียดมือออกมาหาเอมมาและยิ้มอย่างนุ่มนวล ลง ลง ลง พวกเขาลอยลงไปในโลกที่เรืองแสงอย่างอ่อนโยน
+image_prompt: A mystical underground scene bathed in soft, warm golden and violet
+  light. A tall, ethereal spirit-like figure with kind, gentle features emerges from
+  swirling mist and rocky outcroppings, extending one welcoming hand toward a small,
+  curious girl (Emma). The girl reaches back toward him with wonder in her eyes. Around
+  them, glowing crystals, luminescent plants, and swirling magical mist create a dreamlike,
+  enchanted atmosphere. The transition from surface to underground is visible with
+  soft earth tones, gentle slopes, and floating particles of light. The mood is magical,
+  inviting, and peaceful—like stepping into a beautiful dream. No written words visible
+  in the scene.
+image_path: images/page-002.png
+characters_present:
+- rubezahl-the-spirit
+- princess-emma
+character_positions:
+  rubezahl-the-spirit: tall, ethereal figure emerging from mist and rocks, centre-left,
+    reaching out his hand
+  princess-emma: small girl in the foreground, centre-right, reaching toward the spirit
+    with wonder
+status: approved

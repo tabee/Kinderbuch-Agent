@@ -1,0 +1,21 @@
+number: 8
+text:
+  en: Day after day, Rübenzahl counted and counted without sleeping. His voice grew
+    softer and sadder. Sometimes he lost count and had to start all over again. The
+    magic turnips had tired him so!
+  th: วันต่อวัน รูเบนซาห์นับเรื่อยไป ไม่มีการหยุดพักเลย เสียงของเขาเริ่มเบาลงและเศร้าลงไปเรื่อย
+    บางครั้งเขาลืมไปว่านับถึงตัวเลขไหนแล้ว จึงต้องเริ่มนับใหม่อีกครั้ง พืชรูเบนที่มีเวทมนตร์ทำให้เขาเหนื่อยมากขึ้นเรื่อยไป
+image_prompt: A mountainside scene at dusk with soft, melancholy golden light filtering
+  through clouds. Rübenzahl, the spirit, sits surrounded by countless turnips in neat
+  piles, his magical form glowing but noticeably dimmer and more tired than before.
+  His shoulders are hunched, his expression weary and sad as his lips move silently,
+  counting. Around him, the turnips seem endless, stretching into the misty distance.
+  The Star-Eyed Horse stands nearby, watching with concern, its luminous eyes reflecting
+  sadness. The overall mood is peaceful but tinged with exhaustion and gentle melancholy—showing
+  how the counting has worn the spirit down, day after day.
+image_path: images/page-008.png
+characters_present:
+- the-star-eyed-horse
+character_positions:
+  the-star-eyed-horse: standing nearby to the right, watching with concern
+status: approved

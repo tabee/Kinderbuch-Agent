@@ -1,0 +1,24 @@
+number: 4
+text:
+  en: Rübezahl gave Emma a basket full of round, bumpy turnips and a shimmering silver
+    wand. When Emma waved the wand, magic sparkled through the air! The turnips glowed
+    and showed pictures of everyone Emma loved most. Emma wanted to hug them all tight!
+  th: รูเบซาห์มอบให้เอมมาตะกร้าเต็มไปด้วยหัวเชือกมนและไม้เท่ห์เงินวิ่วหนึ่ง เมื่อเอมมาโบกไม้เท่ห์
+    น้อยมายาหลวงแสนสุขเต่าโตปรี่มแถวอากาศ! หัวเชือกส่องแสงและแสดงภาพของทุกคนที่เอมมารักที่สุด
+    เอมมาต้องการกอดพวกมันทั้งหมดให้แน่น!
+image_prompt: A magical forest clearing bathed in soft, warm golden light. Princess
+  Emma stands in the centre, her face filled with delight, holding a shimmering silver
+  wand high in the air. Around her, glowing turnips float and swirl in the air, transforming
+  into luminous, translucent images of smiling faces—her loved ones appear as gentle
+  light-forms among the floating vegetables. Rübezahl, the kind spirit with earthy
+  features, kneels beside her with a warm, satisfied expression, watching the magic
+  he has created. The atmosphere is enchanted but cosy, with gentle sparkles and soft
+  golden mist swirling around the floating images. The Star-Eyed Horse can be glimpsed
+  in the background among the trees, watching peacefully.
+image_path: images/page-004.png
+characters_present:
+- princess-emma
+character_positions:
+  princess-emma: standing in the centre, holding the silver wand raised high with
+    wonder and joy on her face
+status: approved

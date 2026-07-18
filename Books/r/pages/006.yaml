@@ -1,0 +1,27 @@
+number: 6
+text:
+  en: Emma sat very still and thought and thought. She watched the spirit count and
+    sort and organize his things. Then Emma had a wonderful idea! "Rübezahl," she
+    asked with a smile, "can you count every single turnip in your whole field?" The
+    spirit's eyes grew wide and bright with joy.
+  th: เอมมานั่งนิ่มและคิด คิดอีก เธอดูจิตวิญญาณนับ จัดเรียง และจัดการของเขา จากนั้นเอมมามีความคิดที่ยอดเยี่ยม
+    "รูเบซาห์" เธอถามพร้อมรอยยิ้ม "คุณนับผักกวนในไร่ของคุณทั้งหมดได้ไหม" ตาของจิตวิญญาณเปิดกว้างและสว่างไสวด้วยความปีติ
+image_prompt: A magical mountain meadow bathed in soft golden sunlight. Princess Emma
+  sits gracefully on the back of the Star-Eyed Horse, positioned in the right-center
+  of the scene. She has a gentle, knowing smile on her face as she speaks to Rübezahl.
+  The Spirit stands before them in the center-left, his form glowing with an ethereal
+  green light, his eyes wide and sparkling with delight and excitement. Around them,
+  a vast field of purple and orange turnips stretches into the distance, with rolling
+  hills and a bright blue sky dotted with fluffy white clouds. The atmosphere is warm,
+  magical, and full of wonder. The lighting is soft and dreamy, with rays of sunlight
+  filtering through the air.
+image_path: images/page-006.png
+characters_present:
+- princess-emma
+- the-star-eyed-horse
+character_positions:
+  princess-emma: sitting gracefully on the Star-Eyed Horse's back, right-center of
+    the scene with a knowing smile
+  the-star-eyed-horse: positioned in the right-center, carrying Princess Emma through
+    the magical meadow
+status: image_done

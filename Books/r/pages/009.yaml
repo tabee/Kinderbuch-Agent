@@ -1,0 +1,25 @@
+number: 9
+text:
+  en: While Rübezahl counted far away, clever Emma found the very last turnip. She
+    whispered a secret spell, and—*sparkle*—the turnip grew into a beautiful black
+    horse with eyes like stars! Emma climbed onto the horse's back and rode up, up,
+    up toward the golden light above.
+  th: ขณะที่รูเบนซาห์นับหมู่ไกล เอมมาผู้ฉลาดก็พบหัวชาลอตตัวสุดท้าย เธอกระซิบเวทมนตร์ลับเอกสิบ—*กิ่ว*—หัวชาลอตเติบโตเป็นม้าสีดำสวยงามที่มีดวงตาเหมือนดาว!
+    เอมมาปีนขึ้นไปบนหลังม้า แล้วขี่ไป ขึ้นไป ขึ้นไปสู่แสงทองคำที่ส่องประกายอยู่ด้านบน
+image_prompt: A magical underground cavern illuminated by warm golden light streaming
+  from above. Princess Emma sits atop a magnificent black horse with a shimmering
+  coat and luminous star-like eyes. The horse is mid-stride, ascending toward the
+  glowing light above, its movement graceful and joyful. Emma sits confidently on
+  the horse's back, looking upward with wonder and hope. The ground below shows scattered
+  turnips fading into shadow. The atmosphere is warm, enchanted, and full of hope—a
+  moment of triumph and escape. Soft sparkles of magic shimmer around the horse as
+  it rises toward freedom."
+image_path: images/page-009.png
+characters_present:
+- princess-emma
+- the-star-eyed-horse
+character_positions:
+  princess-emma: sitting confidently on the horse's back, looking upward with wonder
+  the-star-eyed-horse: ascending through the center of the scene toward golden light
+    above, with shimmering black coat and luminous star-like eyes
+status: image_done

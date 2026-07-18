@@ -1,0 +1,22 @@
+number: 10
+text:
+  en: Emma rode up, up, up into the bright sunshine! She was free and happy at last.
+    But far, far below, Rübezahl counts and counts his turnips, forever and ever.
+    Being greedy makes even spirits very sad.
+  th: เอมมาขี่ม้าไปสูงขึ้น ขึ้นไปอีก ออกมาสู่แสงแดดที่สดใส! เธอเป็นอิสระและมีความสุข
+    ที่ไกลลงไปด้านล่าง รูเบซาห์นับและนับผักชนิดหัวกวนของเขาไปเรื่อย ๆ นิรันดร์ จิตใจที่โลภมากจึงทำให้เศร้า
+image_prompt: 'A split-scene illustration: In the upper half, Emma sits joyfully on
+  the Star-Eyed Horse, bursting through fluffy white clouds into brilliant golden
+  sunlight. The sky is bright blue and warm. Emma has her arms outstretched, smiling
+  with pure joy and freedom. The magical horse glows softly as it leaps upward. Below,
+  separated by a thick layer of clouds, the dark underground cavern is visible. Rübezahl
+  sits hunched over enormous piles of turnips, methodically counting with his hands,
+  his face shadowed and sad. The contrast between Emma''s bright, free world above
+  and Rübezahl''s dark, lonely counting below tells the story''s gentle moral lesson.'
+image_path: images/page-010.png
+characters_present:
+- the-star-eyed-horse
+character_positions:
+  the-star-eyed-horse: leaping upward through the clouds, carrying Emma toward the
+    bright sky
+status: image_done

@@ -1,0 +1,23 @@
+number: 1
+text:
+  en: Princess Emma walked through the misty mountains, looking for adventure. The
+    trees whispered softly all around her. Then she found something magical—a waterfall
+    that glowed with the most beautiful green light. Emma stepped closer to see what
+    it could be.
+  th: เจ้าหญิงเอมม่าเดินผ่านภูเขามอหลอกมัว ค้นหาการผจญภัย ต้นไม้รอบตัวเธอกระซิบเบาๆ
+    แล้วเธอพบสิ่งมหัศจรรย์—น้ำตกที่เรืองแสงด้วยแสงเขียวที่สวยงามที่สุด เอมม่าก้าวเข้าไปใกล้เพื่อดูว่ามันคืออะไร
+image_prompt: A young princess in a soft pink or lavender gown walks through an enchanted
+  misty mountain landscape filled with tall, gently swaying trees. Golden morning
+  or twilight light filters through the mist, creating a magical, warm atmosphere.
+  In the middle distance ahead of her, a magnificent waterfall cascades down moss-covered
+  rocks, glowing with an ethereal emerald-green light that seems to come from within
+  the water itself. The princess looks up in wonder and awe, her hand raised slightly
+  as if drawn toward the magical glow. The overall mood is dreamy, gentle, and full
+  of childlike wonder—nothing dark or frightening, just pure magic and discovery.
+image_path: images/page-001.png
+characters_present:
+- princess-emma
+character_positions:
+  princess-emma: walking through misty forest in the foreground, gazing up in wonder
+    toward the glowing waterfall ahead
+status: approved

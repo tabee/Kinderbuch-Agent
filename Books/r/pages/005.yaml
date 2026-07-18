@@ -1,0 +1,22 @@
+number: 5
+text:
+  en: The pictures began to fade like gentle smoke. They turned back into turnips
+    and crumbled softly in Emma's hands. Her heart felt so, so heavy. But Rübenzahl
+    watched with kind eyes.
+  th: รูปภาพเริ่มจางหายเหมือนควันอ่อน พวกมันกลับมาเป็นหัวไชเท้าและสลายตัวไปอย่างนุ่มนวลในมือของเอมมา
+    หัวใจของเธอรู้สึกหนักมากมาย แต่รูเบนซาห์ดูเธอด้วยสายตาที่เมตตา
+image_prompt: A tender, bittersweet moment in a misty mountain glade bathed in soft
+  golden-amber light. Emma sits in the centre foreground, her small hands open before
+  her, containing three delicate turnips that are dissolving into shimmering dust
+  particles floating away like fireflies. Her face is downturned but peaceful, not
+  frightened. Behind her stands Rübenzahl, a tall, gentle spirit figure with a kind
+  expression, watching with understanding. To the side, the Star-Eyed Horse stands
+  quietly in the middle ground, its wise eyes reflecting the golden light. Autumn
+  leaves swirl gently around them all. The mood is wistful and tender — a moment of
+  learning that some things change, but they are cherished nonetheless.
+image_path: images/page-005.png
+characters_present:
+- the-star-eyed-horse
+character_positions:
+  the-star-eyed-horse: standing quietly to the side in the middle ground
+status: approved
